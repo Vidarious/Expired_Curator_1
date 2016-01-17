@@ -11,3 +11,6 @@ Project Curator is a PHP discovery and learning project The Curator application 
 
 ####Start Date
 January 16, 2016
+
+####Author
+James Druhan
