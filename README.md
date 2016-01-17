@@ -1,8 +1,9 @@
 # Curator
-Project Curator is a PHP discovery and learning project The Curator application itself will be a authentication and user management system. The mission of this project is to improve understanding of PHP as well as coding practices. This project will include the following guidelines:
+Project Curator is a PHP discovery and learning project. The Curator application itself will be a authentication and user management system. The mission of this project is to improve understanding of PHP as well as coding practices. This project will include the following guidelines:
 
 - PHP 7.0+
-- Bootstrap 3.3.6
+- Versioning (GIT)
+- Bootstrap 3.3.6 (Bootstap 4.0 when released)
 - MySQL & MSSQL compatible
 - Selectable levels of encryption
 - Use of namespaces
