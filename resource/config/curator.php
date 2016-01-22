@@ -13,5 +13,9 @@
    namespace Curator\Config;
 
    //Server path to where Curator is installed / extracted.
-   define('Curator\Config\ROOT', '/Curator/');
+   define('Curator\Config\PATH\ROOT', '/home/ubuntu/workspace/Curator/'); //Cloud9
+   //define('Curator\Config\ROOT', '/Curator'); //Home
+   
+   //Directory path to where Curator classes are located.
+   define('Curator\Config\PATH\CLASSES', Path\ROOT . 'resource/classes/');
 ?>

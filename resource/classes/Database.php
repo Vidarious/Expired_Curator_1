@@ -9,7 +9,7 @@
  * @copyright  2016 James Druhan
  * @version    1.0
  */
-   namespace Curator\Class;
+   namespace Curator\Classes;
 
    class Database
    {
