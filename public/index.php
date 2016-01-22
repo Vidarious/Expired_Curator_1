@@ -1,3 +1,5 @@
+<?php require_once('../application/start.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
