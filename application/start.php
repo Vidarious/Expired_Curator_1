@@ -16,12 +16,16 @@
 
    //Load Curator configuartion data.
    require_once('../resource/config/curator.php');
+   
+   //Load debug utilities. Development only.
+   require_once('../resource/debug/vendor/debug.php');
 
-   //Automatically include classes which are called.
+   //Automatically include classes for created objects.
    function autoLoad($className)
    {
       //Extract class file name from namespace path.
-      $fileName = end(explode('\\', $className));
+      $fileName = explode('\\', $className);
+      $fileName = end($fileName);
       
       //Create path to class.
       $classLocation = PATH\CLASSES . $fileName . '.php';
