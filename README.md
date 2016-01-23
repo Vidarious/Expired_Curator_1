@@ -5,6 +5,7 @@ Project Curator is a PHP discovery and learning project. The Curator application
 - Versioning (GIT)
 - Bootstrap 3.3.6 (Bootstap 4.0 when released)
 - MySQL & MSSQL compatible
+- PDO
 - Selectable levels of encryption
 - Use of namespaces
 - Highly efficient and organized code

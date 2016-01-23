@@ -18,4 +18,7 @@
    
    //Directory path to where Curator classes are located.
    define('Curator\Config\PATH\CLASSES', Path\ROOT . 'resource/classes/');
+   
+   //Directory path to where Curator configuration files are located.
+   define('Curator\Config\PATH\CONFIG', Path\ROOT . 'resource/config/');
 ?>
