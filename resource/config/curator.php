@@ -13,12 +13,11 @@
    namespace Curator\Config;
 
    //Server path to where Curator is installed / extracted.
-   define('Curator\Config\PATH\ROOT', '/home/ubuntu/workspace/Curator/'); //Cloud9
-   //define('Curator\Config\ROOT', '/Curator'); //Home
+   define('Curator\Config\PATH\ROOT', $_SERVER["DOCUMENT_ROOT"] . '/Curator/'); //Cloud9
    
    //Directory path to where Curator classes are located.
-   define('Curator\Config\PATH\CLASSES', Path\ROOT . 'resource/classes/');
+   define('Curator\Config\PATH\CLASSES', PATH\ROOT . 'resource/classes/');
    
    //Directory path to where Curator configuration files are located.
-   define('Curator\Config\PATH\CONFIG', Path\ROOT . 'resource/config/');
+   define('Curator\Config\PATH\CONFIG', PATH\ROOT . 'resource/config/');
 ?>

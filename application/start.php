@@ -29,7 +29,7 @@
       
       //Create path to class.
       $classLocation = PATH\CLASSES . $fileName . '.php';
-      
+
       //Verify class file exists and load.
       if(file_exists($classLocation))
       {
