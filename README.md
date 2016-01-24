@@ -10,6 +10,7 @@ Project Curator is a PHP discovery and learning project. The Curator application
 - Use of namespaces
 - Highly efficient and organized code
 - Use of PHP 'Best Practices' techniques
+- Multi-Language support
 
 ####Start Date
 January 16, 2016
