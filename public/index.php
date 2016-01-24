@@ -22,10 +22,11 @@
                <h3>Developed by: James Druhan</h1>
             </div>
          </div>
+         <hr/>
          <div class="row">
             <div class="col-md-12">
-               <h3><?=\Curator\Config\PATH\CLASSES?></h1>
-
+               <h4>Selected Language</h4>
+               <p><?=$LANG->language;?></p>
             </div>
          </div>
       </div>

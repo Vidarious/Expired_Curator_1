@@ -28,7 +28,7 @@
       //Extract class file name from namespace path.
       $fileName = explode('\\', $className);
       $fileName = end($fileName);
-   
+
       //Create path to class.
       $classLocation = PATH\CLASSES . $fileName . '.php';
    
@@ -36,7 +36,6 @@
       if(file_exists($classLocation))
       {
          require_once $classLocation;
-         CLASSES\Language::loadClassLanguage($fileName);
       }
    }
    
@@ -44,11 +43,11 @@
    spl_autoload_register('\Curator\Application\autoLoad');
    
    //Initialize language object to handle messaging.
-   $LANG = new CLASSES\Language();
+   $LANG = CLASSES\Language::getLanguage('en_CA');
    
    //Create a database object to handle all database communication.
    $DB = CLASSES\Database::getConnection();
    
-   //TODO: Create process to call a message. Should the $LANG object be passed to Database? Or just create a new Language object?
-   //TODO: Create Language class function to call the correct message depending on the language. But what namespace should the message variables be in? Maybe none?
+   //TODO: Create page URL handler (specifically ?lang=)
+   //TODO: Create helper static class to tools
 ?>

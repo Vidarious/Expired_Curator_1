@@ -10,5 +10,7 @@
  * @version    1.0
  */
 
+    namespace Curator\Classes\Language\Database;
 
+    define('Curator\Classes\Language\Database\ERROR_CONNECT', 'Error: Unable to connect to the SQL database. Please contact the system administrator.')
 ?>

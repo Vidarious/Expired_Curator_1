@@ -1,6 +1,6 @@
 <?php
 /*
- * Class for processing all communication to the SQL database.
+ * Class for processing all communication to the SQL database. Singleton design. There can only be one instance of this class.
  *
  * PHP Version 7.0.2
  *
@@ -11,7 +11,8 @@
  */
    namespace Curator\Classes;
 
-   use \Curator\Config\DB as DB;
+   use \Curator\Config\DB                 as DB;
+   use \Curator\Classes\Language\Database as LANG;
 
    //Include database configuration information.
    require_once(\Curator\Config\PATH\CONFIG . 'database.php');
@@ -19,11 +20,16 @@
    class Database
    {
       //Class Variables
-      private $Connection = NULL;
+      private $Connection  = NULL;
+      public $LANG         = NULL;
 
-      //Create object connection to database. Singleton design.
+      //Object initalization. Singleton design.
       protected function __construct()
       {
+         //Obtain the language object and load the database language file for messages.
+         $this->LANG = \Curator\Classes\Language::getLanguage();
+         $this->LANG->loadClassLanguage(__CLASS__);
+
          $pdoServerString = 'mysql:host=' . DB\HOST . ';dbname=' . DB\NAME;
          $pdoOptionString = array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION);
 
@@ -33,7 +39,7 @@
          }
          catch(PDOException $pdoError)
          {
-            dump($pdoError);
+            echo LANG\ERROR_CONNECT;
          }
       }
 
