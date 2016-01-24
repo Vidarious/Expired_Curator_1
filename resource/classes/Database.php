@@ -10,18 +10,21 @@
  * @version    1.0
  */
    namespace Curator\Classes;
-   
+
    use \Curator\Config\DB as DB;
 
+   //Include database configuration information.
    require_once(\Curator\Config\PATH\CONFIG . 'database.php');
-   
+
    class Database
    {
+      //Class Variables
       private $Connection = NULL;
-      
+
+      //Create object connection to database. Singleton design.
       protected function __construct()
       {
-         $pdoServerString = 'mysql:Server' . DB\HOST . ';Database=' . DB\NAME;
+         $pdoServerString = 'mysql:host=' . DB\HOST . ';dbname=' . DB\NAME;
          $pdoOptionString = array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION);
 
          try
@@ -33,22 +36,25 @@
             dump($pdoError);
          }
       }
-      
+
+      //Singleton design.
       private function __clone()
       {}
-      
+
+      //Singleton design.
       private function __wakeup()
       {}
-      
+
+      //Returns the singleton instance of the database connection. Singleton design.
       public static function getConnection()
       {
          static $pdoInstance = NULL;
-         
+
          if($pdoInstance === NULL)
          {
             $pdoInstance = new static();
          }
-         
+
          return $pdoInstance;
       }
    }

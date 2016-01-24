@@ -14,13 +14,13 @@
 
     //Host address for SQL database.
     define('Curator\Config\DB\HOST', 'sql5.freemysqlhosting.net'); //Cloud9
-    
+
     //Database name for SQL database.
     define('Curator\Config\DB\NAME', 'sql5103939');
-    
+
     //Username for SQL database.
     define('Curator\Config\DB\USER', 'sql5103939');
-    
+
    //Password for SQL database.
     define('Curator\Config\DB\PASS', 'zaiR6VzmI5');
 ?>
