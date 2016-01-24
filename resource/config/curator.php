@@ -25,5 +25,5 @@
    define('Curator\Config\PATH\LANG', PATH\ROOT . 'resource/language');
 
    //Curator language.
-   define('Curator\Config\LANG\CHOICE', 'en_CA.utf8');
+   define('Curator\Config\LANG\CHOICE', 'en_CA');
 ?>

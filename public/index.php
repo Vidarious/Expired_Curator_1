@@ -24,8 +24,8 @@
          </div>
          <div class="row">
             <div class="col-md-12">
-               <h3><?=gettext("Hello World")?></h1>
-               <h3><?=gettext("Test")?></h1>
+               <h3><?=\Curator\Config\PATH\CLASSES?></h1>
+
             </div>
          </div>
       </div>

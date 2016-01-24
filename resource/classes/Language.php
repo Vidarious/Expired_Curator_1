@@ -19,24 +19,19 @@
     {
         public function __construct()
         {
-            $langDomain = 'messages';
-            $langPath = PATH\LANG . '/' . LANG\CHOICE . '/LC_MESSAGES/' . $langDomain . '.mo';
 
-            if(file_exists($langPath))
+        }
+
+        public static function loadClassLanguage($className)
+        {
+            if($className != 'Language')
             {
-                $test2 = putenv("LC_ALL=" . LANG\CHOICE);
-                echo "\r\nputenv = " . $test2;
-                $test = setlocale(LC_ALL, LANG\CHOICE);
-                echo "\r\nsetlocale = " . $test;
-    
-                $test3 = bindtextdomain($langDomain, PATH\LANG);
-                echo "\r\nbindtextdomain = " . $test2;
-                $test4 = textdomain($langDomain);
-                echo "\r\ntextdomain = " . $test2;
-            }
-            else
-            {
-                echo "Language file does not exist.";
+                $classLanguagePath = PATH\LANG . '/' . LANG\CHOICE . '/class/' . $className . '.php';
+
+                if(file_exists($classLanguagePath))
+                {
+                    require_once $classLanguagePath;
+                }
             }
         }
     }
