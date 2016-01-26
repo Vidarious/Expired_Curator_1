@@ -1,4 +1,4 @@
-# <a id="<a id="top"></a>"></a>[Curator How To Guide]
+# <a id="top"></a>[Curator How To Guide]
 
 ###Classes
 - [Database](#database)
