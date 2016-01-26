@@ -2,9 +2,9 @@
 
 ###Classes
 - [Database](#database)
-  - Create database object(#database1)
-  - Prepare a SQL statement(#database2)
-  - Bind values to a prepared statement(#database3)
+  - [Create database object](#database1)
+  - [Prepare a SQL statement](#database2)
+  - [Bind values to a prepared statement](#database3)
 - [Lanugage](#language)
 - [Session](#session)
 - [Log](#log)
