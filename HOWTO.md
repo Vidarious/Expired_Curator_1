@@ -1,4 +1,4 @@
-# <a id="top"></a>[Curator How To Guide]
+# <a id="top"></a>Curator How To Guide
 
 ###Classes
 - [Database](#database)
@@ -43,13 +43,19 @@ $DB->bindValue("name", "John", "PARAM_STR");
 
 ###### [Back to Top](#top) ######
 
+* * *
+
 ## <a id="language"></a>Language
 
 ###### [Back to Top](#top) ######
 
+* * *
+
 ## <a id="session"></a>Session
 
 ###### [Back to Top](#top) ######
+
+* * *
 
 ## <a id="log"></a>Log
 
