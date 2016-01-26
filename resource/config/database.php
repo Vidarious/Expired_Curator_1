@@ -9,7 +9,6 @@
  * @copyright  2016 James Druhan
  * @version    1.0
  */
-
     namespace Curator\Config;
 
     //Host address for SQL database.
@@ -21,6 +20,6 @@
     //Username for SQL database.
     define('Curator\Config\DB\USER', 'sql5103939');
 
-   //Password for SQL database.
+    //Password for SQL database.
     define('Curator\Config\DB\PASS', 'zaiR6VzmI5');
 ?>

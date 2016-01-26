@@ -9,7 +9,6 @@
  * @copyright  2016 James Druhan
  * @version    1.0
  */
-
     namespace Curator\Classes;
 
     use \Curator\Config\LANG as LANG;
@@ -37,7 +36,7 @@
         //Singleton design.
         private function __clone()
         {}
-        
+
         //Singleton design.
         private function __wakeup()
         {}
@@ -46,12 +45,12 @@
         public static function getLanguage($userLanguage = NULL)
         {
             static $languageInstance = NULL;
-            
+
             if($languageInstance === NULL)
             {
                 $languageInstance = new static($userLanguage);
             }
-            
+
             return $languageInstance;
         }
 
@@ -63,9 +62,9 @@
                 //Capture the class name without namespace.
                 $className = explode('\\', $className);
                 $className = end($className);
-          
+
                 $classLanguagePath = PATH\LANG . '/' . $this->language . '/class/' . $className . '.php';
-        
+
                 if(file_exists($classLanguagePath))
                 {
                     require_once $classLanguagePath;

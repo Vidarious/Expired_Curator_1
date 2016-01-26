@@ -9,59 +9,117 @@
  * @copyright  2016 James Druhan
  * @version    1.0
  */
-   namespace Curator\Classes;
+    namespace Curator\Classes;
 
-   use \Curator\Config\DB                 as DB;
-   use \Curator\Classes\Language\Database as LANG;
+    use \Curator\Config\DB                 as DB;
+    use \Curator\Classes\Language\Database as LANG;
 
-   //Include database configuration information.
-   require_once(\Curator\Config\PATH\CONFIG . 'database.php');
+    //Include database configuration & language data.
+    require_once(\Curator\Config\PATH\CONFIG . 'database.php');
 
-   class Database
-   {
-      //Class Variables
-      private $Connection  = NULL;
-      public $LANG         = NULL;
+    class Database
+    {
+        //Class Objects
+        private $Connection = NULL;
+        public $Language    = NULL;
 
-      //Object initalization. Singleton design.
-      protected function __construct()
-      {
-         //Obtain the language object and load the database language file for messages.
-         $this->LANG = \Curator\Classes\Language::getLanguage();
-         $this->LANG->loadClassLanguage(__CLASS__);
+        //Class Variables
+        private $preparedStatment = NULL;
 
-         $pdoServerString = 'mysql:host=' . DB\HOST . ';dbname=' . DB\NAME;
-         $pdoOptionString = array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION);
+        //Object initalization. Singleton design.
+        protected function __construct()
+        {
+            //Obtain the language object and load the database language file for messages.
+            $this->Language = \Curator\Classes\Language::getLanguage();
+            $this->Language->loadClassLanguage(__CLASS__);
 
-         try
-         {
-            $this->Connection = new \PDO($pdoServerString, DB\USER, DB\PASS, $pdoOptionString);
-         }
-         catch(PDOException $pdoError)
-         {
-            echo LANG\ERROR_CONNECT;
-         }
-      }
+            $pdoServerString = 'mysql:host=' . DB\HOST . ';dbname=' . DB\NAME;
+            $pdoOptionString = array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION);
 
-      //Singleton design.
-      private function __clone()
-      {}
+            try
+            {
+                $this->Connection = new \PDO($pdoServerString, DB\USER, DB\PASS, $pdoOptionString);
+            }
+            catch(PDOException $pdoError)
+            {
+                $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+                $logMessage->saveError(LANG\ERROR_CONNECT);
+            }
+        }
 
-      //Singleton design.
-      private function __wakeup()
-      {}
+        //Singleton design.
+        private function __clone()
+        {}
 
-      //Returns the singleton instance of the database connection. Singleton design.
-      public static function getConnection()
-      {
-         static $pdoInstance = NULL;
+        //Singleton design.
+        private function __wakeup()
+        {}
 
-         if($pdoInstance === NULL)
-         {
-            $pdoInstance = new static();
-         }
+        //Returns the singleton instance of the database connection. Singleton design.
+        public static function getConnection()
+        {
+            static $pdoInstance = NULL;
+            
+            if($pdoInstance === NULL)
+            {
+                $pdoInstance = new static();
+            }
 
-         return $pdoInstance;
-      }
-   }
+            return $pdoInstance;
+        }
+
+        //Prepares SQL query using PDO.
+        public function prepareStatement($statment = NULL)
+        {
+            if(!empty($statement))
+            {
+                $this->preparedStatement = $this->Connection->prepare($statement);
+                
+                if($this->preparedStatement == FALSE)
+                {
+                    $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+                    $logMessage->saveError(LANG\ERROR_PREPARE);
+                }
+            }
+        }
+
+        //Binds value to parameter with the passed type.
+        public function bindValue($statement = NULL, $parameter = NULL, $value = NULL, $type = NULL)
+        {
+            if(!empty($statement) && !empty($parameter) && !empty($value))
+            {
+                if(empty($type))
+                {
+                    $type = self::getType($value);
+                }
+                
+                if(!$this->preparedStatment->bindValue($parameter, $value, $type))
+                {
+                    $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+                    $logMessage->saveError(LANG\ERROR_BIND);
+                }
+            }
+        }
+
+        //Determine the type of the value (INT/BOOL/STR) and return.
+        private function getType($value = NULL)
+        {
+            switch(TRUE)
+            {
+                case is_int($value) :
+                    $type = PDO::PARAM_INT;
+                    break;
+                case is_bool($value):
+                    $type = PDO::PARAM_BOOL;
+                    break;
+                case is_null($value):
+                    $type = PDO::PARAM_NULL;
+                    break;
+                default:
+                    $type = PDO::PARAM_STR;
+            }
+
+            return $type;
+        }
+    }
 ?>
