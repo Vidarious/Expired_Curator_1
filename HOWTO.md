@@ -68,7 +68,7 @@ $LANG = CLASSES\Language::getLanguage($myLanguage);
 [Back to Top](#topguide)
 
 ##### <a id="language2"></a>Load class language file.
-This is an easy way to load your class language files. For Curator these language files are typically for logs (errors and warnings). Path to class language file is *[Curator Language Path]/language_LOCALE/class/__CLASS__.php*.
+This is an easy way to load your class language files. For Curator these language files are typically for logs (errors and warnings). Path to class language file is *[Curator Language Path]/language_LOCALE/class/__CLASSNAME__.php*.
 ```php
 $this->Language->loadClassLanguage(__CLASS__);
 ```
