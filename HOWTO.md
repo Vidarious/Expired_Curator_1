@@ -1,4 +1,4 @@
-#Curator How To Guide
+# <a id="<a id="top"></a>"></a>[Curator How To Guide]
 
 ###Classes
 - [Database](#database)
@@ -34,14 +34,23 @@ OR
 ```php
 $DB->bindValue("name", "John", "PARAM_STR");
 ```
+
 **NOTE**: If $parameterType is not set the method will first identify the variable passed and properly associate the type:
 - PARAM_INT
 - PARAM_BOOL
 - PARAM_NULL
 - PARAM_STR
 
+###### [Back to Top](#top) ######
+
 ## <a id="language"></a>Language
+
+###### [Back to Top](#top) ######
 
 ## <a id="session"></a>Session
 
+###### [Back to Top](#top) ######
+
 ## <a id="log"></a>Log
+
+###### [Back to Top](#top) ######
