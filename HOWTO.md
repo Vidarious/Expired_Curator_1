@@ -7,7 +7,7 @@
   - [Bind values to a prepared statement](#database3)
 - [Lanugage](#language)
   - [Create a language object](#language1)
-  - Load class language file(#language2)
+  - [Load class language file](#language2)
 - [Session](#session)
 - [Log](#log)
 
