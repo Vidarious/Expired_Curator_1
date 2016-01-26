@@ -16,11 +16,15 @@
 $DB = CLASSES\Database::getConnection();
 ```
 
+[Back to Top](#top)
+
 ##### <a id="database2"></a>Prepare a SQL statement
 ```php
 $statement = "INSERT INTO TABLE (name, value) VALUES (:name, :value)";
 $DB->prepareStatement($statement);
 ```
+
+[Back to Top](#top)
 
 ##### <a id="database3"></a>Bind values to a prepared statement
 ```php
@@ -41,22 +45,22 @@ $DB->bindValue("name", "John", "PARAM_STR");
 - PARAM_NULL
 - PARAM_STR
 
-###### [Back to Top](#top) ######
+[Back to Top](#top)
 
 * * *
 
 ## <a id="language"></a>Language
 
-###### [Back to Top](#top) ######
+[Back to Top](#top)
 
 * * *
 
 ## <a id="session"></a>Session
 
-###### [Back to Top](#top) ######
+[Back to Top](#top)
 
 * * *
 
 ## <a id="log"></a>Log
 
-###### [Back to Top](#top) ######
+[Back to Top](#top)
