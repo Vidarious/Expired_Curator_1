@@ -1,4 +1,4 @@
-# <a id="top"></a>Curator How To Guide
+# <a id="topguide"></a>Curator How To Guide
 
 ###Classes
 - [Database](#database)
@@ -9,6 +9,7 @@
 - [Session](#session)
 - [Log](#log)
 
+* * *
 
 ## <a id="database"></a>Database
 #####Create database object<a id="database1"></a>
@@ -16,7 +17,7 @@
 $DB = CLASSES\Database::getConnection();
 ```
 
-[Back to Top](#top)
+[Back to Top](#topguide)
 
 ##### <a id="database2"></a>Prepare a SQL statement
 ```php
@@ -24,7 +25,7 @@ $statement = "INSERT INTO TABLE (name, value) VALUES (:name, :value)";
 $DB->prepareStatement($statement);
 ```
 
-[Back to Top](#top)
+[Back to Top](#topguide)
 
 ##### <a id="database3"></a>Bind values to a prepared statement
 ```php
@@ -45,22 +46,22 @@ $DB->bindValue("name", "John", "PARAM_STR");
 - PARAM_NULL
 - PARAM_STR
 
-[Back to Top](#top)
+[Back to Top](#topguide)
 
 * * *
 
 ## <a id="language"></a>Language
 
-[Back to Top](#top)
+[Back to Top](#topguide)
 
 * * *
 
 ## <a id="session"></a>Session
 
-[Back to Top](#top)
+[Back to Top](#topguide)
 
 * * *
 
 ## <a id="log"></a>Log
 
-[Back to Top](#top)
+[Back to Top](#topguide)
