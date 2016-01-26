@@ -84,9 +84,9 @@
         }
 
         //Binds value to parameter with the passed type.
-        public function bindValue($statement = NULL, $parameter = NULL, $value = NULL, $type = NULL)
+        public function bindValue($parameter = NULL, $value = NULL, $type = NULL)
         {
-            if(!empty($statement) && !empty($parameter) && !empty($value))
+            if(!empty($parameter) && !empty($value))
             {
                 if(empty($type))
                 {
