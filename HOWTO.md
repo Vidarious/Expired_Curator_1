@@ -10,19 +10,19 @@
 - [Log](#log)
 
 
-##<a id="database"></a>Database
+## <a id="database"></a>Database
 #####Create database object<a id="database1"></a>
 ```php
 $DB = CLASSES\Database::getConnection();
 ```
 
-#####<a id="database2"></a>Prepare a SQL statement
+##### <a id="database2"></a>Prepare a SQL statement
 ```php
 $statement = "INSERT INTO TABLE (name, value) VALUES (:name, :value)";
 $DB->prepareStatement($statement);
 ```
 
-#####<a id="database3"></a>Bind values to a prepared statement
+##### <a id="database3"></a>Bind values to a prepared statement
 ```php
 $parameter = "name";
 $value = "John";
@@ -40,8 +40,8 @@ $DB->bindValue("name", "John", "PARAM_STR");
 - PARAM_NULL
 - PARAM_STR
 
-##<a id="language"></a>Language
+## <a id="language"></a>Language
 
-##<a id="session"></a>Session
+## <a id="session"></a>Session
 
-##<a id="log"></a>Log
+## <a id="log"></a>Log
