@@ -1,6 +1,6 @@
 # <a id="topguide"></a>Curator How To Guide
 
-###Classes
+####Classes
 - [Database](#database)
   - [Create database object](#database1)
   - [Prepare a SQL statement](#database2)
@@ -12,6 +12,8 @@
 * * *
 
 ## <a id="database"></a>Database
+This class is in the **\Curator\Classes** namespace.
+
 #####Create database object<a id="database1"></a>
 ```php
 $DB = CLASSES\Database::getConnection();
@@ -51,17 +53,36 @@ $DB->bindValue("name", "John", "PARAM_STR");
 * * *
 
 ## <a id="language"></a>Language
+This class is in the **\Curator\Classes** namespace.
+
+##### <a id="language1"></a>Create a language object
+```php
+$myLanguage = "en_CA";
+$LANG = CLASSES\Language::getLanguage($myLanguage);
+```
+
+**NOTE**: If the $myLanguage variable is not set, Curator will set the language to it's system default.
+
+##### <a id="language2"></a>Load class language file.
+This is an easy way to load your class language files. For Curator these language files are typically for logs (errors and logs). Path to class language file is [Curator Language Path]/language_LOCALE/class/__CLASS__.php.
+```php
+$this->Language->loadClassLanguage(__CLASS__);
+```
+
+**NOTE**: If a language file does not exist no errors or logs will be generated.
 
 [Back to Top](#topguide)
 
 * * *
 
 ## <a id="session"></a>Session
+This class is in the **\Curator\Classes** namespace.
 
 [Back to Top](#topguide)
 
 * * *
 
 ## <a id="log"></a>Log
+This class is in the **\Curator\Classes** namespace.
 
 [Back to Top](#topguide)
