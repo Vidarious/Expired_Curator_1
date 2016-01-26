@@ -1,15 +1,15 @@
 #Curator How To Guide
 
 ###Classes
-- [Database]
-- [Lanugage]
-- [Session]
-- [Log]
+- [Database](#database)
+- [Lanugage](#language)
+- [Session](#session)
+- [Log](#log)
 
-####(#Database)
+####Database <a id="database"></a>
 
-####(#Lanugage)
+####Lanugage <a id="language"></a>
 
-####(#Session)
+####Session <a id="session"></a>
 
-####(#Log)
+####Log <a id="log"></a>
