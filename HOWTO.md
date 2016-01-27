@@ -61,7 +61,7 @@ $DB->bindValue("name", "John", "PARAM_STR");
 $DB->executeStatement();
 ```
 
-**NOTE**: This method does not return any value
+**NOTE**: This method does not return any value. It executes the prepared statement and assigns it to a private object variable.
 
 [Back to Top](#topguide)
 
