@@ -5,7 +5,7 @@
   - [Create database object](#database1)
   - [Prepare a SQL statement](#database2)
   - [Bind values to a prepared statement](#database3)
-  - [Retrieve a single row result from executed query](#database4)
+  - [Execute a prepared statement](#database4)
   - [Retrieve a single row result from executed query](#database5)
   - [Retrieve a many row result from executed query](#database6)
   - [Retrieve a single column result from executed query.](#database7)
