@@ -11,9 +11,11 @@
  */
     namespace Curator\Classes\Language\Database;
 
-    define('Curator\Classes\Language\Database\ERROR_CONNECT', 'Error: Unable to connect to the SQL database. Please contact the system administrator.');
+    define('Curator\Classes\Language\Database\ERROR_CONNECT', 'Unable to connect to the SQL database. PDO Error: ');
 
-    define('Curator\Classes\Language\Database\ERROR_PREPARE', 'Error: Unable to prepare database query. Please contact the system administrator.');
+    define('Curator\Classes\Language\Database\ERROR_PREPARE', 'Unable to prepare database query. Prepare statement returned FALSE. Statement: ');
 
-    define('Curator\Classes\Language\Database\ERROR_BIND', 'Error: Unable to bind values to database query. Please contact the system administrator.');
+    define('Curator\Classes\Language\Database\ERROR_BIND', 'Unable to bind values to database query. ');
+
+    define('Curator\Classes\Language\Database\ERROR_EXECUTE', 'Unable to execute prepared query. Execute returned FALSE.');
 ?>

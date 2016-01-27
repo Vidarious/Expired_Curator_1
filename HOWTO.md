@@ -5,6 +5,10 @@
   - [Create database object](#database1)
   - [Prepare a SQL statement](#database2)
   - [Bind values to a prepared statement](#database3)
+  - [Retrieve a single row result from executed query](#database4)
+  - [Retrieve a single row result from executed query](#database5)
+  - [Retrieve a many row result from executed query](#database6)
+  - [Retrieve a single column result from executed query.](#database7)
 - [Lanugage](#language)
   - [Create a language object](#language1)
   - [Load class language file](#language2)
@@ -49,6 +53,42 @@ $DB->bindValue("name", "John", "PARAM_STR");
 - PARAM_BOOL
 - PARAM_NULL
 - PARAM_STR
+
+[Back to Top](#topguide)
+
+##### <a id="database4"></a>Execute a prepared statement
+```php
+$DB->executeStatement();
+```
+
+**NOTE**: This method does not return any value
+
+[Back to Top](#topguide)
+
+##### <a id="database5"></a>Retrieve a **single row** result from executed query
+```php
+$data = $DB->getResultSingle();
+```
+
+[Back to Top](#topguide)
+
+##### <a id="database6"></a>Retrieve a **many row** result from executed query
+```php
+$data = $DB->getResultMany();
+```
+
+[Back to Top](#topguide)
+
+##### <a id="database7"></a>Retrieve a single **column** result from executed query.
+```php
+$data = $DB->getResultColumn(); //Returns the first single result value.
+```
+
+OR
+
+```php
+$data = $DB->getResultColumn(3); //Returns the 3rd single result value.
+```
 
 [Back to Top](#topguide)
 

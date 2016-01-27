@@ -24,7 +24,8 @@
         public $Language    = NULL;
 
         //Class Variables
-        private $preparedStatment = NULL;
+        private $preparedStatement = NULL;
+        private $executedStatement = NULL;
 
         //Object initalization. Singleton design.
         protected function __construct()
@@ -43,7 +44,7 @@
             catch(PDOException $pdoError)
             {
                 $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
-                $logMessage->saveError(LANG\ERROR_CONNECT);
+                $logMessage->saveError(LANG\ERROR_CONNECT . $pdoError);
             }
         }
 
@@ -78,7 +79,7 @@
                 if($this->preparedStatement == FALSE)
                 {
                     $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
-                    $logMessage->saveError(LANG\ERROR_PREPARE);
+                    $logMessage->saveError(LANG\ERROR_PREPARE . $statment);
                 }
             }
         }
@@ -96,7 +97,7 @@
                 if(!$this->preparedStatment->bindValue($parameter, $value, $type))
                 {
                     $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
-                    $logMessage->saveError(LANG\ERROR_BIND);
+                    $logMessage->saveError(LANG\ERROR_BIND . 'Parameter: ' . $parameter . ', Value: ' . $value . ', Type: ' . $type);
                 }
             }
         }
@@ -120,6 +121,39 @@
             }
 
             return $type;
+        }
+
+        //Execute the PDO prepared statement.
+        public function executeQuery()
+        {
+            if(!empty($this->preparedStatment))
+            {
+                $this->executedStatement = $this->preparedStatment->execute());
+
+                if(empty($executedStatement))
+                {
+                    $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+                    $logMessage->saveError(LANG\ERROR_EXECUTE);
+                }
+            }
+        }
+
+        //Executes a SQL query (SELECT) and returns a single row.
+        public function getResultSingle()
+        {
+            return($this->executedStatement->fetch(PDO::FETCH_ASSOC));
+        }
+
+        //Executes a SQL query (SELECT) and returns many rows.
+        public function getResultMany()
+        {
+            return($this->executedStatement->fetch(PDO::FETCH_ASSOC));
+        }
+
+        //Executes a SQL query (SELECT) and returns a single column item with $row representing which result row.
+        public function getResultColumn($row = NULL)
+        {
+            return($this->executedStatement->fetchColumn($row));
         }
     }
 ?>
