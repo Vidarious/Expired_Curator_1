@@ -8,7 +8,9 @@
   - [Execute a prepared statement](#database4)
   - [Retrieve a single row result from executed query](#database5)
   - [Retrieve a many row result from executed query](#database6)
-  - [Retrieve a single column result from executed query.](#database7)
+  - [Retrieve a single column result from executed query](#database7)
+  - [Get the row count of the executed statement](#database8)
+  - [Get the ID of the last inserted row for the executed statement](#database9)
 - [Lanugage](#language)
   - [Create a language object](#language1)
   - [Load class language file](#language2)
@@ -79,7 +81,7 @@ $data = $DB->getResultMany();
 
 [Back to Top](#topguide)
 
-##### <a id="database7"></a>Retrieve a single **column** result from executed query.
+##### <a id="database7"></a>Retrieve a single **column** result from executed query
 ```php
 $data = $DB->getResultColumn(); //Returns the first single result value.
 ```
@@ -88,6 +90,20 @@ OR
 
 ```php
 $data = $DB->getResultColumn(3); //Returns the 3rd single result value.
+```
+
+[Back to Top](#topguide)
+
+##### <a id="database8"></a>Get the row count of the executed statement
+```php
+$data = $DB->getRowCount();
+```
+
+[Back to Top](#topguide)
+
+##### <a id="database9"></a>Get the ID of the last inserted row for the executed statement
+```php
+$data = $DB->getInsertedID();
 ```
 
 [Back to Top](#topguide)
