@@ -128,7 +128,7 @@
         {
             if(!empty($this->preparedStatment))
             {
-                $this->executedStatement = $this->preparedStatment->execute());
+                $this->executedStatement = $this->preparedStatment->execute();
 
                 if(empty($executedStatement))
                 {
@@ -154,6 +154,18 @@
         public function getResultColumn($row = NULL)
         {
             return($this->executedStatement->fetchColumn($row));
+        }
+
+        //Returns the row count for the executed query result.
+        public function getRowCount()
+        {
+            return($this->executedStatement->rowCount());
+        }
+
+        //Returns the row ID of the previously inserted record.
+        public function getInsertedID()
+        {
+            return($this->executedStatement->lastInsertId());
         }
     }
 ?>
