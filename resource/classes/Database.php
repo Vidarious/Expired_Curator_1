@@ -25,7 +25,6 @@
 
         //Class Variables
         private $preparedStatement = NULL;
-        private $executedStatement = NULL;
 
         //Object initalization. Singleton design.
         protected function __construct()
@@ -70,7 +69,7 @@
         }
 
         //Prepares SQL query using PDO.
-        public function prepareStatement($statment = NULL)
+        public function prepareStatement($statement = NULL)
         {
             if(!empty($statement))
             {
@@ -94,7 +93,7 @@
                     $type = self::getType($value);
                 }
                 
-                if(!$this->preparedStatment->bindValue($parameter, $value, $type))
+                if(!$this->preparedStatement->bindValue($parameter, $value, $type))
                 {
                     $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
                     $logMessage->saveError(LANG\ERROR_BIND . 'Parameter: ' . $parameter . ', Value: ' . $value . ', Type: ' . $type);
@@ -108,16 +107,16 @@
             switch(TRUE)
             {
                 case is_int($value) :
-                    $type = PDO::PARAM_INT;
+                    $type = \PDO::PARAM_INT;
                     break;
                 case is_bool($value):
-                    $type = PDO::PARAM_BOOL;
+                    $type = \PDO::PARAM_BOOL;
                     break;
                 case is_null($value):
-                    $type = PDO::PARAM_NULL;
+                    $type = \PDO::PARAM_NULL;
                     break;
                 default:
-                    $type = PDO::PARAM_STR;
+                    $type = \PDO::PARAM_STR;
             }
 
             return $type;
@@ -126,46 +125,41 @@
         //Execute the PDO prepared statement.
         public function executeQuery()
         {
-            if(!empty($this->preparedStatment))
+            if(empty($this->preparedStatement) || empty($this->preparedStatement->execute()))
             {
-                $this->executedStatement = $this->preparedStatment->execute();
-
-                if(empty($executedStatement))
-                {
-                    $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
-                    $logMessage->saveError(LANG\ERROR_EXECUTE);
-                }
+                $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+                $logMessage->saveError(LANG\ERROR_EXECUTE);
             }
         }
 
         //Executes a SQL query (SELECT) and returns a single row.
         public function getResultSingle()
         {
-            return($this->executedStatement->fetch(PDO::FETCH_ASSOC));
+            return($this->preparedStatement->fetch(\PDO::FETCH_ASSOC));
         }
 
         //Executes a SQL query (SELECT) and returns many rows.
         public function getResultMany()
         {
-            return($this->executedStatement->fetch(PDO::FETCH_ASSOC));
+            return($this->preparedStatement->fetchAll(\PDO::FETCH_ASSOC));
         }
 
         //Executes a SQL query (SELECT) and returns a single column item with $row representing which result row.
         public function getResultColumn($row = NULL)
         {
-            return($this->executedStatement->fetchColumn($row));
+            return($this->preparedStatement->fetchColumn($row));
         }
 
         //Returns the row count for the executed query result.
         public function getRowCount()
         {
-            return($this->executedStatement->rowCount());
+            return($this->preparedStatement->rowCount());
         }
 
         //Returns the row ID of the previously inserted record.
         public function getInsertedID()
         {
-            return($this->executedStatement->lastInsertId());
+            return($this->Connection->lastInsertId());
         }
     }
 ?>

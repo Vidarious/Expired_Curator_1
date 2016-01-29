@@ -1,0 +1,25 @@
+
+**********
+DATE: January 29, 2016 at 3:02 AM UTC
+ADDRESS: 10.240.0.145
+URI: /Curator/public/
+CLASS: Curator\Classes\Database
+METHOD: Curator\Classes\Database::executeQuery
+MESSAGE: Unable to execute prepared query. Execute returned FALSE.
+**********
+**********
+DATE: January 29, 2016 at 3:03 AM UTC
+ADDRESS: 10.240.0.167
+URI: /Curator/public/
+CLASS: Curator\Classes\Database
+METHOD: Curator\Classes\Database::executeQuery
+MESSAGE: Unable to execute prepared query. Execute returned FALSE.
+**********
+**********
+DATE: January 29, 2016 at 3:03 AM UTC
+ADDRESS: 10.240.0.121
+URI: /Curator/public/
+CLASS: Curator\Classes\Database
+METHOD: Curator\Classes\Database::executeQuery
+MESSAGE: Unable to execute prepared query. Execute returned FALSE.
+**********

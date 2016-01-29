@@ -49,4 +49,13 @@
 
     //Create a database object to handle all database communication.
     $DB = CLASSES\Database::getConnection();
+    
+    $DB->prepareStatement("SELECT * FROM test where name=:name");
+    $DB->bindValue('name', 'James', \PDO::PARAM_INT);
+    $DB->executeQuery();
+    print_r($DB->getResultColumn());
+    echo '<br>';
+    echo $DB->getRowCount();
+    echo '<br>';
+    echo $DB->getInsertedID();
 ?>

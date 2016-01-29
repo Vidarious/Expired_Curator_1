@@ -41,13 +41,12 @@ $DB->prepareStatement($statement);
 ```php
 $parameter = "name";
 $value = "John";
-$parameterType = "PARAM_STR";
 
-$DB->bindValue($parameter, $value, $parameterType);
+$DB->bindValue($parameter, $value, \PDO::PARAM_INT);
 ```
 OR
 ```php
-$DB->bindValue("name", "John", "PARAM_STR");
+$DB->bindValue("name", "John", \PDO::PARAM_INT);
 ```
 
 **NOTE**: If $parameterType is not set the method will first identify the variable passed and properly associate the type:
