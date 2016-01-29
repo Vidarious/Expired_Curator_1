@@ -49,22 +49,22 @@ class Log
     private function writeLog()
     {
         //Build log message
-        $messageFinal[] = "\nDATE: " . date('F d, Y \a\t g:i A e',$_SERVER['REQUEST_TIME']);
-        $messageFinal[] = "\nADDRESS: " . $_SERVER['REMOTE_ADDR'];
-        $messageFinal[] = "\nURI: " . $_SERVER['REQUEST_URI'];
-        $messageFinal[] = "\nCLASS: " . $this->className;
-        $messageFinal[] = "\nMETHOD: " . $this->methodName;
-        $messageFinal[] = "\nMESSAGE: " . $this->logMessage;
+        $messageFinal[] = PHP_EOL . "DATE: " . date('F d, Y \a\t g:i A e',$_SERVER['REQUEST_TIME']);
+        $messageFinal[] = PHP_EOL . "ADDRESS: " . $_SERVER['REMOTE_ADDR'];
+        $messageFinal[] = PHP_EOL . "URI: " . $_SERVER['REQUEST_URI'];
+        $messageFinal[] = PHP_EOL . "CLASS: " . $this->className;
+        $messageFinal[] = PHP_EOL . "METHOD: " . $this->methodName;
+        $messageFinal[] = PHP_EOL . "MESSAGE: " . $this->logMessage;
 
         //Write to log.
-        error_log("\n**********", 3, $this->logPath);
+        error_log(PHP_EOL . "**********", 3, $this->logPath);
 
         foreach($messageFinal as $error)
         {
             error_log($error, 3, $this->logPath);
         }
 
-        error_log("\n**********", 3, $this->logPath);
+        error_log(PHP_EOL . "**********", 3, $this->logPath);
     }
 }
  ?>
