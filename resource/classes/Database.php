@@ -14,9 +14,6 @@
     use \Curator\Config\DB                 as DB;
     use \Curator\Classes\Language\Database as LANG;
 
-    //Include database configuration & language data.
-    require_once(\Curator\Config\PATH\CONFIG . 'database.php');
-
     class Database
     {
         //Class Objects

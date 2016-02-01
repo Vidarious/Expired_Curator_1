@@ -25,8 +25,47 @@
          <hr/>
          <div class="row">
             <div class="col-md-12">
-               <h4>Selected Language</h4>
-               <p><?=$LANG->language;?></p>
+               <table class="table table-striped table-bordered">
+                  <th>#</th>
+                  <th>Varible</th>
+                  <th>Value</th>
+
+                  <tr>
+                     <td>1</td>
+                     <td>Curator Language</td>
+                     <td><?=$LANG->language;?></td>
+                  </tr>
+
+                  <tr>
+                     <td>2</td>
+                     <td>Session ID</td>
+                     <td><?=session_id()?></td>
+                  </tr>
+
+                  <tr>
+                     <td>2</td>
+                     <td>$_SESSION['Curator_userAgent']</td>
+                     <td><?=$_SESSION['Curator_userAgent']?></td>
+                  </tr>
+
+                  <tr>
+                     <td>3</td>
+                     <td>$_SESSION['Curator_startTime']</td>
+                     <td><?=$_SESSION['Curator_startTime']?></td>
+                  </tr>
+
+                  <tr>
+                     <td>4</td>
+                     <td>$_SESSION['Curator_Status']</td>
+                     <td><?=$_SESSION['Curator_Status']?></td>
+                  </tr>
+
+                  <tr>
+                     <td>5</td>
+                     <td>Session Length</td>
+                     <td><?=(time() - $_SESSION['Curator_startTime']) / 60?></td>
+                  </tr>
+               </table>
             </div>
          </div>
       </div>

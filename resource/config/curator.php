@@ -31,4 +31,31 @@
 
     //Curator language.
     define('Curator\Config\LANG\CURATOR_DEFAULT', 'en_CA');
+
+    //Host address for SQL database.
+    define('Curator\Config\DB\HOST', 'sql5.freemysqlhosting.net'); //Cloud9
+
+    //Database name for SQL database.
+    define('Curator\Config\DB\NAME', 'sql5103939');
+
+    //Username for SQL database.
+    define('Curator\Config\DB\USER', 'sql5103939');
+
+    //Password for SQL database.
+    define('Curator\Config\DB\PASS', 'zaiR6VzmI5');
+
+    //Site unique identifier.
+    define('Curator\Config\SESSION\IDENTIFIER', '!)1@(4#*$&5%^AoB3br3kZ1');
+
+    //Session timeout period (seconds).
+    define('Curator\Config\SESSION\TIMEOUT', '600');
+
+    //Session encryption algorithm.
+    define('Curator\Config\SESSION\ENCRYPTION', 'sha512');
+
+    //Session regenerate time.
+    define('Curator\Config\SESSION\ID\REGENERATE\TIME', '300');
+
+    //Session regenerate %.
+    define('Curator\Config\SESSION\ID\REGENERATE\PERCENT', '5');
 ?>
