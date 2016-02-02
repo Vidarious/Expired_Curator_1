@@ -56,6 +56,6 @@
     //Session regenerate time.
     define('Curator\Config\SESSION\ID\REGENERATE\TIME', '300');
 
-    //Session regenerate %.
+    //Session regenerate %. Value should be 1-100.
     define('Curator\Config\SESSION\ID\REGENERATE\PERCENT', '5');
 ?>

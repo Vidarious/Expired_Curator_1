@@ -62,7 +62,7 @@
 
                   <tr>
                      <td>5</td>
-                     <td>Session Length</td>
+                     <td>$_SESSION['Curator_startTime']</td>
                      <td><?=(time() - $_SESSION['Curator_startTime']) / 60?></td>
                   </tr>
                </table>

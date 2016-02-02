@@ -57,7 +57,7 @@
             ini_set('session.use_strict_mode',         1);
             ini_set('session.cookie_httponly',         1);
             ini_set('session.entropy_length',          32);
-            ini_set('session.hash_bits_per_character', 6);
+            ini_set('session.hash_bits_per_character', 5);
             ini_set('session.hash_function', SESSION\ENCRYPTION);
 
             session_name('Curator_Session');
@@ -76,6 +76,7 @@
             if(!isset($_SESSION['Curator_Status']) || !self::confirmUser() || !self::confirmTimeOut())
             {
                 self::newSession();
+                echo "test";
             }
             else
             {
@@ -99,12 +100,13 @@
         //Session timeout management.
         protected function confirmTimeOut()
         {
-            if(isset($_SESSION['Curator_startTime']))
+            if(isset($_SESSION['Curator_startTime']) && isset($_SESSION['Curator_idleTime']))
             {
-                $sessionLength = time() - $_SESSION['Curator_startTime'];
+                $idleLength = $_SESSION['Curator_idleTime'] - $_SESSION['Curator_startTime'];
 
-                if($sessionLength < SESSION\TIMEOUT)
+                if($idleLength < SESSION\TIMEOUT)
                 {
+                    $_SESSION['Curator_idleTime'] = time();
                     return TRUE;
                 }
             }
@@ -128,6 +130,7 @@
             session_start();
             $_SESSION['Curator_userAgent'] = hash(SESSION\ENCRYPTION, $_SERVER['HTTP_USER_AGENT'] . SESSION\IDENTIFIER);
             $_SESSION['Curator_startTime'] = time();
+            $_SESSION['Curator_idleTime']  = time();
             $_SESSION['Curator_Status']    = TRUE;
         }
 
