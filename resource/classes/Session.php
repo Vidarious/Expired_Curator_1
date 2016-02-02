@@ -12,9 +12,15 @@
     namespace Curator\Classes;
 
     use \Curator\Config\SESSION as SESSION;
+    use \Curator\Traits\Security as SECURITY;
+
+    //Load traits.
+    require_once('../resource/helper/Security.php');
 
     class Session
     {
+        //use \Curator\Traits\Security;
+
         //Object initalization. Singleton design.
         protected function __construct()
         {
@@ -73,7 +79,7 @@
         //Secures the session from hijacking.
         protected function secureSession()
         {
-            if(!isset($_SESSION['Curator_Status']) || !self::confirmUser() || !self::confirmTimeOut())
+            if(!isset($_SESSION['Curator_Status']) || !self::confirmTimeOut() || !self::confirmUser() || !self::confirmIP())
             {
                 self::newSession();
                 echo "test";
@@ -84,12 +90,29 @@
             }
         }
 
+        //Confirms if users IP is same as the sessions user.
+        protected function confirmIP()
+        {
+            //Check if IP Enforcement is enabled.
+            if(SESSION\SETTING\ENFORCEIP)
+            {
+                $userIP = SECURITY::Encode(self::obtainIP());
+
+                if(!isset($_SESSION['Curator_userIP']) || ($_SESSION['Curator_userIP'] != $userIP))
+                {
+                    return FALSE;
+                }
+            }
+
+            return TRUE;
+        }
+
         //Confirms if users agent is same as the sessions user.
         protected function confirmUser()
         {
-            $userAgent = $_SESSION['Curator_userAgent'] === hash(SESSION\ENCRYPTION, $_SERVER['HTTP_USER_AGENT'] . SESSION\IDENTIFIER);
+            $userAgent = SECURITY::Encode($_SERVER['HTTP_USER_AGENT']);
 
-            if(isset($_SESSION['Curator_userAgent']) && $userAgent)
+            if(isset($_SESSION['Curator_userAgent']) && ($_SESSION['Curator_userAgent'] === $userAgent))
             {
                 return TRUE;
             }
@@ -128,27 +151,55 @@
 
             //Create new session.
             session_start();
-            $_SESSION['Curator_userAgent'] = hash(SESSION\ENCRYPTION, $_SERVER['HTTP_USER_AGENT'] . SESSION\IDENTIFIER);
-            $_SESSION['Curator_startTime'] = time();
-            $_SESSION['Curator_idleTime']  = time();
+
+            if(SESSION\SETTING\ENFORCEIP)
+            {
+                $_SESSION['Curator_userIP'] = hash(SESSION\ENCRYPTION, self::obtainIP() . SESSION\IDENTIFIER);
+            }
+
+            $_SESSION['Curator_userAgent'] = SECURITY::Encode($_SERVER['HTTP_USER_AGENT']);
+            $_SESSION['Curator_startTime'] = $_SESSION['Curator_idleTime'] = $_SESSION['Curator_regenTime'] = time();
+  
             $_SESSION['Curator_Status']    = TRUE;
+            echo "New session started ... \n";
         }
 
         protected function tryRegenerate()
         {
-            $sessionLength = time() - $_SESSION['Curator_startTime'];
+            $sessionLength = time() - $_SESSION['Curator_regenTime'];
 
             if($sessionLength > SESSION\ID\REGENERATE\TIME)
             {
                 session_regenerate_id(TRUE);
+                $_SESSION['Curator_regenTime'] = time();
+                echo "\nSession time exceeded .. Generated new ID ... \n";
             }
             else
             {
                 if(($test = mt_rand(0,100)) <= SESSION\ID\REGENERATE\PERCENT)
                 {
                     session_regenerate_id(TRUE);
+                    echo "5% hit! Regenerated new ID ... \n";
                 }
-                echo $test;
+                echo 'Random Regen: ' . $test;
+                
+            }
+        }
+
+        protected function obtainIP()
+        {
+            if(!empty($_SERVER['HTTP_CLIENT_IP']))
+            {
+                return $_SERVER['HTTP_CLIENT_IP'];
+            }
+            else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+            {
+                $ipString = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+                return trim($ipString[count($ipString) - 1]);
+            }
+            else
+            {
+                return $_SERVER['REMOTE_ADDR'];
             }
         }
     }

@@ -65,6 +65,24 @@
                      <td>$_SESSION['Curator_startTime']</td>
                      <td><?=(time() - $_SESSION['Curator_startTime']) / 60?></td>
                   </tr>
+
+                  <tr>
+                     <td>5</td>
+                     <td>$_SESSION['Curator_userIP']</td>
+                     <td><?=($_SESSION['Curator_userIP'])?></td>
+                  </tr>
+
+                  <tr>
+                     <td>5</td>
+                     <td>$_SESSION['Curator_regenTime']</td>
+                     <td><?=($_SESSION['Curator_regenTime'])?></td>
+                  </tr>
+
+                  <tr>
+                     <td>5</td>
+                     <td>TIME()</td>
+                     <td><?=(time())?></td>
+                  </tr>
                </table>
             </div>
          </div>

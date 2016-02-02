@@ -50,6 +50,9 @@
     //Session timeout period (seconds).
     define('Curator\Config\SESSION\TIMEOUT', '600');
 
+    //Setting for enforcing consistant IP for sessions. May cause issue with TOR users. 1: Enforce 0: Disable.
+    define('Curator\Config\SESSION\SETTING\ENFORCEIP', '1');
+
     //Session encryption algorithm.
     define('Curator\Config\SESSION\ENCRYPTION', 'sha512');
 
