@@ -18,9 +18,9 @@ January 16, 2016
 ####Author
 James Druhan
 
-####Features
+##Features
 
-##Sessions
+###Sessions
 
 - Admin configurable session encryption (hash_function).
 - Smart HTTPS detection.
@@ -33,8 +33,8 @@ James Druhan
   - Admin configurable setting for time out duration.
   - Admin configurable settings for Session ID regeneration (time and chance).
 
-##Error Logging
+###Error Logging
 - Smart detailed error logging to file.
 
-##Language
+###Language
 - Complete multi-language support - even error logging!
