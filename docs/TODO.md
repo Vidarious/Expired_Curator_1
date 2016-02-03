@@ -2,8 +2,10 @@
     - After session class is made change language class to setup a Curator language session
     variable. Then get rid of the loadLanguageClass method and change the database language load
     to simply load the required file using the session variable.
+- On login get timezone and set it as default for time()
 - Secure Tip: Regenerate session ID during authentication and changing of sensitive data.
 - Create page tracker
+- Once user class is created
 - Session security level. Add options for session.hash_bits_per_character, session.hash_function, session.entropy_length
 
 - Session Secure Options

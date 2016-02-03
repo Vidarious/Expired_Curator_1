@@ -16,10 +16,13 @@
     use \Curator\Classes       as CLASSES;
 
     //Load Curator configuartion data.
-    require_once('../resource/config/curator.php');
+    require_once(dirname(__FILE__) . '/../resource/config/curator.php');
+
+    //Load Curator traits.
+    require_once(\Curator\Config\PATH\ROOT . 'resource/helper/Security.php');
 
     //Load debug utilities. Development only.
-    require_once('../resource/debug/vendor/debug.php');
+    require_once(\Curator\Config\PATH\ROOT . 'resource/debug/vendor/debug.php');
 
     //Automatically include classes for created objects.
     function autoLoad($className)
@@ -42,11 +45,11 @@
     spl_autoload_register('\Curator\Application\autoLoad');
 
     //Initialize session object to handle messaging.
-    $SESSION = CLASSES\Session::getSession();
+    $CURATOR_SESSION = CLASSES\Session::getSession();
 
     //Initialize language object to handle messaging.
-    $LANG = CLASSES\Language::getLanguage();
+    $CURATOR_LANG = CLASSES\Language::getLanguage();
 
     //Create a database object to handle all database communication.
-    $DB = CLASSES\Database::getConnection();
+    $CURATOR_DB = CLASSES\Database::getConnection();
 ?>

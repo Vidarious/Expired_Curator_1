@@ -17,7 +17,7 @@
     class Language
     {
         //Class Variables
-        public $language = NULL;
+        private $language = NULL;
 
         //Object initalization. Singleton design.
         protected function __construct($userLanguage = NULL)
@@ -30,6 +30,14 @@
             else
             {
                 $this->language = LANG\CURATOR_DEFAULT;
+            }
+        }
+
+        public function __get($property)
+        {
+            if(property_exists($this, $property))
+            {
+                return $this->$property;
             }
         }
 

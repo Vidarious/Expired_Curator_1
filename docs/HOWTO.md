@@ -24,7 +24,7 @@ This class is in the **\Curator\Classes** namespace.
 
 #####Create database object<a id="database1"></a>
 ```php
-$DB = CLASSES\Database::getConnection();
+$CURATOR_DB = CLASSES\Database::getConnection();
 ```
 
 [Back to Top](#topguide)
@@ -32,7 +32,7 @@ $DB = CLASSES\Database::getConnection();
 ##### <a id="database2"></a>Prepare a SQL statement
 ```php
 $statement = "INSERT INTO TABLE (name, value) VALUES (:name, :value)";
-$DB->prepareStatement($statement);
+$CURATOR_DB->prepareStatement($statement);
 ```
 
 [Back to Top](#topguide)
@@ -42,11 +42,11 @@ $DB->prepareStatement($statement);
 $parameter = "name";
 $value = "John";
 
-$DB->bindValue($parameter, $value, \PDO::PARAM_INT);
+$CURATOR_DB->bindValue($parameter, $value, \PDO::PARAM_INT);
 ```
 OR
 ```php
-$DB->bindValue("name", "John", \PDO::PARAM_INT);
+$CURATOR_DB->bindValue("name", "John", \PDO::PARAM_INT);
 ```
 
 **NOTE**: If $parameterType is not set the method will first identify the variable passed and properly associate the type:
@@ -59,7 +59,7 @@ $DB->bindValue("name", "John", \PDO::PARAM_INT);
 
 ##### <a id="database4"></a>Execute a prepared statement
 ```php
-$DB->executeStatement();
+$CURATOR_DB->executeStatement();
 ```
 
 **NOTE**: This method does not return any value. It executes the prepared statement and assigns it to a private object variable.
@@ -68,41 +68,41 @@ $DB->executeStatement();
 
 ##### <a id="database5"></a>Retrieve a **single row** result from executed query
 ```php
-$data = $DB->getResultSingle();
+$data = $CURATOR_DB->getResultSingle();
 ```
 
 [Back to Top](#topguide)
 
 ##### <a id="database6"></a>Retrieve a **many row** result from executed query
 ```php
-$data = $DB->getResultMany();
+$data = $CURATOR_DB->getResultMany();
 ```
 
 [Back to Top](#topguide)
 
 ##### <a id="database7"></a>Retrieve a single **column** result from executed query
 ```php
-$data = $DB->getResultColumn(); //Returns the first single result value.
+$data = $CURATOR_DB->getResultColumn(); //Returns the first single result value.
 ```
 
 OR
 
 ```php
-$data = $DB->getResultColumn(3); //Returns the 3rd single result value.
+$data = $CURATOR_DB->getResultColumn(3); //Returns the 3rd single result value.
 ```
 
 [Back to Top](#topguide)
 
 ##### <a id="database8"></a>Get the row count of the executed statement
 ```php
-$data = $DB->getRowCount();
+$data = $CURATOR_DB->getRowCount();
 ```
 
 [Back to Top](#topguide)
 
 ##### <a id="database9"></a>Get the ID of the last inserted row for the executed statement
 ```php
-$data = $DB->getInsertedID();
+$data = $CURATOR_DB->getInsertedID();
 ```
 
 [Back to Top](#topguide)
@@ -136,6 +136,11 @@ $this->Language->loadClassLanguage(__CLASS__);
 
 ## <a id="session"></a>Session
 This class is in the **\Curator\Classes** namespace.
+
+#####  <a id="session1"></a>Get user IP address
+```php
+echo $CURATOR_SESSION->userIP;
+```
 
 [Back to Top](#topguide)
 

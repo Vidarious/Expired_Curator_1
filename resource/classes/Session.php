@@ -14,12 +14,9 @@
     use \Curator\Config\SESSION as SESSION;
     use \Curator\Traits\Security as SECURITY;
 
-    //Load traits.
-    require_once('../resource/helper/Security.php');
-
     class Session
     {
-        private $userIP;
+        private $userIP = NULL;
 
         //Object initalization. Singleton design.
         protected function __construct()
@@ -72,7 +69,6 @@
             session_name('Curator_Session');
 
             //Determine if server is running HTTPS.
-            $secureServer = NULL;
             $secureServer = isset($_SERVER['HTTPS']);
 
             //Configure session cookie.
@@ -154,16 +150,11 @@
         //Initialize new session data.
         protected function newSession()
         {
-            //Destroy cookie.
-            $cookieParameters = session_get_cookie_params();
-            setcookie(session_name(), '', time() - 42000, $cookieParameters['path'], $cookieParameters['domain'], $cookieParameters['secure'], $cookieParameters['httponly']);
+            //Destroy cookie, session and setup new session.
+            self::killCookie();
+            self::killSession();
+            self::setupSession();
 
-            //Destroy old session.
-            session_unset();
-            session_destroy();
-            $_SESSION = array();
-
-            //Create new session.
             session_start();
 
             if(SESSION\SETTING\ENFORCEIP)
@@ -180,6 +171,24 @@
   
             $_SESSION['Curator_Status']    = TRUE;
             echo "New session started ... <br/>";
+        }
+
+        //Destroy cookie.
+        protected function killCookie()
+        {
+       
+            $cookieParameters = session_get_cookie_params();
+
+            unset($_COOKIE['Curator_Session']);
+            setcookie(session_name(), '', time() - 3600, $cookieParameters['path'], $cookieParameters['domain'], $cookieParameters['secure'], $cookieParameters['httponly']);
+        }
+
+        //Destroy old session.
+        protected function killSession()
+        {
+            session_unset();
+            session_destroy();
+            $_SESSION = array();
         }
 
         //Two trys to regenerate Session ID for added security. Both configurable by admin
@@ -242,6 +251,14 @@
             else
             {
                 return($this->userIP = SECURITY::validateIP($_SERVER['REMOTE_ADDR']));
+            }
+        }
+
+        public function __get($property)
+        {
+            if(property_exists($this, $property))
+            {
+                return $this->$property;
             }
         }
     }
