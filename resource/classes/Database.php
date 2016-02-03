@@ -26,10 +26,11 @@
         //Object initalization. Singleton design.
         protected function __construct()
         {
-            //Obtain the language object and load the database language file for messages.
+            //Load database language file for messaging.
             $this->Language = \Curator\Classes\Language::getLanguage();
             $this->Language->loadClassLanguage(__CLASS__);
 
+            //Obtain the language object and load the database language file for messages.
             $pdoServerString = 'mysql:host=' . DB\HOST . ';dbname=' . DB\NAME;
             $pdoOptionString = array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION);
 

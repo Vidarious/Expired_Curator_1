@@ -12,6 +12,7 @@
     namespace Curator\Application;
 
     use \Curator\Config\PATH as PATH;
+    use \Curator\Classes\Language\Log as LANG;
 
 class Log
 {
@@ -19,11 +20,15 @@ class Log
     public $className   = NULL;
     public $methodName  = NULL;
     public $logPath     = NULL;
-    public $logMessage     = NULL;
+    public $logMessage  = NULL;
+    public $Language    = NULL;
 
     //Object initialization. Sets the object variables for class and method.
     public function __construct($className = NULL, $methodName = NULL)
     {
+        //Obtain the language object and load the log language file for messages.
+        $this->Language   = \Curator\Classes\Language::getLanguage();
+        $this->Language->loadClassLanguage(__CLASS__);
         $this->className  = $className;
         $this->methodName = $methodName;
     }
@@ -49,12 +54,12 @@ class Log
     private function writeLog()
     {
         //Build log message
-        $messageFinal[] = PHP_EOL . "DATE: " . date('F d, Y \a\t g:i A e',$_SERVER['REQUEST_TIME']);
-        $messageFinal[] = PHP_EOL . "ADDRESS: " . $_SERVER['REMOTE_ADDR'];
-        $messageFinal[] = PHP_EOL . "URI: " . $_SERVER['REQUEST_URI'];
-        $messageFinal[] = PHP_EOL . "CLASS: " . $this->className;
-        $messageFinal[] = PHP_EOL . "METHOD: " . $this->methodName;
-        $messageFinal[] = PHP_EOL . "MESSAGE: " . $this->logMessage;
+        $messageFinal[] = PHP_EOL . LANG\HEAD_DATE    . ": " . date('F d, Y \a\t g:i A e',$_SERVER['REQUEST_TIME']);
+        $messageFinal[] = PHP_EOL . LANG\HEAD_ADDRESS . ": " . $_SERVER['REMOTE_ADDR'];
+        $messageFinal[] = PHP_EOL . LANG\HEAD_URI     . ": " . $_SERVER['REQUEST_URI'];
+        $messageFinal[] = PHP_EOL . LANG\HEAD_CLASS   . ": " . $this->className;
+        $messageFinal[] = PHP_EOL . LANG\HEAD_METHOD  . ": " . $this->methodName;
+        $messageFinal[] = PHP_EOL . LANG\HEAD_MESSAGE . ": " . $this->logMessage;
 
         //Write to log.
         error_log(PHP_EOL . "**********", 3, $this->logPath);
