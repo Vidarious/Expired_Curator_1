@@ -15,6 +15,7 @@
   - [Create a language object](#language1)
   - [Load class language file](#language2)
 - [Session](#session)
+  - [Get user IP address](#session1)
 - [Log](#log)
 
 * * *
