@@ -26,12 +26,12 @@ James Druhan
 - Smart HTTPS detection.
 - IPV4 & IPV6 validation.
 - Admin configurable setting for validating user using IP.
-..-Session IP is encypted for added hijack protection.
-..-Smart IP detection! On invalid IP due to TOR/Proxy services Curator will still generate a unique key for IP validation.
+  -Session IP is encypted for added hijack protection.
+  -Smart IP detection! On invalid IP due to TOR/Proxy services Curator will still generate a unique key for IP validation.
 - Admin configurable setting for validating user agent.
-..-User agent is encrypted for added hijack protection.
-..-Admin configurable setting for time out duration.
-..-Admin configurable settings for Session ID regeneration (time and chance).
+  -User agent is encrypted for added hijack protection.
+  -Admin configurable setting for time out duration.
+  -Admin configurable settings for Session ID regeneration (time and chance).
 
 ##Error Logging
 - Smart detailed error logging to file.
