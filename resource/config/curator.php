@@ -53,12 +53,17 @@
     //Setting for enforcing consistant IP for sessions. May cause issue with TOR users. 1: Enforce 0: Disable.
     define('Curator\Config\SESSION\SETTING\ENFORCEIP', '1');
 
+    //Setting for enforcing consistant IP for sessions. May cause issue with TOR users. 1: Enforce 0: Disable.
+    define('Curator\Config\SESSION\SETTING\ENFORCEUSERAGENT', '1');
+
     //Session encryption algorithm.
     define('Curator\Config\SESSION\ENCRYPTION', 'sha512');
 
     //Session regenerate time.
+    define('Curator\Config\SESSION\ID\REGENERATE\TIME\ENFORCE', '1');
     define('Curator\Config\SESSION\ID\REGENERATE\TIME', '300');
 
     //Session regenerate %. Value should be 1-100.
+    define('Curator\Config\SESSION\ID\REGENERATE\PERCENT\ENFORCE', '1');
     define('Curator\Config\SESSION\ID\REGENERATE\PERCENT', '5');
 ?>

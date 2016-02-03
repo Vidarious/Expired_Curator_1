@@ -49,12 +49,6 @@
                   </tr>
 
                   <tr>
-                     <td>3</td>
-                     <td>$_SESSION['Curator_startTime']</td>
-                     <td><?=$_SESSION['Curator_startTime']?></td>
-                  </tr>
-
-                  <tr>
                      <td>4</td>
                      <td>$_SESSION['Curator_Status']</td>
                      <td><?=$_SESSION['Curator_Status']?></td>
@@ -63,19 +57,37 @@
                   <tr>
                      <td>5</td>
                      <td>$_SESSION['Curator_startTime']</td>
-                     <td><?=(time() - $_SESSION['Curator_startTime']) / 60?></td>
+                     <td><?=(date("i:s", time() - $_SESSION['Curator_startTime']))?></td>
                   </tr>
 
                   <tr>
                      <td>5</td>
-                     <td>$_SESSION['Curator_userIP']</td>
-                     <td><?=($_SESSION['Curator_userIP'])?></td>
+                     <td>$_SESSION['Curator_idleTime']</td>
+                     <td><?=(date("i:s", time() - $_SESSION['Curator_idleTime']))?></td>
+                  </tr>
+
+                  <tr>
+                     <td>5</td>
+                     <td>Timeout Setting</td>
+                     <td><?=(date("i:s", Curator\Config\SESSION\TIMEOUT))?></td>
                   </tr>
 
                   <tr>
                      <td>5</td>
                      <td>$_SESSION['Curator_regenTime']</td>
-                     <td><?=($_SESSION['Curator_regenTime'])?></td>
+                     <td><?=(date("i:s", time() - $_SESSION['Curator_regenTime']))?></td>
+                  </tr>
+
+                  <tr>
+                     <td>5</td>
+                     <td>Timeout Setting</td>
+                     <td><?=(date("i:s", Curator\Config\SESSION\ID\REGENERATE\TIME))?></td>
+                  </tr>
+
+                  <tr>
+                     <td>5</td>
+                     <td>$_SESSION['Curator_userKey']</td>
+                     <td><?=$_SESSION['Curator_userKey']?></td>
                   </tr>
 
                   <tr>
@@ -87,7 +99,6 @@
             </div>
          </div>
       </div>
-
       <!-- JavaScript Inserts -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
       <script src="js/bootstrap.min.js"></script>

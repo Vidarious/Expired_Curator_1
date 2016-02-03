@@ -15,9 +15,19 @@
 
     trait Security
     {
-        public function Encode($value)
+        public function encode($value)
         {
             return(hash(SESSION\ENCRYPTION, $value . SESSION\IDENTIFIER));
+        }
+
+        public function validateIP($ip)
+        {
+            if((!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) === FALSE) || (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === FALSE))
+            {
+                return $ip;
+            }
+
+            return 'N/A';
         }
     }
  ?>
