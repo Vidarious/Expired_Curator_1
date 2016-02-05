@@ -56,12 +56,12 @@
         protected function setupSession()
         {
             //Set session settings.
-            ini_set('session.cookie_lifetime',         0);
-            ini_set('session.use_trans_sid',           0);
             ini_set('session.use_cookies',             1);
             ini_set('session.use_only_cookies',        1);
-            ini_set('session.use_strict_mode',         1);
+            ini_set('session.cookie_lifetime',         0);
             ini_set('session.cookie_httponly',         1);
+            ini_set('session.use_trans_sid',           0);
+            ini_set('session.use_strict_mode',         1);
             ini_set('session.entropy_length',          32);
             ini_set('session.hash_bits_per_character', 5);
             ini_set('session.hash_function', SESSION\ENCRYPTION);
@@ -72,7 +72,7 @@
             $secureServer = isset($_SERVER['HTTPS']);
 
             //Configure session cookie.
-            session_set_cookie_params(0, '/', $_SERVER['SERVER_NAME'], $secureServer, TRUE);
+            session_set_cookie_params(0, SESSION\COOKIE\PATH, $_SERVER['SERVER_NAME'], $secureServer, TRUE);
         }
 
         //Secures the session from hijacking.
@@ -254,11 +254,37 @@
             }
         }
 
+        //Return a Session class variable.
         public function __get($property)
         {
             if(property_exists($this, $property))
             {
                 return $this->$property;
+            }
+        }
+
+        //Returns the requested session value.
+        public function getValue($variable = NULL)
+        {
+            if(isset($_SESSION[$variable]))
+            {
+                return $_SESSION[$variable];
+            }
+        }
+
+        //Sets the requested session value.
+        public function setValue($variable = NULL, $value = NULL)
+        {
+            if(isset($variable))
+            {
+                if(!isset($value))
+                {
+                    unset($_SESSION[$variable]);
+                }
+                else
+                {
+                    $_SESSION[$variable] = $value;
+                }
             }
         }
     }

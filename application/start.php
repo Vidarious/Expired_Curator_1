@@ -45,11 +45,11 @@
     spl_autoload_register('\Curator\Application\autoLoad');
 
     //Initialize session object to handle messaging.
-    $CURATOR_SESSION = CLASSES\Session::getSession();
+    $_CURATOR['SESSION'] = CLASSES\Session::getSession();
 
     //Initialize language object to handle messaging.
-    $CURATOR_LANG = CLASSES\Language::getLanguage();
+    $_CURATOR['LANGUAGE'] = CLASSES\Language::getLanguage();
 
     //Create a database object to handle all database communication.
-    $CURATOR_DB = CLASSES\Database::getConnection();
+    $_CURATOR['DATABASE'] = CLASSES\Database::getConnection();
 ?>

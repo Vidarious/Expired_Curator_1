@@ -1,3 +1,5 @@
+- Update HOWTO for new session variables.
+
 - Create session class.
     - After session class is made change language class to setup a Curator language session
     variable. Then get rid of the loadLanguageClass method and change the database language load

@@ -66,4 +66,7 @@
     //Session regenerate %. Value should be 1-100.
     define('Curator\Config\SESSION\ID\REGENERATE\PERCENT\ENFORCE', '1');
     define('Curator\Config\SESSION\ID\REGENERATE\PERCENT', '5');
+
+    //Cookie path ownership. '/' is default for entire site.
+    define('Curator\Config\SESSION\COOKIE\PATH', '/');
 ?>

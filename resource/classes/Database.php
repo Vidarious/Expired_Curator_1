@@ -18,7 +18,7 @@
     {
         //Class Objects
         private $Connection = NULL;
-        public $Language    = NULL;
+        private $Language    = NULL;
 
         //Class Variables
         private $preparedStatement = NULL;
