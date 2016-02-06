@@ -1,6 +1,6 @@
 <?php
 /*
- * en_CA language file for Curator database class. Contains all user visable messaging.
+ * fr_CA language file for Curator Log class. Contains all user visable messaging.
  *
  * PHP Version 7.0.2
  *
@@ -10,6 +10,16 @@
  * @version    1.0
  */
     namespace Curator\Classes\Language\Log;
+
+    //Deny direct access to file.
+    if(!defined('Curator\Config\APPLICATION'))
+    {
+        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+    }
+
+    define('Curator\Classes\Language\Log\ERROR_HEADER', 'Demande ne peut être traitée ...');
+    define('Curator\Classes\Language\Log\ERROR_BODY', 'Désolé viser votre demande ne peut être traitée à ce moment . Veuillez réessayer.');
+    define('Curator\Classes\Language\Log\ERROR_FOOTER', 'Si vous continuez à voir ce message s\'il vous plaît contacter l\'administrateur: ' . \Curator\Config\APPLICATION\ADMIN_EMAIL);
 
     define('Curator\Classes\Language\Log\HEAD_DATE', 'DATE');
 

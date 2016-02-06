@@ -11,16 +11,37 @@
  */
     namespace Curator\Classes;
 
+    //Deny direct access to file.
+    if(!defined('Curator\Config\APPLICATION'))
+    {
+        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+    }
+
     use \Curator\Config\SESSION as SESSION;
     use \Curator\Traits\Security as SECURITY;
+    use \Curator\Classes\Language\Session as LANG;
 
     class Session
     {
+        //Class Variables
         private $userIP = NULL;
+        private $Cookie = NULL;
 
         //Object initalization. Singleton design.
-        protected function __construct()
+        protected function __construct($Cookie = NULL)
         {
+            //Load database language file for messaging.
+            $this->Language = \Curator\Classes\Language::getLanguage();
+            $this->Language->loadClassLanguage(__CLASS__);
+
+            if(!isset($Cookie))
+            {
+                $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+                $logMessage->saveError(LANG\ERROR_COOKIE);
+            }
+
+            $this->Cookie = $Cookie;
+
             //Setup the session configuration details.
             self::setupSession();
 
@@ -40,13 +61,13 @@
         {}
 
         //Returns the singleton instance of the session class. Singleton design.
-        public static function getSession()
+        public static function getSession($Cookie = NULL)
         {
             static $sessionInstance = NULL;
 
             if($sessionInstance === NULL)
             {
-                $sessionInstance = new static();
+                $sessionInstance = new static($Cookie);
             }
 
             return $sessionInstance;
@@ -66,13 +87,7 @@
             ini_set('session.hash_bits_per_character', 5);
             ini_set('session.hash_function', SESSION\ENCRYPTION);
 
-            session_name('Curator_Session');
-
-            //Determine if server is running HTTPS.
-            $secureServer = isset($_SERVER['HTTPS']);
-
-            //Configure session cookie.
-            session_set_cookie_params(0, SESSION\COOKIE\PATH, $_SERVER['SERVER_NAME'], $secureServer, TRUE);
+            session_name(SESSION\NAME);
         }
 
         //Secures the session from hijacking.
@@ -97,7 +112,7 @@
         protected function confirmIP()
         {
             //Check if IP Enforcement is enabled.
-            if(SESSION\SETTING\ENFORCEIP)
+            if(SESSION\SETTING\ENFORCE_IP === TRUE)
             {
                 $userKey = SECURITY::encode($this->userIP);
 
@@ -114,7 +129,7 @@
         //Confirms if users agent is same as the sessions user.
         protected function confirmUser()
         {
-            if(SESSION\SETTING\ENFORCEUSERAGENT)
+            if(SESSION\SETTING\ENFORCE_USERAGENT === TRUE)
             {
                 $userAgent = SECURITY::encode($_SERVER['HTTP_USER_AGENT']);
 
@@ -150,19 +165,21 @@
         //Initialize new session data.
         protected function newSession()
         {
-            //Destroy cookie, session and setup new session.
-            self::killCookie();
+            //Destroy cookie, session and setup new cookie & session.
+            $this->Cookie->destroyCookies();
+            $this->Cookie->setupCookies();
+
             self::killSession();
             self::setupSession();
 
             session_start();
 
-            if(SESSION\SETTING\ENFORCEIP)
+            if(SESSION\SETTING\ENFORCE_IP === TRUE)
             {
                 $_SESSION['Curator_userKey'] = hash(SESSION\ENCRYPTION, $this->userIP . SESSION\IDENTIFIER);
             }
 
-            if(SESSION\SETTING\ENFORCEUSERAGENT)
+            if(SESSION\SETTING\ENFORCE_USERAGENT === TRUE)
             {
                 $_SESSION['Curator_userAgent'] = SECURITY::encode($_SERVER['HTTP_USER_AGENT']);
             }
@@ -173,21 +190,13 @@
             echo "New session started ... <br/>";
         }
 
-        //Destroy cookie.
-        protected function killCookie()
-        {
-       
-            $cookieParameters = session_get_cookie_params();
-
-            unset($_COOKIE['Curator_Session']);
-            setcookie(session_name(), '', time() - 3600, $cookieParameters['path'], $cookieParameters['domain'], $cookieParameters['secure'], $cookieParameters['httponly']);
-        }
-
         //Destroy old session.
         protected function killSession()
         {
             session_unset();
             session_destroy();
+            session_write_close();
+
             $_SESSION = array();
         }
 
@@ -203,7 +212,7 @@
         //Regenerate Session ID based on admin set time length. Regenerates every XXX seconds.
         protected function regenerateTime()
         {
-            if(SESSION\ID\REGENERATE\TIME\ENFORCE)
+            if(SESSION\ID\REGENERATE\TIME\ENFORCE === TRUE)
             {
                 //Last time the session ID was regenerated.
                 $regenLength = time() - $_SESSION['Curator_regenTime'];
@@ -222,7 +231,7 @@
         //Regenerate Session ID every X% of the time which is admin set.
         protected function regeneratePercent()
         {
-            if(SESSION\ID\REGENERATE\PERCENT\ENFORCE)
+            if(SESSION\ID\REGENERATE\PERCENT\ENFORCE === TRUE)
             {
                 //Generate the random chance <Admin Value 1 - 100) out of 100.
                 if(($test = mt_rand(0,100)) <= SESSION\ID\REGENERATE\PERCENT)
@@ -239,19 +248,21 @@
         {
             if(!empty($_SERVER['HTTP_CLIENT_IP']))
             {
-                return($this->userIP = SECURITY::validateIP($_SERVER['HTTP_CLIENT_IP']));
+                $this->userIP = SECURITY::validateIP($_SERVER['HTTP_CLIENT_IP']);
             }
             else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
             {
                 $ipString = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
                 $ip       = trim($ipString[count($ipString) - 1]);
 
-                return($this->userIP = SECURITY::validateIP($ip));
+                $this->userIP = SECURITY::validateIP($ip);
             }
             else
             {
-                return($this->userIP = SECURITY::validateIP($_SERVER['REMOTE_ADDR']));
+                $this->userIP = SECURITY::validateIP($_SERVER['REMOTE_ADDR']);
             }
+
+            return($this->userIP);
         }
 
         //Return a Session class variable.
@@ -264,7 +275,7 @@
         }
 
         //Returns the requested session value.
-        public function getValue($variable = NULL)
+        public static function getValue($variable = NULL)
         {
             if(isset($_SESSION[$variable]))
             {
@@ -273,7 +284,7 @@
         }
 
         //Sets the requested session value.
-        public function setValue($variable = NULL, $value = NULL)
+        public static function setValue($variable = NULL, $value = NULL)
         {
             if(isset($variable))
             {

@@ -11,6 +11,12 @@
  */
     namespace Curator\Traits;
 
+    //Deny direct access to file.
+    if(!defined('Curator\Config\APPLICATION'))
+    {
+        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+    }
+
     use \Curator\Config\SESSION as SESSION;
 
     trait Security

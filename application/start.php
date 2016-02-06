@@ -44,8 +44,11 @@
     //Register auto-load function.
     spl_autoload_register('\Curator\Application\autoLoad');
 
+    //Initialize cookies object to handle messaging.
+    $_CURATOR['COOKIE'] = CLASSES\Cookie::getCookie();
+
     //Initialize session object to handle messaging.
-    $_CURATOR['SESSION'] = CLASSES\Session::getSession();
+    $_CURATOR['SESSION'] = CLASSES\Session::getSession($_CURATOR['COOKIE']);
 
     //Initialize language object to handle messaging.
     $_CURATOR['LANGUAGE'] = CLASSES\Language::getLanguage();

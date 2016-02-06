@@ -11,6 +11,12 @@
  */
     namespace Curator\Application;
 
+    //Deny direct access to file.
+    if(!defined('Curator\Config\APPLICATION'))
+    {
+        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+    }
+
     use \Curator\Config\PATH as PATH;
     use \Curator\Classes\Language\Log as LANG;
 
@@ -70,6 +76,8 @@ class Log
         }
 
         error_log(PHP_EOL . "**********", 3, $this->logPath);
+
+        die('<H3>' . LANG\ERROR_HEADER . '</H3> <P>' . LANG\ERROR_BODY . '</P><P>' . LANG\ERROR_FOOTER);
     }
 }
  ?>

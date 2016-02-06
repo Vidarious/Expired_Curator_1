@@ -11,6 +11,12 @@
  */
     namespace Curator\Classes;
 
+    //Deny direct access to file.
+    if(!defined('Curator\Config\APPLICATION'))
+    {
+        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+    }
+
     use \Curator\Config\DB                 as DB;
     use \Curator\Classes\Language\Database as LANG;
 

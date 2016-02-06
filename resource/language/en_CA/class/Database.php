@@ -11,6 +11,12 @@
  */
     namespace Curator\Classes\Language\Database;
 
+    //Deny direct access to file.
+    if(!defined('Curator\Config\APPLICATION'))
+    {
+        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+    }
+
     define('Curator\Classes\Language\Database\ERROR_CONNECT', 'Unable to connect to the SQL database. PDO Error: ');
 
     define('Curator\Classes\Language\Database\ERROR_PREPARE', 'Unable to prepare database query. Prepare statement returned FALSE. Statement: ');
