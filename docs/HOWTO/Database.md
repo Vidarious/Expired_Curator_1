@@ -6,7 +6,9 @@ The database class is used by The Curator to interact with your SQL database in 
 ```php
 namespace Curator\Classes;
 ```
+
 The database class belongs to the Curator\Classes PHP namespace. This means the full path the this class would be:
+
 ```php
 \Curator\Classes\Database
 ```
@@ -30,9 +32,8 @@ $myDatabaseVariable = CLASSES\Database::getConnection();
 //Returns the same instance of the class as $_CURATOR['DATABASE'].
 ```
 * * *
-####Methods
-  - [Create database object](#database1)
-  - [Prepare a SQL statement](#database2)
+####<a id="topMethods"></a>Methods
+  - [Prepare a SQL statement](#database1)
   - [Bind values to a prepared statement](#database3)
   - [Execute a prepared statement](#database4)
   - [Retrieve a single row result from executed query](#database5)
@@ -43,23 +44,17 @@ $myDatabaseVariable = CLASSES\Database::getConnection();
 
 * * *
 
-## <a id="database"></a>Database
-This class is in the **\Curator\Classes** namespace.
-
-#####Create database object<a id="database1"></a>
+##### <a id="database1"></a>Prepare a SQL statement
 ```php
-$CURATOR_DB = CLASSES\Database::getConnection();
+public void Database::prepareStatement ([ string $statement = NULL ] )
 ```
 
-[Back to Top](#topguide)
-
-##### <a id="database2"></a>Prepare a SQL statement
 ```php
 $statement = "INSERT INTO TABLE (name, value) VALUES (:name, :value)";
 $CURATOR_DB->prepareStatement($statement);
 ```
 
-[Back to Top](#topguide)
+[Back to Top](#topMethods)
 
 ##### <a id="database3"></a>Bind values to a prepared statement
 ```php
