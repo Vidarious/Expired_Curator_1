@@ -1,7 +1,36 @@
-# <a id="topguide"></a>Curator How To Guide
+# <a id="topguide"></a>Curator - How To Guide - *Database Class*
 
-####Classes
-- [Database](#database)
+The database class is used by The Curator to interact with your SQL database in order to manage application and user data. You can utilize the database object created by The Curator to perform all your necessary database actions: *Prepare a Statement*, *Bind Values*, *Execute Statement*, *Retrieve Results* (*Single Value*, *Many Rows*/*Columns*, *Many Columns*), *Row Count* and *Inserted ID*. All database actions are performed with secure [*PDO*](http://php.net/manual/en/book.pdo.php "Go to: PHP Manual").
+
+####Namespace
+```php
+namespace Curator\Classes;
+```
+The database class belongs to the Curator\Classes PHP namespace. This means the full path the this class would be:
+```php
+\Curator\Classes\Database
+```
+* * *
+####Requirements
+The database class requires the [**Language**](Language.md "Go to: Curator Language Class") & [**Log**](Log.md "Go to: Curator Log Class") classes in order to log any error messages in the admin designated language. These class files are not loaded in this class file but rather loaded with the PHP [*spl_autoload_register*](http://php.net/manual/en/function.spl-autoload-register.php "Go to: PHP Manual") function from The Curator.
+
+In addition to the Language and Log classes the Database class requires a number of global application variables. Some of these are globally declared while others are found in $_SESSION[].
+* * *
+####Object Creation
+```php
+$_CURATOR['DATABASE'] = CLASSES\Database::getConnection();
+```
+By default, The Curator creates an object for this class when the application is included in your site. The object **$_CURATOR['DATABASE']** can also be used by your own application and scripts in order to access your SQL database.
+
+The database class is designed as a [*singleton*](http://www.phptherightway.com/pages/Design-Patterns.html "Go to: Design Patterns"). In short, this means that you cannot have multiple instances of this class. If you create your own object, the class will return the previously instantiated class object. This ensures only one connection to your database exists.
+
+```php
+//Create your own database object.
+$myDatabaseVariable = CLASSES\Database::getConnection();
+//Returns the same instance of the class as $_CURATOR['DATABASE'].
+```
+* * *
+####Methods
   - [Create database object](#database1)
   - [Prepare a SQL statement](#database2)
   - [Bind values to a prepared statement](#database3)
@@ -11,12 +40,6 @@
   - [Retrieve a single column result from executed query](#database7)
   - [Get the row count of the executed statement](#database8)
   - [Get the ID of the last inserted row for the executed statement](#database9)
-- [Lanugage](#language)
-  - [Create a language object](#language1)
-  - [Load class language file](#language2)
-- [Session](#session)
-  - [Get user IP address](#session1)
-- [Log](#log)
 
 * * *
 
@@ -105,49 +128,5 @@ $data = $CURATOR_DB->getRowCount();
 ```php
 $data = $CURATOR_DB->getInsertedID();
 ```
-
-[Back to Top](#topguide)
-
-* * *
-
-## <a id="language"></a>Language
-This class is in the **\Curator\Classes** namespace.
-
-##### <a id="language1"></a>Create a language object
-```php
-$myLanguage = "en_CA";
-$LANG = CLASSES\Language::getLanguage($myLanguage);
-```
-
-**NOTE**: If the $myLanguage variable is not set, Curator will set the language to it's system default.
-
-[Back to Top](#topguide)
-
-##### <a id="language2"></a>Load class language file.
-This is an easy way to load your class language files. For Curator these language files are typically for logs (errors and warnings). Path to class language file is *[Curator Language Path]/language_LOCALE/class/__CLASSNAME__.php*.
-```php
-$this->Language->loadClassLanguage(__CLASS__);
-```
-
-**NOTE**: If a language file does not exist no errors or logs will be generated.
-
-[Back to Top](#topguide)
-
-* * *
-
-## <a id="session"></a>Session
-This class is in the **\Curator\Classes** namespace.
-
-#####  <a id="session1"></a>Get user IP address
-```php
-echo $CURATOR_SESSION->userIP;
-```
-
-[Back to Top](#topguide)
-
-* * *
-
-## <a id="log"></a>Log
-This class is in the **\Curator\Classes** namespace.
 
 [Back to Top](#topguide)
