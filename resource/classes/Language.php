@@ -25,17 +25,17 @@
         //Class Variables
         private $language = NULL;
 
-        //Object initalization. Singleton design.
-        protected function __construct($userLanguage = NULL)
+        //Object initalization.
+        public function __construct($language = NULL)
         {
             //Check if the user has a selected language. If not, load Curator default.
-            if($userLanguage != NULL)
+            if($language != NULL)
             {
-                $this->language = $userLanguage;
+                $this->language = $language;
             }
             else
             {
-                $this->language = LANG\CURATOR_DEFAULT;
+                $this->language = LANG\CURATOR_USER_DEFAULT;
             }
         }
 
@@ -46,14 +46,6 @@
                 return $this->$property;
             }
         }
-
-        //Singleton design.
-        private function __clone()
-        {}
-
-        //Singleton design.
-        private function __wakeup()
-        {}
 
         //Returns the singleton instance of the language class. Singleton design.
         public static function getLanguage($userLanguage = NULL)

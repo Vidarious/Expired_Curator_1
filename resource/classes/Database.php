@@ -17,14 +17,16 @@
         header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
     }
 
-    use \Curator\Config\DB                 as DB;
+    use \Curator\Config                    as CONFIG;
     use \Curator\Classes\Language\Database as LANG;
+
+    //Include the Database language error messaging file.
+    require_once(\Curator\Config\PATH\ROOT . 'resource/language/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Session.php');
 
     class Database
     {
         //Class Objects
         private $Connection = NULL;
-        private $Language    = NULL;
 
         //Class Variables
         private $preparedStatement = NULL;
@@ -32,17 +34,12 @@
         //Object initalization. Singleton design.
         protected function __construct()
         {
-            //Load database language file for messaging.
-            $this->Language = \Curator\Classes\Language::getLanguage();
-            $this->Language->loadClassLanguage(__CLASS__);
-
-            //Obtain the language object and load the database language file for messages.
-            $pdoServerString = 'mysql:host=' . DB\HOST . ';dbname=' . DB\NAME;
+            $pdoServerString = 'mysql:host=' . CONFIG\DB\HOST . ';dbname=' . CONFIG\DB\NAME;
             $pdoOptionString = array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION);
 
             try
             {
-                $this->Connection = new \PDO($pdoServerString, DB\USER, DB\PASS, $pdoOptionString);
+                $this->Connection = new \PDO($pdoServerString, CONFIG\DB\USER, CONFIG\DB\PASS, $pdoOptionString);
             }
             catch(PDOException $pdoError)
             {

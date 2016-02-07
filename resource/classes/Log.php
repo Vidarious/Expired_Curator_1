@@ -20,6 +20,8 @@
     use \Curator\Config\PATH as PATH;
     use \Curator\Classes\Language\Log as LANG;
 
+    require_once(\Curator\Config\PATH\ROOT . 'resource/language/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Session.php');
+
 class Log
 {
     //Class Variables
@@ -27,14 +29,10 @@ class Log
     public $methodName  = NULL;
     public $logPath     = NULL;
     public $logMessage  = NULL;
-    public $Language    = NULL;
 
     //Object initialization. Sets the object variables for class and method.
     public function __construct($className = NULL, $methodName = NULL)
     {
-        //Obtain the language object and load the log language file for messages.
-        $this->Language   = \Curator\Classes\Language::getLanguage();
-        $this->Language->loadClassLanguage(__CLASS__);
         $this->className  = $className;
         $this->methodName = $methodName;
     }

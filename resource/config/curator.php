@@ -36,7 +36,8 @@
     define('Curator\Config\PATH\LOG\WARNING', PATH\ROOT . 'application/logs/warnings.log');
 
     //Curator language.
-    define('Curator\Config\LANG\CURATOR_DEFAULT', 'en_CA');
+    define('Curator\Config\LANG\CURATOR_USER_DEFAULT', 'en_CA');
+    define('Curator\Config\LANG\CURATOR_APPLICATION', 'en_CA');
 
     //Host address for SQL database.
     define('Curator\Config\DB\HOST', getenv('IP')); //Cloud9

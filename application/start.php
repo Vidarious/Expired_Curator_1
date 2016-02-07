@@ -50,9 +50,9 @@
     //Initialize session object to handle messaging.
     $_CURATOR['SESSION'] = CLASSES\Session::getSession($_CURATOR['COOKIE']);
 
-    //Initialize language object to handle messaging.
-    $_CURATOR['LANGUAGE'] = CLASSES\Language::getLanguage();
-
     //Create a database object to handle all database communication.
     $_CURATOR['DATABASE'] = CLASSES\Database::getConnection();
+
+    //User optional set user language.
+    $_CURATOR['SESSION']::setValue('Curator_Lang', 'en_CA');
 ?>

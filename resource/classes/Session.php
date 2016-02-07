@@ -21,19 +21,19 @@
     use \Curator\Traits\Security as SECURITY;
     use \Curator\Classes\Language\Session as LANG;
 
+    require_once(\Curator\Config\PATH\ROOT . 'resource/language/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Session.php');
+
     class Session
     {
         //Class Variables
         private $userIP = NULL;
         private $Cookie = NULL;
 
+        public $test = array();
+
         //Object initalization. Singleton design.
         protected function __construct($Cookie = NULL)
         {
-            //Load database language file for messaging.
-            $this->Language = \Curator\Classes\Language::getLanguage();
-            $this->Language->loadClassLanguage(__CLASS__);
-
             if(!isset($Cookie))
             {
                 $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
@@ -96,7 +96,7 @@
             //Determines users IP.
             self::setIP();
 
-            if(!isset($_SESSION['Curator_Status']) || !self::confirmTimeOut() || !self::confirmUser() || !self::confirmIP())
+            if(!isset($_SESSION['Curator_Status']) || !isset($_SESSION['Curator_Lang']) || !self::confirmTimeOut() || !self::confirmUser() || !self::confirmIP())
             {
                 //Secure check(s) failed. Create new session.
                 self::newSession();
@@ -118,7 +118,7 @@
 
                 if(!isset($_SESSION['Curator_userKey']) || ($_SESSION['Curator_userKey'] != $userKey))
                 {
-                    echo "User IP check failed ... <br/>";
+                    $this->test[] = "User IP check failed ...";
                     return FALSE;
                 }
             }
@@ -135,7 +135,7 @@
 
                 if(!isset($_SESSION['Curator_userAgent']) || ($_SESSION['Curator_userAgent'] != $userAgent))
                 {
-                    echo "User agent check failed ... <br/>";
+                    $this->test[] = "User agent check failed ...";
                     return FALSE;
                 }
             }
@@ -152,13 +152,15 @@
 
                 if($idleLength < SESSION\TIMEOUT)
                 {
-                    echo "Last idle time: " . date("i:s", time() - $_SESSION['Curator_idleTime']) . "<br/>";
+                    //***
+                    $_SESSION['Curator_idleTime2'] = $_SESSION['Curator_idleTime']; //TESTING ONLY. DELETE LATER.
+                    //***
                     $_SESSION['Curator_idleTime'] = time();
                     return TRUE;
                 }
             }
-            echo "Last idle time: " . date("i:s", time() - $_SESSION['Curator_idleTime']) . "<br/>";
-            echo "Timeout failed ... <br/>";
+            $this->test[] = "Timeout failed .. Last idle time: " . date("i:s", time() - $_SESSION['Curator_idleTime']);
+
             return FALSE;
         }
 
@@ -185,9 +187,11 @@
             }
 
             $_SESSION['Curator_startTime'] = $_SESSION['Curator_idleTime'] = $_SESSION['Curator_regenTime'] = time();
-  
             $_SESSION['Curator_Status']    = TRUE;
-            echo "New session started ... <br/>";
+            $_SESSION['Curator_Lang']      = \Curator\Config\LANG\CURATOR_USER_DEFAULT;
+
+            $this->test[] = "New session started ...";
+            $_SESSION['MESSAGE'] = $this->test;
         }
 
         //Destroy old session.
@@ -222,7 +226,7 @@
                 {
                     session_regenerate_id(TRUE);
                     $_SESSION['Curator_regenTime'] = time();
-                    echo "\nSession time exceeded .. Generated new ID ... <br/>";
+                    $_SESSION['MESSAGE'][0] = "\nSession time exceeded .. Generated new ID ...";
                     return TRUE;
                 }
             }
@@ -237,9 +241,11 @@
                 if(($test = mt_rand(0,100)) <= SESSION\ID\REGENERATE\PERCENT)
                 {
                     session_regenerate_id(TRUE);
-                    echo "5% hit! Regenerated new ID ... <br/>";
+                    $_SESSION['MESSAGE'][0] = "5% hit! Regenerated new ID ...";
                 }
-                echo 'Random Regen: ' . $test . '<br/>';
+                //****
+                $_SESSION['RandomTEST'] = $test; //TESTING ONLY
+                //****
             }
         }
 

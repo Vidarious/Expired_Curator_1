@@ -40,7 +40,7 @@
         private function __wakeup()
         {}
 
-        //Returns the singleton instance of the language class. Singleton design.
+        //Returns the singleton instance of the cookie class. Singleton design.
         public static function getCookie()
         {
             static $cookieInstance = NULL;
