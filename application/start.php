@@ -1,6 +1,6 @@
 <?php
  /*
- * Primary application file for Curator. Include this file to initialize Curator.
+ * Primary application file for Curator. Include this file to initialize The Curator.
  *
  * PHP Version 7.0.2
  *
@@ -12,17 +12,16 @@
     namespace Curator\Application;
 
     use \Curator\Config\PATH   as PATH;
-    use \Curator\Config\LANG   as LANG;
     use \Curator\Classes       as CLASSES;
 
     //Load Curator configuartion data.
     require_once(dirname(__FILE__) . '/../resource/config/curator.php');
 
     //Load Curator traits.
-    require_once(\Curator\Config\PATH\ROOT . 'resource/helper/Security.php');
+    require_once(PATH\ROOT . 'resource/traits/Security.php');
 
     //Load debug utilities. Development only.
-    require_once(\Curator\Config\PATH\ROOT . 'resource/debug/vendor/debug.php');
+    require_once(PATH\ROOT . 'resource/debug/vendor/debug.php');
 
     //Automatically include classes for created objects.
     function autoLoad($className)
@@ -44,15 +43,9 @@
     //Register auto-load function.
     spl_autoload_register('\Curator\Application\autoLoad');
 
-    //Initialize cookies object to handle messaging.
-    $_CURATOR['COOKIE'] = CLASSES\Cookie::getCookie();
+    //Initialize session object.
+    $_CURATOR['SESSION'] = CLASSES\Session::getSession();
 
-    //Initialize session object to handle messaging.
-    $_CURATOR['SESSION'] = CLASSES\Session::getSession($_CURATOR['COOKIE']);
-
-    //Create a database object to handle all database communication.
+    //Create a database object to handle all SQL communication.
     $_CURATOR['DATABASE'] = CLASSES\Database::getConnection();
-
-    //User optional set user language.
-    $_CURATOR['SESSION']::setValue('Curator_Lang', 'en_CA');
 ?>

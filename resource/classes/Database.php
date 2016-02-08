@@ -21,7 +21,7 @@
     use \Curator\Classes\Language\Database as LANG;
 
     //Include the Database language error messaging file.
-    require_once(\Curator\Config\PATH\ROOT . 'resource/language/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Session.php');
+    require_once(\Curator\Config\PATH\ROOT . 'resource/locale/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Session.php');
 
     class Database
     {

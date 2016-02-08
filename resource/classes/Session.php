@@ -17,11 +17,9 @@
         header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
     }
 
-    use \Curator\Config\SESSION as SESSION;
-    use \Curator\Traits\Security as SECURITY;
-    use \Curator\Classes\Language\Session as LANG;
-
-    require_once(\Curator\Config\PATH\ROOT . 'resource/language/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Session.php');
+    use \Curator\Config  as CONFIG;
+    use \Curator\Traits  as TRAITS;
+    use \Curator\Classes as CLASSES;
 
     class Session
     {
@@ -29,18 +27,12 @@
         private $userIP = NULL;
         private $Cookie = NULL;
 
-        public $test = array();
+        public $test = array(); //FOR TESTING
 
         //Object initalization. Singleton design.
-        protected function __construct($Cookie = NULL)
+        protected function __construct()
         {
-            if(!isset($Cookie))
-            {
-                $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
-                $logMessage->saveError(LANG\ERROR_COOKIE);
-            }
-
-            $this->Cookie = $Cookie;
+            $this->Cookie = CLASSES\Cookie::getCookie();
 
             //Setup the session configuration details.
             self::setupSession();
@@ -53,21 +45,19 @@
         }
 
         //Singleton design.
-        private function __clone()
-        {}
+        private function __clone() {}
 
         //Singleton design.
-        private function __wakeup()
-        {}
+        private function __wakeup() {}
 
         //Returns the singleton instance of the session class. Singleton design.
-        public static function getSession($Cookie = NULL)
+        public static function getSession()
         {
             static $sessionInstance = NULL;
 
             if($sessionInstance === NULL)
             {
-                $sessionInstance = new static($Cookie);
+                $sessionInstance = new static();
             }
 
             return $sessionInstance;
@@ -85,9 +75,9 @@
             ini_set('session.use_strict_mode',         1);
             ini_set('session.entropy_length',          32);
             ini_set('session.hash_bits_per_character', 5);
-            ini_set('session.hash_function', SESSION\ENCRYPTION);
+            ini_set('session.hash_function',           CONFIG\SESSION\ENCRYPTION);
 
-            session_name(SESSION\NAME);
+            session_name(CONFIG\SESSION\NAME);
         }
 
         //Secures the session from hijacking.
@@ -108,13 +98,35 @@
             }
         }
 
+        //Determine and validate the users IP.
+        protected function setIP()
+        {
+            if(!empty($_SERVER['HTTP_CLIENT_IP']))
+            {
+                $this->userIP = SECURITY::validateIP($_SERVER['HTTP_CLIENT_IP']);
+            }
+            else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+            {
+                $ipString = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+                $ip       = trim($ipString[count($ipString) - 1]);
+
+                $this->userIP = Traits\SECURITY::validateIP($ip);
+            }
+            else
+            {
+                $this->userIP = Traits\SECURITY::validateIP($_SERVER['REMOTE_ADDR']);
+            }
+
+            return($this->userIP);
+        }
+
         //Confirms if users IP is same as the sessions user.
         protected function confirmIP()
         {
             //Check if IP Enforcement is enabled.
-            if(SESSION\SETTING\ENFORCE_IP === TRUE)
+            if(CONFIG\SESSION\ENFORCE_IP === TRUE)
             {
-                $userKey = SECURITY::encode($this->userIP);
+                $userKey = Traits\SECURITY::encode($this->userIP);
 
                 if(!isset($_SESSION['Curator_userKey']) || ($_SESSION['Curator_userKey'] != $userKey))
                 {
@@ -129,9 +141,9 @@
         //Confirms if users agent is same as the sessions user.
         protected function confirmUser()
         {
-            if(SESSION\SETTING\ENFORCE_USERAGENT === TRUE)
+            if(CONFIG\SESSION\ENFORCE_USERAGENT === TRUE)
             {
-                $userAgent = SECURITY::encode($_SERVER['HTTP_USER_AGENT']);
+                $userAgent = Traits\SECURITY::encode($_SERVER['HTTP_USER_AGENT']);
 
                 if(!isset($_SESSION['Curator_userAgent']) || ($_SESSION['Curator_userAgent'] != $userAgent))
                 {
@@ -150,7 +162,7 @@
             {
                 $idleLength = time() - $_SESSION['Curator_idleTime'];
 
-                if($idleLength < SESSION\TIMEOUT)
+                if($idleLength < CONFIG\SESSION\TIMEOUT)
                 {
                     //***
                     $_SESSION['Curator_idleTime2'] = $_SESSION['Curator_idleTime']; //TESTING ONLY. DELETE LATER.
@@ -171,31 +183,31 @@
             $this->Cookie->destroyCookies();
             $this->Cookie->setupCookies();
 
-            self::killSession();
+            self::destroySession();
             self::setupSession();
 
             session_start();
 
-            if(SESSION\SETTING\ENFORCE_IP === TRUE)
+            if(CONFIG\SESSION\ENFORCE_IP === TRUE)
             {
-                $_SESSION['Curator_userKey'] = hash(SESSION\ENCRYPTION, $this->userIP . SESSION\IDENTIFIER);
+                $_SESSION['Curator_userKey'] = Traits\SECURITY::encode($this->userIP);
             }
 
-            if(SESSION\SETTING\ENFORCE_USERAGENT === TRUE)
+            if(CONFIG\SESSION\ENFORCE_USERAGENT === TRUE)
             {
-                $_SESSION['Curator_userAgent'] = SECURITY::encode($_SERVER['HTTP_USER_AGENT']);
+                $_SESSION['Curator_userAgent'] = Traits\SECURITY::encode($_SERVER['HTTP_USER_AGENT']);
             }
 
             $_SESSION['Curator_startTime'] = $_SESSION['Curator_idleTime'] = $_SESSION['Curator_regenTime'] = time();
             $_SESSION['Curator_Status']    = TRUE;
-            $_SESSION['Curator_Lang']      = \Curator\Config\LANG\CURATOR_USER_DEFAULT;
+            $_SESSION['Curator_Lang']      = CONFIG\LANG\CURATOR_USER_DEFAULT;
 
             $this->test[] = "New session started ...";
             $_SESSION['MESSAGE'] = $this->test;
         }
 
         //Destroy old session.
-        protected function killSession()
+        protected function destroySession()
         {
             session_unset();
             session_destroy();
@@ -216,13 +228,13 @@
         //Regenerate Session ID based on admin set time length. Regenerates every XXX seconds.
         protected function regenerateTime()
         {
-            if(SESSION\ID\REGENERATE\TIME\ENFORCE === TRUE)
+            if(CONFIG\SESSION\REGENERATE\TIME\ENFORCE === TRUE)
             {
                 //Last time the session ID was regenerated.
                 $regenLength = time() - $_SESSION['Curator_regenTime'];
 
                 //Check if the last regenerated time has exceeded the admin setting.
-                if($regenLength > SESSION\ID\REGENERATE\TIME)
+                if($regenLength > CONFIG\SESSION\REGENERATE\TIME)
                 {
                     session_regenerate_id(TRUE);
                     $_SESSION['Curator_regenTime'] = time();
@@ -235,10 +247,10 @@
         //Regenerate Session ID every X% of the time which is admin set.
         protected function regeneratePercent()
         {
-            if(SESSION\ID\REGENERATE\PERCENT\ENFORCE === TRUE)
+            if(CONFIG\SESSION\REGENERATE\PERCENT\ENFORCE === TRUE)
             {
-                //Generate the random chance <Admin Value 1 - 100) out of 100.
-                if(($test = mt_rand(0,100)) <= SESSION\ID\REGENERATE\PERCENT)
+                //Generate based on % chance set by admin (Value: 1 - 100) out of 100.
+                if(($test = mt_rand(0,100)) <= CONFIG\SESSION\REGENERATE\PERCENT)
                 {
                     session_regenerate_id(TRUE);
                     $_SESSION['MESSAGE'][0] = "5% hit! Regenerated new ID ...";
@@ -249,30 +261,8 @@
             }
         }
 
-        //Determine and validate the users IP.
-        protected function setIP()
-        {
-            if(!empty($_SERVER['HTTP_CLIENT_IP']))
-            {
-                $this->userIP = SECURITY::validateIP($_SERVER['HTTP_CLIENT_IP']);
-            }
-            else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
-            {
-                $ipString = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-                $ip       = trim($ipString[count($ipString) - 1]);
-
-                $this->userIP = SECURITY::validateIP($ip);
-            }
-            else
-            {
-                $this->userIP = SECURITY::validateIP($_SERVER['REMOTE_ADDR']);
-            }
-
-            return($this->userIP);
-        }
-
         //Return a Session class variable.
-        public function __get($property)
+        public function __get($property = NULL)
         {
             if(property_exists($this, $property))
             {
