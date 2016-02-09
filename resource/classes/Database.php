@@ -74,9 +74,7 @@
         {
             if(!empty($statement))
             {
-                $this->preparedStatement = $this->Connection->prepare($statement);
-                
-                if($this->preparedStatement == FALSE)
+                if(!$this->preparedStatement = $this->Connection->prepare($statement))
                 {
                     $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
                     $logMessage->saveError(LANG\ERROR_PREPARE . $statment);

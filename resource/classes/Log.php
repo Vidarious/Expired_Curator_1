@@ -62,6 +62,7 @@ class Log
 
         //Build log message
         $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_DATE    . ": " . date('F d, Y \a\t g:i A e',$_SERVER['REQUEST_TIME']);
+        //TIMEZONE
         $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_ADDRESS . ": " . $_SERVER['REMOTE_ADDR'];
         $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_URI     . ": " . $_SERVER['REQUEST_URI'];
         $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_CLASS   . ": " . $this->className;
