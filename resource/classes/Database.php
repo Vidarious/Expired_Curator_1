@@ -49,12 +49,10 @@
         }
 
         //Singleton design.
-        private function __clone()
-        {}
+        private function __clone() {}
 
         //Singleton design.
-        private function __wakeup()
-        {}
+        private function __wakeup() {}
 
         //Returns the singleton instance of the database connection. Singleton design.
         public static function getConnection()

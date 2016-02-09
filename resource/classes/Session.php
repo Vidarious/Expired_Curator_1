@@ -277,6 +277,8 @@
             {
                 return $_SESSION[$variable];
             }
+
+            return NULL;
         }
 
         //Sets the requested session value.

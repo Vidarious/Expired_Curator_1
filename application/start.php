@@ -48,4 +48,6 @@
 
     //Create a database object to handle all SQL communication.
     $_CURATOR['DATABASE'] = CLASSES\Database::getConnection();
+    
+    echo htmlspecialchars($_SERVER['REQUEST_URI']);
 ?>

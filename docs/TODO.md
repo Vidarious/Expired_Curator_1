@@ -1,4 +1,3 @@
-- On login get timezone and set it as default for time()
 - Secure Tip: Regenerate session ID during authentication and changing of sensitive data.
 - Create page tracker
 - Once user class is created

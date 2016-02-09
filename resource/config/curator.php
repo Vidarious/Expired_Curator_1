@@ -21,6 +21,8 @@
     //Website administrator's contact e-mail.
     define('Curator\Config\APPLICATION\ADMIN_EMAIL', 'admin@example.com');
 
+    //Curator's default timezone.
+    define('Curator\Config\APPLICATION\TIMZEONE', 'America/New_York');
     //*****
     //** Pathing Settings
     //*****
