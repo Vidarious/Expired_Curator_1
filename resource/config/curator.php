@@ -11,11 +11,19 @@
  */
     namespace Curator\Config;
 
+    //*****
+    //** Main Application Settings.
+    //*****
+
     //Server path to where Curator is installed / extracted.
     define('Curator\Config\APPLICATION', TRUE);
 
     //Website administrator's contact e-mail.
     define('Curator\Config\APPLICATION\ADMIN_EMAIL', 'admin@example.com');
+
+    //*****
+    //** Pathing Settings
+    //*****
 
     //Server path to where Curator is installed / extracted.
     define('Curator\Config\PATH\ROOT', $_SERVER["DOCUMENT_ROOT"] . '/curator/'); //Cloud9
@@ -35,9 +43,17 @@
     //Directory path to where Curator warning log file is located.
     define('Curator\Config\PATH\LOG\WARNING', PATH\ROOT . 'application/logs/warnings.log');
 
+    //*****
+    //** Language Settings.
+    //*****
+
     //Curator language.
     define('Curator\Config\LANG\CURATOR_USER_DEFAULT', 'en_CA');
     define('Curator\Config\LANG\CURATOR_APPLICATION', 'en_CA');
+
+    //*****
+    //** Database Settings.
+    //*****
 
     //Host address for SQL database.
     define('Curator\Config\DB\HOST', getenv('IP')); //Cloud9
@@ -52,6 +68,10 @@
     //Password for SQL database.
     define('Curator\Config\DB\PASS', 'd6wfE37jrjmD822Y');
     //define('Curator\Config\DB\USER', 'sql5103939');
+
+    //*****
+    //** Session Settings.
+    //*****
 
     //Session name.
     define('Curator\Config\SESSION\NAME', 'Curator_Session');
@@ -78,6 +98,10 @@
     //Session regenerate %. Value should be 1-100.
     define('Curator\Config\SESSION\REGENERATE\PERCENT\ENFORCE', TRUE);
     define('Curator\Config\SESSION\REGENERATE\PERCENT', '5');
+
+    //*****
+    //** Cookie Settings.
+    //*****
 
     //Cookie path ownership. '/' is default for entire site.
     define('Curator\Config\COOKIE\PATH', '/');
