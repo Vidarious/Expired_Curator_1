@@ -17,7 +17,7 @@
         header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
     }
 
-    use \Curator\Config\COOKIE as COOKIE;
+    use \Curator\Config as CONFIG;
 
     class Cookie
     {
@@ -59,7 +59,7 @@
             //Determine if server is running HTTPS.
             $secureServer = isset($_SERVER['HTTPS']);
 
-            session_set_cookie_params(0, COOKIE\PATH, COOKIE\DOMAIN, $this->secure, TRUE);
+            session_set_cookie_params(0, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secure, TRUE);
         }
 
         //Removes all cookies.
@@ -69,7 +69,7 @@
             foreach ($_COOKIE as $key => $value)
             {
                 unset($_COOKIE[$key]);
-                setcookie($key, '', time() - 3600, COOKIE\PATH, COOKIE\DOMAIN, $this->secure, TRUE);
+                setcookie($key, '', time() - 3600, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secure, TRUE);
             }
         }
 
@@ -78,7 +78,7 @@
         {
             if(isset($name) && isset($value))
             {
-                return(setcookie($name, $value, time() + $expire, COOKIE\PATH, COOKIE\DOMAIN, $this->secure, TRUE));
+                return(setcookie($name, $value, time() + $expire, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secure, TRUE));
             }
 
             return FALSE;
@@ -101,7 +101,7 @@
             if(isset($name))
             {
                 unset($_COOKIE[$name]);
-                return(setcookie($name, '', time() - 3600, COOKIE\PATH, COOKIE\DOMAIN, $this->secure, TRUE));
+                return(setcookie($name, '', time() - 3600, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secure, TRUE));
             }
 
             return FALSE;

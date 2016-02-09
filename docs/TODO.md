@@ -1,4 +1,4 @@
-- Review is done of Sessions and Logs. Do DATABASE and COOKIE (Run through Cookie and session relationship)
+- Review is done of Sessions and Logs and Cookies. Do DATABASE (Run through Cookie and session relationship)
 
 - Create session class.
     - After session class is made change language class to setup a Curator language session
