@@ -14,7 +14,7 @@
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))
     {
-        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+        header("Location: " . "http://" . htmlspecialchars($_SERVER['HTTP_HOST']));
     }
 
     use \Curator\Config as CONFIG;
@@ -22,11 +22,12 @@
     class Cookie
     {
         //Class Variables
-        private $secure = NULL;
+        private $secureServer = NULL;
 
         //Object initalization. Singleton design.
         protected function __construct()
         {
+            //Determine if server is running HTTPS.
             $this->secureServer = isset($_SERVER['HTTPS']);
 
             self::setupCookies();
@@ -54,10 +55,7 @@
         //Initialize cookie settings.
         public function setupCookies()
         {
-            //Determine if server is running HTTPS.
-            $secureServer = isset($_SERVER['HTTPS']);
-
-            session_set_cookie_params(0, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secure, TRUE);
+            session_set_cookie_params(0, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secureServer, TRUE);
         }
 
         //Removes all cookies.
@@ -67,7 +65,7 @@
             foreach ($_COOKIE as $key => $value)
             {
                 unset($_COOKIE[$key]);
-                setcookie($key, '', time() - 3600, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secure, TRUE);
+                setcookie($key, '', time() - 3600, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secureServer, TRUE);
             }
         }
 
@@ -76,7 +74,7 @@
         {
             if(isset($name) && isset($value))
             {
-                return(setcookie($name, $value, time() + $expire, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secure, TRUE));
+                return(setcookie($name, $value, time() + $expire, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secureServer, TRUE));
             }
 
             return FALSE;
@@ -99,7 +97,7 @@
             if(isset($name))
             {
                 unset($_COOKIE[$name]);
-                return(setcookie($name, '', time() - 3600, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secure, TRUE));
+                return(setcookie($name, '', time() - 3600, CONFIG\COOKIE\PATH, CONFIG\COOKIE\DOMAIN, $this->secureServer, TRUE));
             }
 
             return FALSE;

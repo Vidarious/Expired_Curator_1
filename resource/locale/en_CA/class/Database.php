@@ -14,7 +14,7 @@
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))
     {
-        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+        header("Location: " . "http://" . htmlspecialchars($_SERVER['HTTP_HOST']));
     }
 
     define('Curator\Classes\Language\Database\ERROR_CONNECT', 'Unable to connect to the SQL database. PDO Error: ');

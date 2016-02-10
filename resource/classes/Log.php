@@ -14,7 +14,7 @@
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))
     {
-        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+        header("Location: " . "http://" . htmlspecialchars($_SERVER['HTTP_HOST']));
     }
 
     use \Curator\Config as CONFIG;
@@ -63,9 +63,9 @@ class Log
         $messageFinal = array();
 
         //Build log message
-        $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_DATE    . ": " . date('F d, Y \a\t g:i A e',$_SERVER['REQUEST_TIME']);
-        $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_ADDRESS . ": " . $_SERVER['REMOTE_ADDR'];
-        $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_URI     . ": " . $_SERVER['REQUEST_URI'];
+        $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_DATE    . ": " . date('F d, Y \a\t g:i A e', htmlspecialchars($_SERVER['REQUEST_TIME']));
+        $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_ADDRESS . ": " . htmlspecialchars($_SERVER['REMOTE_ADDR']);
+        $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_URI     . ": " . htmlspecialchars($_SERVER['REQUEST_URI']);
         $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_CLASS   . ": " . $this->className;
         $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_METHOD  . ": " . $this->methodName;
         $messageFinal[] = PHP_EOL . LANGUAGE\HEAD_MESSAGE . ": " . $this->logMessage;

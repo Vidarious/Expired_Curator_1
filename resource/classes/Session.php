@@ -14,7 +14,7 @@
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))
     {
-        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+        header("Location: " . "http://" . htmlspecialchars($_SERVER['HTTP_HOST']));
     }
 
     use \Curator\Config  as CONFIG;
@@ -103,18 +103,18 @@
         {
             if(!empty($_SERVER['HTTP_CLIENT_IP']))
             {
-                $this->userIP = SECURITY::validateIP($_SERVER['HTTP_CLIENT_IP']);
+                $this->userIP = SECURITY::validateIP(htmlspecialchars($_SERVER['HTTP_CLIENT_IP']));
             }
             else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
             {
-                $ipString = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+                $ipString = explode(',', htmlspecialchars($_SERVER['HTTP_X_FORWARDED_FOR']));
                 $ip       = trim($ipString[count($ipString) - 1]);
 
                 $this->userIP = Traits\SECURITY::validateIP($ip);
             }
             else
             {
-                $this->userIP = Traits\SECURITY::validateIP($_SERVER['REMOTE_ADDR']);
+                $this->userIP = Traits\SECURITY::validateIP(htmlspecialchars($_SERVER['REMOTE_ADDR']));
             }
 
             return($this->userIP);
@@ -143,7 +143,7 @@
         {
             if(CONFIG\SESSION\ENFORCE_USERAGENT === TRUE)
             {
-                $userAgent = Traits\SECURITY::encode($_SERVER['HTTP_USER_AGENT']);
+                $userAgent = Traits\SECURITY::encode(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
 
                 if(!isset($_SESSION['Curator_userAgent']) || ($_SESSION['Curator_userAgent'] != $userAgent))
                 {
@@ -195,7 +195,7 @@
 
             if(CONFIG\SESSION\ENFORCE_USERAGENT === TRUE)
             {
-                $_SESSION['Curator_userAgent'] = Traits\SECURITY::encode($_SERVER['HTTP_USER_AGENT']);
+                $_SESSION['Curator_userAgent'] = Traits\SECURITY::encode(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
             }
 
             $_SESSION['Curator_startTime'] = $_SESSION['Curator_idleTime'] = $_SESSION['Curator_regenTime'] = time();

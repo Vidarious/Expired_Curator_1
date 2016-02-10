@@ -23,12 +23,16 @@
 
     //Curator's default timezone.
     define('Curator\Config\APPLICATION\TIMZEONE', 'America/New_York');
+
     //*****
     //** Pathing Settings
     //*****
 
     //Server path to where Curator is installed / extracted.
-    define('Curator\Config\PATH\ROOT', $_SERVER["DOCUMENT_ROOT"] . '/curator/'); //Cloud9
+    define('Curator\Config\PATH\ROOT', htmlspecialchars($_SERVER["DOCUMENT_ROOT"]) . '/curator/'); //Cloud9
+
+    //Directory path to where your homepage is located.
+    define('Curator\Config\PATH\HOMEPAGE', '/');
 
     //Directory path to where Curator classes are located.
     define('Curator\Config\PATH\CLASSES', PATH\ROOT . 'resource/classes/');
@@ -109,5 +113,5 @@
     define('Curator\Config\COOKIE\PATH', '/');
 
     //Cookie domain path. $_SERVER['SERVER_NAME'] is default for entire site.
-    define('Curator\Config\COOKIE\DOMAIN', $_SERVER['SERVER_NAME']);
+    define('Curator\Config\COOKIE\DOMAIN', htmlspecialchars($_SERVER['SERVER_NAME']));
 ?>

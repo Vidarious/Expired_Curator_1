@@ -14,7 +14,7 @@
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))
     {
-        header("Location: " . "http://" . $_SERVER['HTTP_HOST']);
+        header("Location: " . "http://" . htmlspecialchars($_SERVER['HTTP_HOST']));
     }
 
     use \Curator\Config\SESSION as SESSION;
