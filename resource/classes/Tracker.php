@@ -16,7 +16,7 @@
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))
     {
-        header("Location: " . "http://" . htmlspecialchars($_SERVER['HTTP_HOST']));
+        header("Location: " . "http://" . filter_var($_SERVER['HTTP_HOST'], FILTER_SANITIZE_URL));
     }
 
     class Tracker
@@ -26,22 +26,15 @@
 
         //Class Variables
         public $pageCurrent  = NULL;
-        public $pagePrevious = CONFIG\HOMEPAGE;
+        public $pagePrevious = CONFIG\PATH\HOMEPAGE;
 
         //Object initalization. Singleton design.
         protected function __construct()
         {
-            $Session = Session::getSession();
+            $this->Session = Session::getSession();
 
-            $pastCurrentPage = $Session->getValue('Curator_PageCurrent');
-
-            if($pastCurrentPage !== NULL)
-            {
-                $this->pagePrevious = $pastCurrentPage;
-            }
-
-            $this->pageCurrent = htmlspecialchars($_SERVER['REQUEST_URI']);
-
+            self::getCurrentPage();
+            self::getPastPage();
             self::updateSessionPages();
         }
 
@@ -64,15 +57,28 @@
         //Singleton design.
         private function __wakeup() {}
 
-        //Get current and past data
-        //
-        //
-        
+        //Get current page URI.
+        private function getCurrentPage()
+        {
+            $this->pageCurrent = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
+        }
+
+        //Get past page URI.
+        private function getPastPage()
+        {
+            $pastCurrentPage = filter_var($this->Session->getValue('Curator_PageCurrent'), FILTER_SANITIZE_URL);
+
+            if($pastCurrentPage !== NULL)
+            {
+                $this->pagePrevious = $pastCurrentPage;
+            }
+        }
+
         //Update the Current and Past page session values.
         private function updateSessionPages()
         {
-            $Session->setValue('Curator_PageCurrent', $this->pageCurrent);
-            $Session->setValue('Curator_PagePrevious', $this->pagePrevious);
+            $this->Session->setValue('Curator_PageCurrent', $this->pageCurrent);
+            $this->Session->setValue('Curator_PagePrevious', $this->pagePrevious);
         }
     }
 ?>

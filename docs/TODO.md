@@ -1,6 +1,4 @@
 - Secure Tip: Regenerate session ID during authentication and changing of sensitive data.
-- Create page tracker
-- Once user class is created
 - Session security level. Add options for session.hash_bits_per_character, session.hash_function, session.entropy_length
 
 - Session Secure Options

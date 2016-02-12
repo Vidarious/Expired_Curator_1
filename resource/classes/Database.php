@@ -14,7 +14,7 @@
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))
     {
-        header("Location: " . "http://" . htmlspecialchars($_SERVER['HTTP_HOST']));
+        header("Location: " . "http://" . filter_var($_SERVER['HTTP_HOST'], FILTER_SANITIZE_URL));
     }
 
     use \Curator\Config                    as CONFIG;

@@ -46,6 +46,9 @@
     //Initialize session object.
     $_CURATOR['SESSION'] = CLASSES\Session::getSession();
 
+    //Start page tracking utility.
+    $_CURATOR['TRACKER'] = CLASSES\Tracker::getTracker();
+
     //Create a database object to handle all SQL communication.
     $_CURATOR['DATABASE'] = CLASSES\Database::getConnection();
 ?>
