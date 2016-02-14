@@ -1,3 +1,17 @@
+- Create the method that verifies which account fields are required for creation/update and validates data
+
+- Account should be a class - Only gets created when login success
+- Account Management should be a class that an Account object is passed to
+- Create trait for validating account details
+- Create method to add user (register)
+-   Change register page to no load if logged in.
+-   Register page should ask for all the details enabled in settings
+- Create trait for determining encryption algorithm
+- Create method to authenticate user (login)
+- Create method to remember me
+- 
+- Refer to help file.
+- Add max login try setting
 - Secure Tip: Regenerate session ID during authentication and changing of sensitive data.
 - Session security level. Add options for session.hash_bits_per_character, session.hash_function, session.entropy_length
 

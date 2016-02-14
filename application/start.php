@@ -11,14 +11,10 @@
  */
     namespace Curator\Application;
 
-    use \Curator\Config\PATH   as PATH;
-    use \Curator\Classes       as CLASSES;
+    use \Curator\Config\PATH as PATH;
 
     //Load Curator configuartion data.
     require_once(dirname(__FILE__) . '/../resource/config/curator.php');
-
-    //Load Curator traits.
-    require_once(PATH\ROOT . 'resource/traits/Security.php');
 
     //Load debug utilities. Development only.
     require_once(PATH\ROOT . 'resource/debug/vendor/debug.php');
@@ -28,10 +24,16 @@
     {
         //Extract class file name from namespace path.
         $fileName = explode('\\', $className);
-        $fileName = end($fileName);
 
-        //Create path to class.
-        $classLocation = PATH\CLASSES . $fileName . '.php';
+        //Create path to class. Supports 1 sub-folder deep loading.
+        if(sizeof($fileName) === 3)
+        {
+            $classLocation = PATH\CLASSES . $fileName[2] . '.php';
+        }
+        else
+        {
+            $classLocation = PATH\CLASSES . $fileName[2] . '/' . $fileName[3] . '.php';
+        }
 
         //Verify class file exists and load.
         if(file_exists($classLocation))
@@ -43,12 +45,6 @@
     //Register auto-load function.
     spl_autoload_register('\Curator\Application\autoLoad');
 
-    //Initialize session object.
-    $_CURATOR['SESSION'] = CLASSES\Session::getSession();
-
-    //Start page tracking utility.
-    $_CURATOR['TRACKER'] = CLASSES\Tracker::getTracker();
-
-    //Create a database object to handle all SQL communication.
-    $_CURATOR['DATABASE'] = CLASSES\Database::getConnection();
+    //Initialize The Curator.
+    $theCurator = \Curator\Classes\Curator::Initialize();
 ?>

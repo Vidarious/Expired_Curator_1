@@ -15,7 +15,11 @@
     if(!defined('Curator\Config\APPLICATION'))
     {
         header("Location: " . "http://" . filter_var($_SERVER['HTTP_HOST'], FILTER_SANITIZE_URL));
+        die();
     }
+
+    //Load Curator traits.
+    require_once(\Curator\Config\PATH\ROOT . 'resource/traits/Security.php');
 
     use \Curator\Config  as CONFIG;
     use \Curator\Traits  as TRAITS;
@@ -25,14 +29,17 @@
     {
         //Class Variables
         private $userIP = NULL;
-        private $Cookie = NULL;
+
+        //Class Objects
+        public $Cookie  = NULL;
 
         public $test = array(); //FOR TESTING
 
         //Object initalization. Singleton design.
         protected function __construct()
         {
-            $this->Cookie = CLASSES\Cookie::getCookie();
+            //Initialize cookie object.
+            $this->Cookie  = Cookie::getCookie();
 
             //Setup the session configuration details.
             self::setupSession();
@@ -103,7 +110,7 @@
         {
             if(!empty($_SERVER['HTTP_CLIENT_IP']))
             {
-                $this->userIP = SECURITY::validateIP(htmlspecialchars($_SERVER['HTTP_CLIENT_IP']));
+                $this->userIP = Traits\SECURITY::validateIP(htmlspecialchars($_SERVER['HTTP_CLIENT_IP']));
             }
             else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
             {

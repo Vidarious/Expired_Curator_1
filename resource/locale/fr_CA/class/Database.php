@@ -15,6 +15,7 @@
     if(!defined('Curator\Config\APPLICATION'))
     {
         header("Location: " . "http://" . filter_var($_SERVER['HTTP_HOST'], FILTER_SANITIZE_URL));
+        die();
     }
 
     define('Curator\Classes\Language\Database\ERROR_CONNECT', 'Impossible de se connecter à la base de données SQL. PDO ERREUR: ');

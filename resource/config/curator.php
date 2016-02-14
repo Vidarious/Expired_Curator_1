@@ -72,7 +72,7 @@
     define('Curator\Config\DB\USER', 'Curator');
 
     //Password for SQL database.
-    define('Curator\Config\DB\PASS', 'd6wfE37jrjmD822Y');
+    define('Curator\Config\DB\PASS', 'myPassword123'); //OK for GIT
     //define('Curator\Config\DB\USER', 'sql5103939');
 
     //*****
