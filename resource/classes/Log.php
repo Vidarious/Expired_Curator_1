@@ -47,12 +47,13 @@ class Log
         $this->logMessage = $logMessage;
 
         self::writeLog();
+        self::throwError();
     }
 
-    //Sets log message and warning path then sends it to be written to log file.
-    public function saveWarning($logMessage = 'N/A')
+    //Sets log message and hazard path then sends it to be written to log file.
+    public function saveHazard($logMessage = 'N/A')
     {
-        $this->logPath    = CONFIG\PATH\LOG\WARNING;
+        $this->logPath    = CONFIG\PATH\LOG\HAZARD;
         $this->logMessage = $logMessage;
 
         self::writeLog();
@@ -80,7 +81,11 @@ class Log
         }
 
         error_log(PHP_EOL . "**********", 3, $this->logPath);
+    }
 
+    //Throw error to the user.
+    private function throwError()
+    {
         die('<H3>' . LANGUAGE\ERROR_HEADER . '</H3> <P>' . LANGUAGE\ERROR_BODY . '</P><P>' . LANGUAGE\ERROR_FOOTER);
     }
 }

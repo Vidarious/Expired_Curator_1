@@ -57,9 +57,6 @@
         //Initializes all processes required for account creation.
         public function Initialize_Account_Creation()
         {
-            //Load utility trait.
-            require_once(\Curator\Config\PATH\ROOT . 'resource/traits/Utility.php');
-
             //Create Account object and initialize.
             $this->Account = Account::initialize();
 

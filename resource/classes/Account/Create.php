@@ -20,57 +20,41 @@
 
     class Create extends \Curator\Classes\Account
     {
-        //Class Variables
-        public $URI = NULL;
-
-        //Class Objects
-        public $Shield = NULL;
-
-        //Object initalization. Singleton design.
-        public function __construct()
+        //Object initalization. Call parent constructor to gain access to class methods and variables/objects
+        public function __construct($Form)
         {
-            $this->Shield = new \Curator\Classes\Shield();
+            //Assign the $Form object passed to the \Curator\Account\ object (inherited).
+            $this->Form = $Form;
 
-            //Check if data was posted. If so, process it.
-            if(isset($_POST) && isset($_POST['Create_Form']))
-            {
-                self::processForm();
-            }
+            var_dump($_POST);
 
-            //Generate URI for the form action.
-            self::generateURI();
-
-            //Generate and set secure form token.
-            $this->Shield->setFormToken();
-
-            dump($_POST);
+            self::processForm();
         }
 
-        //Process account create form.
+        //Process account creation form.
         private function processForm()
         {
-            //Check the validity of form.
-            if($this->Shield->verifyForm("username"))
+            //Check if a form was posted and validate it.
+            if(!empty($_POST) && $this->Form->validate('Create_Account', 'username'))
             {
-                //Check form field requirements.
-                //Check the validity of the data submitted.
-                //Verify account does not already exist.
+                //Validate POST fields.
+
+                //Validate each field one at a time.
+                    //If its a required field it must have data
+                    //Ensure the data in the field matches the field.
+                    //Ensure the rules for each field are met.
+
+                //Verify if account already exists.
+
+                //Create account
+
+                //Start authorization process
             }
-
-            //Create account.
-        }
-
-        //Generates the POST URI for the account creation form.
-        private function generateURI()
-        {
-            $requestScheme = 'http://';
-
-            if(isset($_SERVER['HTTPS']))
+            else
             {
-                $requestScheme = 'https://';
+                //Generate page error indicating form submission failed (form wasn't validated).
+                echo "Form type passed was not the same as the form processed";
             }
-
-            $this->URI = $requestScheme . filter_var($_SERVER['SERVER_NAME'], FILTER_SANITIZE_URL) . filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
         }
     }
 ?>

@@ -293,13 +293,13 @@
         {
             if(isset($variable))
             {
-                if(!isset($value))
+                if(empty($value))
                 {
                     unset($_SESSION[$variable]);
                 }
                 else
                 {
-                    $_SESSION[$variable] = $value;
+                    return($_SESSION[$variable] = $value);
                 }
             }
         }

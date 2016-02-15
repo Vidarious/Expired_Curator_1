@@ -43,12 +43,15 @@
     //Directory path to where Curator language tables are located.
     define('Curator\Config\PATH\LANG', PATH\ROOT . 'resource/language');
 
-    //Directory path to where Curator error log file is located.
+    //Directory path to where Curator log files are located.
     define('Curator\Config\PATH\LOG\ERROR', PATH\ROOT . 'application/logs/errors.log');
+    define('Curator\Config\PATH\LOG\HAZARD', PATH\ROOT . 'application/logs/hazards.log');
 
     //Directory path to where Curator warning log file is located.
     define('Curator\Config\PATH\LOG\WARNING', PATH\ROOT . 'application/logs/warnings.log');
 
+    //Directory path to where Curator forms.
+    define('Curator\Config\PATH\FORMS', PATH\ROOT . 'resource/forms/');
     //*****
     //** Language Settings.
     //*****
@@ -114,4 +117,48 @@
 
     //Cookie domain path. $_SERVER['SERVER_NAME'] is default for entire site.
     define('Curator\Config\COOKIE\DOMAIN', htmlspecialchars($_SERVER['SERVER_NAME']));
+
+    //*****
+    //** Account Settings.
+    //*****
+
+    //Account field setting: Username.
+    define('Curator\Config\ACCOUNT\FIELD\USERNAME', '1');
+    define('Curator\Config\ACCOUNT\FIELD\USERNAME\REQUIRED', '1');
+
+    //Account field setting: Given Name.
+    define('Curator\Config\ACCOUNT\FIELD\GIVEN_NAME', '1');
+    define('Curator\Config\ACCOUNT\FIELD\GIVEN_NAME\REQUIRED', '1');
+
+    //Account field setting: Family Name.
+    define('Curator\Config\ACCOUNT\FIELD\FAMILY_NAME', '1');
+    define('Curator\Config\ACCOUNT\FIELD\FAMILY_NAME\REQUIRED', '1');
+
+    //Account field setting: Preferred Name.
+    define('Curator\Config\ACCOUNT\FIELD\PREFERRED_NAME', '1');
+    define('Curator\Config\ACCOUNT\FIELD\PREFERRED_NAME\REQUIRED', '1');
+
+    //Account field setting: Title.
+    define('Curator\Config\ACCOUNT\FIELD\TITLE', '1');
+    define('Curator\Config\ACCOUNT\FIELD\TITLE\REQUIRED', '1');
+
+    //Account field setting: Gender.
+    define('Curator\Config\ACCOUNT\FIELD\GENDER', '1');
+    define('Curator\Config\ACCOUNT\FIELD\GENDER\REQUIRED', '1');
+
+    //Account field setting: Date of Birth.
+    define('Curator\Config\ACCOUNT\FIELD\DATE_OF_BIRTH', '1');
+    define('Curator\Config\ACCOUNT\FIELD\DATE_OF_BIRTH\REQUIRED', '1');
+
+    //Account field setting: Phone.
+    define('Curator\Config\ACCOUNT\FIELD\PHONE', '1');
+    define('Curator\Config\ACCOUNT\FIELD\PHONE\REQUIRED', '1');
+
+    //Account field setting: Address.
+    define('Curator\Config\ACCOUNT\FIELD\ADDRESS', '1');
+    define('Curator\Config\ACCOUNT\FIELD\LINE_1\REQUIRED', '1');
+    define('Curator\Config\ACCOUNT\FIELD\CITY\REQUIRED', '1');
+    define('Curator\Config\ACCOUNT\FIELD\PROVINCE\REQUIRED', '1');
+    define('Curator\Config\ACCOUNT\FIELD\POSTAL\REQUIRED', '1');
+    define('Curator\Config\ACCOUNT\FIELD\COUNTRY\REQUIRED', '1');
 ?>

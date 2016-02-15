@@ -1,4 +1,7 @@
+- Add message system for form
+- Add enable / disable registration
 - Create the method that verifies which account fields are required for creation/update and validates data
+-   - Method gets list of required form fields - adds to array - compares to array of form fields submitted?
 
 - Account should be a class - Only gets created when login success
 - Account Management should be a class that an Account object is passed to
