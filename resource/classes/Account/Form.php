@@ -58,35 +58,36 @@
         }
 
         //Check the validity of the posted form. Accepts two variables.
-        //$formName is the name or purpoase of the form. $invisibleCAPTCHA is the name of the fake field used to trick bots.
+        //$formType is the name or purpoase of the form. $invisibleCAPTCHA is the name of the fake field used to trick bots.
         public function validate($formType, $invisibleCAPTCHA)
         {
-            //Verify the form type submitted matches the passed $formType..
-            if(!empty($_POST['Form_Type']) && (filter_var($_POST['Form_Type'], FILTER_SANITIZE_ENCODED) == $formType))
+            if(self::verifyFormType($formType) &&
+               self::verifyInvisibleCAPTCHA($invisibleCAPTCHA) &&
+               self::verifyToken() &&
+               self::verifyWhitelist($this->getEnabledFieldsAccount($formType, $invisibleCAPTCHA)))
             {
-                //Verify if form type is valid
-                //Verify Token
-                //Verify Whitelist
-                //Verify Invisible CAPTCHA
-
-                //Get the saved form session token.
-                $sessionToken = $this->Session->getValue('Curator_formToken');
-
-                //Kill the session form token.
-                $this->Session->setValue('Curator_formToken');
-
-                //Validate the form token.
-                if(empty($_POST[$invisibleCAPTCHA]) && isset($sessionToken))
-                {
-                    if($sessionToken == filter_var($_POST['cToken'], FILTER_SANITIZE_ENCODED))
-                    {
-                        echo "The form has been successfully validated.";
-                        return TRUE;
-                    }
-                }
-
-                self::throwHazard(__CLASS__, __METHOD__, $invisibleCAPTCHA, $sessionToken);
+                //Form is verified.
+                return TRUE;
             }
+
+            //Form is not verified.
+
+            return FALSE;
+        }
+
+        //Validate the form type in the POST data matches the passed value.
+        private function verifyFormType($formType)
+        {
+            $this->sanitizePOST('Form_Type');
+
+            if($_POST['Form_Type'] == $formType)
+            {
+                return TRUE;
+            }
+
+            //Form is not verified.
+            $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+            $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_FORM_TYPE . ' Requested Form Type: "' . $formType . '" - Received POST Form Type: "' . $_POST['Form_Type'] . '"');
 
             return FALSE;
         }
@@ -94,55 +95,67 @@
         //Validate the form invisible CAPTCHA
         private function verifyInvisibleCAPTCHA($invisibleCAPTCHA)
         {
-            
+            $this->sanitizePOST($invisibleCAPTCHA);
+
+            if(empty($_POST[$invisibleCAPTCHA]))
+            {
+                return TRUE;
+            }
+
+            //Form is not verified.
+            $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+            $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_INVISIBLE_CAPTCHA . ' invisibleCAPTCHA: "' . $_POST[$invisibleCAPTCHA] . '"');
+
+            return FALSE;
         }
 
         //Validate the form token.
         private function verifyToken()
         {
-            
+            $this->sanitizePOST('cToken');
+
+            if($this->Session->getValue('Curator_formToken') == $_POST['cToken'])
+            {
+                return TRUE;
+            }
+
+            //Form is not verified.
+            $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+            $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_TOKEN . ' sessionToken: "' . $this->Session->getValue('Curator_formToken') . '" - POST[cToken]: "' . $_POST['cToken'] . '"');
+
+            return FALSE;
         }
 
-        //Validate the form whitelist.
-        private function verifyWhitelist($formType)
+        //Verify the $_POST fields submitted.
+        private function verifyWhitelist($whitelist)
         {
-            
+            if(sizeof($_POST) === sizeof($whitelist))
+            {
+                foreach ($whitelist as $key)
+                {
+                    if(!in_array($key, array_keys($_POST)))
+                    {
+                        //One of the fields are missing. Fail.
+                        $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+                        $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_WHITELIST_FIELD . $key);
+
+                        return FALSE;
+                    }
+                }
+                //The $_POST data is valid. Pass.
+                return TRUE;
+            }
+            //The $_POST and $whitelist sizes are different. Fail.
+            $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
+            $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_WHITELIST_COUNT);
+
+            return FALSE;
         }
 
         //Inject account creation form.
         public function Create()
         {
             include(PATH\FORMS . 'Account_Create.php');
-        }
-
-        //Throw hazard log
-        private function throwHazard($class, $method, $invisibleCAPTCHA, $sessionToken)
-        {
-            //Form validation failed. Log and send user to root.
-            $userIP = $CAPTCHA = $formToken = 'N/A';
-
-            if(isset($_SERVER['REMOTE_ADDR']))
-            {
-                $userIP = filter_var($_SERVER['REMOTE_ADDR'], FILTER_SANITIZE_ENCODED);
-            }
-            if(isset($_POST[$invisibleCAPTCHA]))
-            {
-                $CAPTCHA = filter_var($_POST[$invisibleCAPTCHA], FILTER_SANITIZE_ENCODED);
-            }
-            if(isset($_POST['cToken']))
-            {
-                $formToken = filter_var($_POST['cToken'], FILTER_SANITIZE_ENCODED);
-            }
-
-            $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
-            $logMessage ->saveHazard(LANG\HAZARD_VALIDATE .
-                ' IP - '                  . $userIP .
-                ' Invisible CAPTCHA - "'  . $CAPTCHA .
-                '" Session Token - "'     . $sessionToken .
-                '" Form Token - "'        . $formToken . '"');
-
-            header("Location: " . "http://" . filter_var($_SERVER['HTTP_HOST'], FILTER_SANITIZE_URL));
-            die();
         }
     }
 ?>

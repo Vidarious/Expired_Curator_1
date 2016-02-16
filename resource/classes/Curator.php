@@ -18,8 +18,14 @@
         die();
     }
 
+    //Load Curator traits.
+    require_once(\Curator\Config\PATH\ROOT . 'resource/traits/Utility.php');
+
     class Curator
     {
+
+        use \Curator\Traits\Utility;
+
         //Class Objects
         public $Session = NULL;
         public $Tracker = NULL;

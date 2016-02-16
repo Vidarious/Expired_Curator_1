@@ -53,6 +53,11 @@ class Log
     //Sets log message and hazard path then sends it to be written to log file.
     public function saveHazard($logMessage = 'N/A')
     {
+        if(isset($_SERVER['REMOTE_ADDR']))
+        {
+            $logMessage .= ' - IP: ' . filter_var($_SERVER['REMOTE_ADDR'], FILTER_SANITIZE_ENCODED);
+        }
+
         $this->logPath    = CONFIG\PATH\LOG\HAZARD;
         $this->logMessage = $logMessage;
 

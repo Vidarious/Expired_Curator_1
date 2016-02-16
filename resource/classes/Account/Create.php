@@ -35,8 +35,9 @@
         private function processForm()
         {
             //Check if a form was posted and validate it.
-            if(!empty($_POST) && $this->Form->validate('Create_Account', 'username'))
+            if(!empty($_POST))
             {
+                $this->Form->validate('Create_Account', 'username');
                 //Validate POST fields.
 
                 //Validate each field one at a time.
@@ -53,7 +54,7 @@
             else
             {
                 //Generate page error indicating form submission failed (form wasn't validated).
-                echo "Form type passed was not the same as the form processed";
+                echo "There was no form posted.";
             }
         }
     }

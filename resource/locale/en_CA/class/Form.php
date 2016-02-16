@@ -18,5 +18,12 @@
         die();
     }
 
-    define('Curator\Classes\Language\Form\HAZARD_VALIDATE', 'A submitted form was not validated. Please review data..');
+    define('Curator\Classes\Language\Form\HAZARD_VALIDATE_TOKEN', 'A submitted form failed validation due to bad tokens.');
+
+    define('Curator\Classes\Language\Form\HAZARD_VALIDATE_INVISIBLE_CAPTCHA', 'A submitted form failed validation due to bad invisible CAPTCHA.');
+
+    define('Curator\Classes\Language\Form\HAZARD_VALIDATE_FORM_TYPE', 'A submitted form failed validation due to bad form type.');
+
+    define('Curator\Classes\Language\Form\HAZARD_VALIDATE_WHITELIST_FIELD', '$_POST whitelist verification failed. The following field was not found in the posted data: ');
+    define('Curator\Classes\Language\Form\HAZARD_VALIDATE_WHITELIST_COUNT', '$_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST.');
 ?>
