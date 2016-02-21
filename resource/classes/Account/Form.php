@@ -26,6 +26,17 @@
 
     class Form extends \Curator\Classes\Account
     {
+        //Class Variables
+        public  $formMessagesWarning = array();
+        public  $formMessagesError   = array();
+        public  $formMessagesSuccess = array();
+        private $formType            = NULL;
+        private $invisibleCAPTCHA    = NULL;
+        public  $whitelist           = NULL;
+
+        //Class Objects
+        public  $Field               = NULL;
+
         //Object initalization. Call parent constructor to gain access to class methods and variables/objects.
         protected function __construct()
         {
@@ -61,50 +72,56 @@
         //$formType is the name or purpoase of the form. $invisibleCAPTCHA is the name of the fake field used to trick bots.
         public function validate($formType, $invisibleCAPTCHA)
         {
-            if(self::verifyFormType($formType) &&
-               self::verifyInvisibleCAPTCHA($invisibleCAPTCHA) &&
+            $this->formType         = $formType;
+            $this->invisibleCAPTCHA = $invisibleCAPTCHA;
+            $this->whitelist        = $this->getFormWhitelist($formType, $invisibleCAPTCHA);
+
+            if(self::verifyFormType() &&
+               self::verifyInvisibleCAPTCHA() &&
                self::verifyToken() &&
-               self::verifyWhitelist($this->getEnabledFieldsAccount($formType, $invisibleCAPTCHA)))
+               self::verifyWhitelist())
             {
+                //Initialize the Rules class for field validation.
+                $this->Field = new Field($this);
+
                 //Form is verified.
                 return TRUE;
             }
 
             //Form is not verified.
-
             return FALSE;
         }
 
         //Validate the form type in the POST data matches the passed value.
-        private function verifyFormType($formType)
+        private function verifyFormType()
         {
             $this->sanitizePOST('Form_Type');
 
-            if($_POST['Form_Type'] == $formType)
+            if($_POST['Form_Type'] == $this->formType)
             {
                 return TRUE;
             }
 
             //Form is not verified.
             $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
-            $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_FORM_TYPE . ' Requested Form Type: "' . $formType . '" - Received POST Form Type: "' . $_POST['Form_Type'] . '"');
+            $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_FORM_TYPE . ' Requested Form Type: "' . $this->formType . '" - Received POST Form Type: "' . $_POST['Form_Type'] . '"');
 
             return FALSE;
         }
 
         //Validate the form invisible CAPTCHA
-        private function verifyInvisibleCAPTCHA($invisibleCAPTCHA)
+        private function verifyInvisibleCAPTCHA()
         {
-            $this->sanitizePOST($invisibleCAPTCHA);
+            $this->sanitizePOST($this->invisibleCAPTCHA);
 
-            if(empty($_POST[$invisibleCAPTCHA]))
+            if(empty($_POST[$this->invisibleCAPTCHA]))
             {
                 return TRUE;
             }
 
             //Form is not verified.
             $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
-            $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_INVISIBLE_CAPTCHA . ' invisibleCAPTCHA: "' . $_POST[$invisibleCAPTCHA] . '"');
+            $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_INVISIBLE_CAPTCHA . ' invisibleCAPTCHA: "' . $_POST[$this->invisibleCAPTCHA] . '"');
 
             return FALSE;
         }
@@ -127,11 +144,11 @@
         }
 
         //Verify the $_POST fields submitted.
-        private function verifyWhitelist($whitelist)
+        private function verifyWhitelist()
         {
-            if(sizeof($_POST) === sizeof($whitelist))
+            if(sizeof($_POST) === sizeof($this->whitelist))
             {
-                foreach ($whitelist as $key)
+                foreach ($this->whitelist as $key)
                 {
                     if(!in_array($key, array_keys($_POST)))
                     {
@@ -142,9 +159,11 @@
                         return FALSE;
                     }
                 }
+
                 //The $_POST data is valid. Pass.
                 return TRUE;
             }
+
             //The $_POST and $whitelist sizes are different. Fail.
             $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
             $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_WHITELIST_COUNT);

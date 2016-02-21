@@ -1,4 +1,7 @@
-- Add message system for form
+- Add field popups for the error messages (bootstrap?). And do the POST thing below.
+- Modify form check? if ($_SERVER['REQUEST_METHOD'] == 'POST')
+- - on success create - redirect to new page
+- Should add error message on verify fail?
 - Add enable / disable registration
 - Create the method that verifies which account fields are required for creation/update and validates data
 -   - Method gets list of required form fields - adds to array - compares to array of form fields submitted?

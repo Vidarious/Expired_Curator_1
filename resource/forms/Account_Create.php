@@ -6,18 +6,37 @@
                   <div class="panel-heading">
                      <h3 class="panel-title">Create Account</h3>
                   </div>
+
                   <div class="panel-body">
                        <form method="POST" action="<?=self::getActionURI();?>">
                           <fieldset>
-
+                            <?php if(!empty($this->formMessagesSuccess)) : ?>
+                                <?php foreach($this->formMessagesSuccess as $message) : ?>
+                            <div class="alert alert-success" role="alert"><?=$message?></div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <?php if(!empty($this->formMessagesWarning)) : ?>
+                                <?php foreach($this->formMessagesWarning as $message) : ?>
+                            <div class="alert alert-warning" role="alert"><?=$message?></div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <?php if(!empty($this->formMessagesError)) : ?>
+                                <?php foreach($this->formMessagesError as $message) : ?>
+                            <div class="alert alert-danger" role="alert"><?=$message?></div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                              <div class="row">
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group<?php if(!empty($this->Field->Email['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Email" type="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1" value="test@test.com">
+                                         <input name="Email" type="text" class="form-control" placeholder="Email" aria-describedby="user-email" value="test@test.com">
+                                         <?php if(!empty($this->Field->Email['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Field->Email['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
@@ -28,7 +47,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Email_Confirm" type="email" class="form-control" placeholder="Email (Confirm)" aria-describedby="basic-addon1" value="test@test.com">
+                                         <input name="Email_Confirm" type="text" class="form-control" placeholder="Email (Confirm)" aria-describedby="user-email-confirm" value="test@test.com">
                                       </div>
                                    </div>
                                 </div>
@@ -41,7 +60,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Password"  type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" value="pass">
+                                         <input name="Password"  type="password" class="form-control" placeholder="Password" aria-describedby="user-password" value="pass">
                                       </div>
                                    </div>
                                 </div>
@@ -51,7 +70,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Password_Confirm" type="password" class="form-control" placeholder="Password (Confirm)" aria-describedby="basic-addon1" value="pass">
+                                         <input name="Password_Confirm" type="password" class="form-control" placeholder="Password (Confirm)" aria-describedby="user-password-confirm" value="pass">
                                       </div>
                                    </div>
                                 </div>
@@ -65,12 +84,12 @@
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             </span>
-                                         <input name="Username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" value="Vidarious">
+                                         <input name="Username" type="text" class="form-control" placeholder="Username" aria-describedby="user-username" value="Vidarious">
                                       </div>
                                    </div>
                                 </div>
                                 <?php endif; ?>
-        
+
                                 <?php if(FIELD\GIVEN_NAME) : ?>
                                 <div class="col-md-6">
                                    <div class="form-group">
@@ -78,13 +97,13 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Given_Name" type="text" class="form-control" placeholder="Given Name" aria-describedby="basic-addon1" value="John">
+                                         <input name="Given_Name" type="text" class="form-control" placeholder="Given Name" aria-describedby="user-given-name" value="John">
                                       </div>
                                    </div>
                                 </div>
                                 <?php endif; ?>
                             </div>
-        
+
                             <div class="row">
                                 <?php if(FIELD\FAMILY_NAME) : ?>
                                 <div class="col-md-6">
@@ -93,12 +112,12 @@
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             </span>
-                                            <input name="Family_Name" type="text" class="form-control" placeholder="Family Name" aria-describedby="basic-addon1" value="Smith">
+                                            <input name="Family_Name" type="text" class="form-control" placeholder="Family Name" aria-describedby="user-family-name" value="Smith">
                                         </div>
                                     </div>
                                 </div>
                                 <?php endif; ?>
-        
+
                                 <?php if(FIELD\PREFERRED_NAME) : ?>
                                 <div class="col-md-6">
                                    <div class="form-group">
@@ -106,13 +125,13 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Preferred_Name" type="text" class="form-control" placeholder="Preferred Name" aria-describedby="basic-addon1" value="Kitten">
+                                         <input name="Preferred_Name" type="text" class="form-control" placeholder="Preferred Name" aria-describedby="user-preferred-name" value="Kitten">
                                       </div>
                                    </div>
                                 </div>
                                 <?php endif; ?>
                              </div>
-        
+
                              <div class="row">
                                 <?php if(FIELD\TITLE) : ?>
                                 <div class="col-md-6">
@@ -121,11 +140,11 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Title" type="text" class="form-control" placeholder="Title" aria-describedby="basic-addon1" value="Mr.">
+                                         <input name="Title" type="text" class="form-control" placeholder="Title" aria-describedby="user-title" value="Mr.">
                                       </div>
                                    </div>
                                 </div>
-        
+
                                 <?php endif; ?>
                                 <?php if(FIELD\GENDER) : ?>
                                 <div class="col-md-6">
@@ -134,7 +153,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Gender" type="text" class="form-control" placeholder="Gender" aria-describedby="basic-addon1" value="Male">
+                                         <input name="Gender" type="text" class="form-control" placeholder="Gender" aria-describedby="user-gender" value="Male">
                                       </div>
                                    </div>
                                 </div>
@@ -149,7 +168,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Date_Of_Birth" type="text" class="form-control" placeholder="Date of Birth" aria-describedby="basic-addon1" value="Jan 1, 1980">
+                                         <input name="Date_Of_Birth" type="text" class="form-control" placeholder="Date of Birth" aria-describedby="user-date-of-birth" value="Jan 1, 1980">
                                       </div>
                                    </div>
                                 </div>
@@ -161,7 +180,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Phone" type="text" class="form-control" placeholder="Phone Number" aria-describedby="basic-addon1" value="999-999-999">
+                                         <input name="Phone" type="text" class="form-control" placeholder="Phone Number" aria-describedby="user-phone-number" value="999-999-999">
                                       </div>
                                    </div>
                                 </div>
@@ -176,7 +195,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Address_Label" type="text" class="form-control" placeholder="Label" aria-describedby="basic-addon1" value="Home">
+                                         <input name="Address_Label" type="text" class="form-control" placeholder="Label" aria-describedby="user-address-label" value="Home">
                                       </div>
                                    </div>
                                 </div>
@@ -189,7 +208,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Address_Line_1" type="text" class="form-control" placeholder="Line 1" aria-describedby="basic-addon1" value="123 Hotel Dr.">
+                                         <input name="Address_Line_1" type="text" class="form-control" placeholder="Line 1" aria-describedby="user-address-line1" value="123 Hotel Dr.">
                                       </div>
                                    </div>
                                 </div>
@@ -202,7 +221,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Address_Line_2" type="text" class="form-control" placeholder="Line 2" aria-describedby="basic-addon1" value="">
+                                         <input name="Address_Line_2" type="text" class="form-control" placeholder="Line 2" aria-describedby="user-address-line2" value="">
                                       </div>
                                    </div>
                                 </div>
@@ -215,7 +234,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Address_Line_3" type="text" class="form-control" placeholder="Line 3" aria-describedby="basic-addon1" value="">
+                                         <input name="Address_Line_3" type="text" class="form-control" placeholder="Line 3" aria-describedby="user-address-line2" value="">
                                       </div>
                                    </div>
                                 </div>
@@ -228,7 +247,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Address_City" type="text" class="form-control" placeholder="City" aria-describedby="basic-addon1" value="Mississauga">
+                                         <input name="Address_City" type="text" class="form-control" placeholder="City" aria-describedby="user-address-line3" value="Mississauga">
                                       </div>
                                    </div>
                                 </div>
@@ -239,7 +258,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Address_Province" type="text" class="form-control" placeholder="Province" aria-describedby="basic-addon1" value="Ontario">
+                                         <input name="Address_Province" type="text" class="form-control" placeholder="Province" aria-describedby="user-address-province" value="Ontario">
                                       </div>
                                    </div>
                                 </div>
@@ -252,7 +271,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Address_Postal" type="text" class="form-control" placeholder="Postal Code" aria-describedby="basic-addon1" value="K1J3V6">
+                                         <input name="Address_Postal" type="text" class="form-control" placeholder="Postal Code" aria-describedby="user-address-postal" value="K1J3V6">
                                       </div>
                                    </div>
                                 </div>
@@ -263,7 +282,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Address_Country" type="text" class="form-control" placeholder="Country" aria-describedby="basic-addon1" value="Canada">
+                                         <input name="Address_Country" type="text" class="form-control" placeholder="Country" aria-describedby="user-address-country" value="Canada">
                                       </div>
                                    </div>
                                 </div>

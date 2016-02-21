@@ -18,6 +18,9 @@
         die();
     }
 
+    define('Curator\Classes\Language\Form\MESSAGE\ERROR_GENERAL', 'Your form submission could not be processed, please try again.');
+    define('Curator\Classes\Language\Form\MESSAGE\ERROR_FIELD', 'Your form submission could not be processed, please fix the flagged fields and resubmit.');
+
     define('Curator\Classes\Language\Form\HAZARD_VALIDATE_TOKEN', 'A submitted form failed validation due to bad tokens.');
 
     define('Curator\Classes\Language\Form\HAZARD_VALIDATE_INVISIBLE_CAPTCHA', 'A submitted form failed validation due to bad invisible CAPTCHA.');

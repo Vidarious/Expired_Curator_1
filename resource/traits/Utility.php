@@ -35,7 +35,7 @@
         }
 
         //Generate and return an array of enabled account field names.
-        public function getEnabledFieldsAccount($formType, $invisibleCAPTCHA)
+        public function getFormWhitelist($formType, $invisibleCAPTCHA)
         {
             if($formType == 'Create_Account')
             {
@@ -83,7 +83,6 @@
                     array_push($fields, 'Address_Province');
                     array_push($fields, 'Address_Postal');
                     array_push($fields, 'Address_Country');
-                    
                 }
 
                 return($fields);

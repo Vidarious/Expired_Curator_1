@@ -37,19 +37,37 @@
             //Check if a form was posted and validate it.
             if(!empty($_POST))
             {
-                $this->Form->validate('Create_Account', 'username');
-                //Validate POST fields.
+                //Validate the form passed The Curator's safety procedures.
+                if(!$this->Form->validate('Create_Account', 'username'))
+                {
+                    array_push($this->Form->formMessagesWarning, \Curator\Classes\Language\Form\MESSAGE\ERROR_GENERAL);
 
-                //Validate each field one at a time.
-                    //If its a required field it must have data
-                    //Ensure the data in the field matches the field.
-                    //Ensure the rules for each field are met.
+                    return FALSE;
+                }
 
-                //Verify if account already exists.
+                //Check the user field data against Curator rules.
+                if($this->Form->Field->checkRules())
+                {
+                    array_push($this->Form->formMessagesWarning, \Curator\Classes\Language\Form\MESSAGE\ERROR_FIELD);
 
-                //Create account
+                    return FALSE;
+                }
 
-                //Start authorization process
+                array_push($this->Form->formMessagesSuccess, 'Account Created.');
+
+                return TRUE;
+                    
+                    //Validate each field one at a time.
+                        //If its a required field it must have data
+                        //Ensure the data in the field matches the field.
+                        //Ensure the rules for each field are met.
+
+                    //Verify if account already exists.
+
+                    //Create account
+
+                    //Start authorization process
+
             }
             else
             {

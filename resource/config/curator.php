@@ -123,39 +123,39 @@
     //*****
 
     //Account field setting: Username.
-    define('Curator\Config\ACCOUNT\FIELD\USERNAME', '1');
+    define('Curator\Config\ACCOUNT\FIELD\USERNAME', '0');
     define('Curator\Config\ACCOUNT\FIELD\USERNAME\REQUIRED', '1');
 
     //Account field setting: Given Name.
-    define('Curator\Config\ACCOUNT\FIELD\GIVEN_NAME', '1');
+    define('Curator\Config\ACCOUNT\FIELD\GIVEN_NAME', '0');
     define('Curator\Config\ACCOUNT\FIELD\GIVEN_NAME\REQUIRED', '1');
 
     //Account field setting: Family Name.
-    define('Curator\Config\ACCOUNT\FIELD\FAMILY_NAME', '1');
+    define('Curator\Config\ACCOUNT\FIELD\FAMILY_NAME', '0');
     define('Curator\Config\ACCOUNT\FIELD\FAMILY_NAME\REQUIRED', '1');
 
     //Account field setting: Preferred Name.
-    define('Curator\Config\ACCOUNT\FIELD\PREFERRED_NAME', '1');
+    define('Curator\Config\ACCOUNT\FIELD\PREFERRED_NAME', '0');
     define('Curator\Config\ACCOUNT\FIELD\PREFERRED_NAME\REQUIRED', '1');
 
     //Account field setting: Title.
-    define('Curator\Config\ACCOUNT\FIELD\TITLE', '1');
+    define('Curator\Config\ACCOUNT\FIELD\TITLE', '0');
     define('Curator\Config\ACCOUNT\FIELD\TITLE\REQUIRED', '1');
 
     //Account field setting: Gender.
-    define('Curator\Config\ACCOUNT\FIELD\GENDER', '1');
+    define('Curator\Config\ACCOUNT\FIELD\GENDER', '0');
     define('Curator\Config\ACCOUNT\FIELD\GENDER\REQUIRED', '1');
 
     //Account field setting: Date of Birth.
-    define('Curator\Config\ACCOUNT\FIELD\DATE_OF_BIRTH', '1');
+    define('Curator\Config\ACCOUNT\FIELD\DATE_OF_BIRTH', '0');
     define('Curator\Config\ACCOUNT\FIELD\DATE_OF_BIRTH\REQUIRED', '1');
 
     //Account field setting: Phone.
-    define('Curator\Config\ACCOUNT\FIELD\PHONE', '1');
+    define('Curator\Config\ACCOUNT\FIELD\PHONE', '0');
     define('Curator\Config\ACCOUNT\FIELD\PHONE\REQUIRED', '1');
 
     //Account field setting: Address.
-    define('Curator\Config\ACCOUNT\FIELD\ADDRESS', '1');
+    define('Curator\Config\ACCOUNT\FIELD\ADDRESS', '0');
     define('Curator\Config\ACCOUNT\FIELD\LINE_1\REQUIRED', '1');
     define('Curator\Config\ACCOUNT\FIELD\CITY\REQUIRED', '1');
     define('Curator\Config\ACCOUNT\FIELD\PROVINCE\REQUIRED', '1');
