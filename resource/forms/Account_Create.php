@@ -6,7 +6,7 @@
                   <div class="panel-heading">
                      <h3 class="panel-title">Create Account</h3>
                   </div>
-
+                  <?php dump($this); ?>
                   <div class="panel-body">
                        <form method="POST" action="<?=self::getActionURI();?>">
                           <fieldset>
@@ -32,7 +32,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Email" type="text" class="form-control" placeholder="Email" aria-describedby="user-email" value="test@test.com">
+                                         <input name="Email" type="text" class="form-control" placeholder="Email" aria-describedby="user-email" value="<?php if(!empty($this->Field->Email['Value'])) { echo $this->Field->Email['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Field->Email['Message'])) { echo $this->Field->Email['Message']; } ?>">
                                          <?php if(!empty($this->Field->Email['Message'])) : ?>
                                          <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                          <span class="sr-only"><?=$this->Field->Email['Message']?></span>
@@ -42,12 +42,16 @@
                                 </div>
         
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group<?php if(!empty($this->Field->Email_Confirm['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Email_Confirm" type="text" class="form-control" placeholder="Email (Confirm)" aria-describedby="user-email-confirm" value="test@test.com">
+                                         <input name="Email_Confirm" type="text" class="form-control" placeholder="Email (Confirm)" aria-describedby="user-email-confirm" value="<?php if(!empty($this->Field->Email_Confirm['Value'])) { echo $this->Field->Email_Confirm['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Field->Email_Confirm['Message'])) { echo $this->Field->Email_Confirm['Message']; } ?>">
+                                         <?php if(!empty($this->Field->Email_Confirm['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Field->Email_Confirm['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
@@ -55,22 +59,30 @@
         
                              <div class="row">
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group<?php if(!empty($this->Field->Password['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Password"  type="password" class="form-control" placeholder="Password" aria-describedby="user-password" value="pass">
+                                         <input name="Password"  type="password" class="form-control" placeholder="Password" aria-describedby="user-password" value="<?php if(!empty($this->Field->Password['Value'])) { echo $this->Field->Password['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Field->Password['Message'])) { echo $this->Field->Password['Message']; } ?>">
+                                         <?php if(!empty($this->Field->Password['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Field->Password['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group<?php if(!empty($this->Field->Password_Confirm['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Password_Confirm" type="password" class="form-control" placeholder="Password (Confirm)" aria-describedby="user-password-confirm" value="pass">
+                                         <input name="Password_Confirm" type="password" class="form-control" placeholder="Password (Confirm)" aria-describedby="user-password-confirm" value="<?php if(!empty($this->Field->Password_Confirm['Value'])) { echo $this->Field->Password_Confirm['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Field->Password_Confirm['Message'])) { echo $this->Field->Password_Confirm['Message']; } ?>">
+                                         <?php if(!empty($this->Field->Password_Confirm['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Field->Password_Confirm['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
@@ -302,3 +314,12 @@
                </div>
             </div>
          </div>
+
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip({
+                    container: "body",
+                    placement: "top"
+                });   
+            });
+        </script>

@@ -161,4 +161,12 @@
     define('Curator\Config\ACCOUNT\FIELD\PROVINCE\REQUIRED', '1');
     define('Curator\Config\ACCOUNT\FIELD\POSTAL\REQUIRED', '1');
     define('Curator\Config\ACCOUNT\FIELD\COUNTRY\REQUIRED', '1');
+
+    //Account password settings.
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\MIN_LENGTH', '5');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\MAX_LENGTH', '10');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\UPPER_CHAR', '1');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\LOWER_CHAR', '1');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\SPECIAL_CHAR', '1');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\NUMBER', '1');
 ?>

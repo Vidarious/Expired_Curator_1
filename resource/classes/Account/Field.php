@@ -200,16 +200,20 @@
             $this->Email_Confirm['Value']   = NULL;
             $this->Email_Confirm['Message'] = NULL;
 
-            //Confirm e-mail and e-mail confirm fields match.
-            if($this->Email['Value'] !== $_POST['Email_Confirm'])
+            if($this->Email['Value'] !== NULL)
             {
-                $this->Email_Confirm['Message'] = LANG\EMAIL_CONFIRM\MISMATCH;
-                $this->error                    = TRUE;
-
-                return FALSE;
+                //Confirm e-mail and e-mail confirm fields match.
+                if($this->Email['Value'] !== $_POST['Email_Confirm'])
+                {
+                    $this->Email_Confirm['Message'] = LANG\EMAIL_CONFIRM\MISMATCH;
+                    $this->error                    = TRUE;
+    
+                    return FALSE;
+                }
+    
+                $this->Email_Confirm['Value'] = filter_var($_POST['Email_Confirm'], FILTER_SANITIZE_EMAIL);
+    
             }
-
-            $this->Email_Confirm['Value'] = filter_var($_POST['Email_Confirm'], FILTER_SANITIZE_EMAIL);
 
             return TRUE;
         }
@@ -217,13 +221,57 @@
         //Check password field against Curator fields.
         public function checkPassword()
         {
-            
+            $this->Password['Value']   = NULL;
+            $this->Password['Message'] = NULL;
+
+            //Confirm value exists.
+            if(empty($_POST['Password']))
+            {
+                $this->Password['Message'] = LANG\PASSWORD\MISSING;
+                $this->error               = TRUE;
+
+                return FALSE;
+            }
+
+            $policy = \Curator\Traits\Security::getPasswordPolicy();
+
+            //Confirm value exists.
+            if(filter_var($_POST['Password'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+            {
+                $this->Password['Message'] = LANG\PASSWORD\POLICY;
+                $this->error               = TRUE;
+
+                return FALSE;
+            }
+
+            //HASH PASSWORD
+            $this->Password['Value'] = filter_var($_POST['Password'], FILTER_SANITIZE_EMAIL);
+
+            return TRUE;
         }
 
         //Check password confirm field against Curator fields.
         public function checkPasswordConfirm()
         {
-            
+            $this->Password_Confirm['Value']   = NULL;
+            $this->Password_Confirm['Message'] = NULL;
+
+            if($this->Password['Value'] !== NULL)
+            {
+                //Confirm e-mail and e-mail confirm fields match.
+                if($this->Password['Value'] !== $_POST['Password_Confirm'])
+                {
+                    $this->Password_Confirm['Message'] = LANG\PASSWORD_CONFIRM\MISMATCH;
+                    $this->error                    = TRUE;
+
+                    return FALSE;
+                }
+
+                //HASH PASSWORD
+                $this->Password_Confirm['Value'] = filter_var($_POST['Password_Confirm'], FILTER_SANITIZE_EMAIL);
+            }
+
+            return TRUE;
         }
 
         //Check username field against Curator fields.

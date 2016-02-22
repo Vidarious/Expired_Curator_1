@@ -17,8 +17,13 @@
         header("Location: " . "http://" . filter_var($_SERVER['HTTP_HOST'], FILTER_SANITIZE_URL));
         die();
     }
-    define('Curator\Classes\Language\Field\EMAIL\MISSING', 'Missing e-mail address.');
+    define('Curator\Classes\Language\Field\EMAIL\MISSING', 'E-mail is required.');
     define('Curator\Classes\Language\Field\EMAIL\INVALID', 'Invalid e-mail address.');
 
     define('Curator\Classes\Language\Field\EMAIL_CONFIRM\MISMATCH', 'E-mail addresses do not match.');
+
+    define('Curator\Classes\Language\Field\PASSWORD\MISSING', 'Password is required.');
+    define('Curator\Classes\Language\Field\PASSWORD\POLICY', 'Password does not meet requirements.');
+
+    define('Curator\Classes\Language\Field\PASSWORD_CONFIRM\MISMATCH', 'Passwords do not match.');
 ?>

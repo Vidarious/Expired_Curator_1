@@ -18,7 +18,8 @@
         die();
     }
 
-    use \Curator\Config\SESSION as SESSION;
+    use \Curator\Config\SESSION               as SESSION;
+    use \Curator\Config\ACCOUNT\FIELD\SETTING as RULE;
 
     trait Security
     {
@@ -35,6 +36,40 @@
             }
 
             return 'N/A';
+        }
+
+        public function getPasswordPolicy()
+        {
+            //Set min and max password length rule.
+            $policy = '/^(?=.{' . RULE\PASSWORD\MIN_LENGTH . ',' . RULE\PASSWORD\MAX_LENGTH . '}$)';
+
+            //Set lower character requirement rule.
+            if(RULE\PASSWORD\LOWER_CHAR)
+            {
+                $policy .= '(?=.*[a-z])';
+            }
+
+            //Set upper character requirement rule.
+            if(RULE\PASSWORD\UPPER_CHAR)
+            {
+                $policy .= '(?=.*[A-Z])';
+            }
+
+            //Set number character requirement rule.
+            if(RULE\PASSWORD\NUMBER)
+            {
+                $policy .= '(?=.*\d)';
+            }
+
+            //Set special character requirement rule.
+            if(RULE\PASSWORD\SPECIAL_CHAR)
+            {
+                $policy .= '(?=.*(_|[^\w]))';
+            }
+
+            $policy .= '.+$/';
+
+            return $policy;
         }
     }
  ?>

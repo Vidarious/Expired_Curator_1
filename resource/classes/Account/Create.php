@@ -35,7 +35,7 @@
         private function processForm()
         {
             //Check if a form was posted and validate it.
-            if(!empty($_POST))
+            if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
                 //Validate the form passed The Curator's safety procedures.
                 if(!$this->Form->validate('Create_Account', 'username'))

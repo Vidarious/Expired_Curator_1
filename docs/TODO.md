@@ -1,5 +1,8 @@
-- Add field popups for the error messages (bootstrap?). And do the POST thing below.
-- Modify form check? if ($_SERVER['REQUEST_METHOD'] == 'POST')
+-- Clear password if it or confirm is bad
+-- Hash password when validated. (Not email sanitize)
+-- Add rule for displaying true reason why password policy failed. This will require error messages on password policy fail only when rule true.
+
+- - Continue with creating rules
 - - on success create - redirect to new page
 - Should add error message on verify fail?
 - Add enable / disable registration
