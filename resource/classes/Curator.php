@@ -18,27 +18,22 @@
         die();
     }
 
-    //Load Curator traits.
-    require_once(\Curator\Config\PATH\ROOT . 'resource/traits/Utility.php');
-
     class Curator
     {
-
-        use \Curator\Traits\Utility;
-
         //Class Objects
-        public $Session = NULL;
-        public $Tracker = NULL;
-        public $Account = NULL;
+        public $Session  = NULL;
+        public $Tracker  = NULL;
+
+        public $Account  = NULL;
 
         //Object initalization. Singleton design.
         protected function __construct()
         {
             //Initialize session object.
-            $this->Session = Session::getSession();
+            $this->Session  = Session::getSession();
 
             //Start page tracking utility.
-            $this->Tracker = Tracker::getTracker();
+            $this->Tracker  = Tracker::getTracker();
         }
 
         //Returns the singleton instance of The Curator class. Singleton design.

@@ -1,6 +1,6 @@
 <?php
  /*
- * Curator trait file for Encyption related traits.
+ * Curator trait file for Curator Policy related traits.
  *
  * PHP Version 7.0.2
  *
@@ -18,27 +18,12 @@
         die();
     }
 
-    use \Curator\Config\SESSION               as SESSION;
     use \Curator\Config\ACCOUNT\FIELD\SETTING as RULE;
 
-    trait Security
+    trait Policy
     {
-        public function encode($value)
-        {
-            return(hash(SESSION\ENCRYPTION, $value . SESSION\IDENTIFIER));
-        }
-
-        public function validateIP($ip)
-        {
-            if((!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) === FALSE) || (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === FALSE))
-            {
-                return $ip;
-            }
-
-            return 'N/A';
-        }
-
-        public function getPasswordPolicy()
+        //Generate the password rule policy.
+        public function getPolicy_Password()
         {
             //Set min and max password length rule.
             $policy = '/^(?=.{' . RULE\PASSWORD\MIN_LENGTH . ',' . RULE\PASSWORD\MAX_LENGTH . '}$)';

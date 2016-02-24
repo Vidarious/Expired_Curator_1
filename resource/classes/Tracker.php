@@ -32,7 +32,8 @@
         //Object initalization. Singleton design.
         protected function __construct()
         {
-            $this->Session = Session::getSession();
+            //Initialize session object.
+            $this->Session  = Session::getSession();
 
             self::getCurrentPage();
             self::getPastPage();

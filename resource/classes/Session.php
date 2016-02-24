@@ -18,9 +18,6 @@
         die();
     }
 
-    //Load Curator traits.
-    require_once(\Curator\Config\PATH\ROOT . 'resource/traits/Security.php');
-
     use \Curator\Config  as CONFIG;
     use \Curator\Traits  as TRAITS;
     use \Curator\Classes as CLASSES;
@@ -105,23 +102,40 @@
             }
         }
 
+        //Encode the passed value with the Curator's salt.
+        public function encode($value)
+        {
+            return(hash(CONFIG\SESSION\ENCRYPTION, $value . CONFIG\SESSION\IDENTIFIER));
+        }
+
+        //Verify the passed value is a valid IP address.
+        public function validateIP($ip)
+        {
+            if((!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) === FALSE) || (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === FALSE))
+            {
+                return $ip;
+            }
+
+            return 'N/A';
+        }
+
         //Determine and validate the users IP.
         protected function setIP()
         {
             if(!empty($_SERVER['HTTP_CLIENT_IP']))
             {
-                $this->userIP = Traits\SECURITY::validateIP(htmlspecialchars($_SERVER['HTTP_CLIENT_IP']));
+                $this->userIP = self::validateIP(htmlspecialchars($_SERVER['HTTP_CLIENT_IP']));
             }
             else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
             {
                 $ipString = explode(',', htmlspecialchars($_SERVER['HTTP_X_FORWARDED_FOR']));
                 $ip       = trim($ipString[count($ipString) - 1]);
 
-                $this->userIP = Traits\SECURITY::validateIP($ip);
+                $this->userIP = self::validateIP($ip);
             }
             else
             {
-                $this->userIP = Traits\SECURITY::validateIP(htmlspecialchars($_SERVER['REMOTE_ADDR']));
+                $this->userIP = self::validateIP(htmlspecialchars($_SERVER['REMOTE_ADDR']));
             }
 
             return($this->userIP);
@@ -133,7 +147,7 @@
             //Check if IP Enforcement is enabled.
             if(CONFIG\SESSION\ENFORCE_IP === TRUE)
             {
-                $userKey = Traits\SECURITY::encode($this->userIP);
+                $userKey = self::encode($this->userIP);
 
                 if(!isset($_SESSION['Curator_userKey']) || ($_SESSION['Curator_userKey'] != $userKey))
                 {
@@ -150,7 +164,7 @@
         {
             if(CONFIG\SESSION\ENFORCE_USERAGENT === TRUE)
             {
-                $userAgent = Traits\SECURITY::encode(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
+                $userAgent = self::encode(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
 
                 if(!isset($_SESSION['Curator_userAgent']) || ($_SESSION['Curator_userAgent'] != $userAgent))
                 {
@@ -197,12 +211,12 @@
 
             if(CONFIG\SESSION\ENFORCE_IP === TRUE)
             {
-                $_SESSION['Curator_userKey'] = Traits\SECURITY::encode($this->userIP);
+                $_SESSION['Curator_userKey'] = self::encode($this->userIP);
             }
 
             if(CONFIG\SESSION\ENFORCE_USERAGENT === TRUE)
             {
-                $_SESSION['Curator_userAgent'] = Traits\SECURITY::encode(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
+                $_SESSION['Curator_userAgent'] = self::encode(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
             }
 
             $_SESSION['Curator_startTime'] = $_SESSION['Curator_idleTime'] = $_SESSION['Curator_regenTime'] = time();

@@ -169,4 +169,5 @@
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\LOWER_CHAR', '1');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\SPECIAL_CHAR', '1');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\NUMBER', '1');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\WORD', '1');
 ?>

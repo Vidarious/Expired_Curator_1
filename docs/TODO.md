@@ -1,4 +1,6 @@
--- Clear password if it or confirm is bad
+- Review Visio and code. Ensure the remaining extentions make sense. Understand the form class. Don't think Curator needs a Session object at all.
+- added new table for password restricted words.  Add option for it and other ones. Need regexp that matches restricted word for any letter ie password = PASSword
+-- Verify email and password rules
 -- Hash password when validated. (Not email sanitize)
 -- Add rule for displaying true reason why password policy failed. This will require error messages on password policy fail only when rule true.
 

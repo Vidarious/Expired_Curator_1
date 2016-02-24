@@ -18,15 +18,21 @@
         die();
     }
 
-    use \Curator\Config\PATH            as PATH;
-    use \Curator\Classes\Language\Field as LANG;
+    use \Curator\Config\PATH                  as PATH;
+    use \Curator\Classes\Language\Field       as LANG;
+    use \Curator\Config\ACCOUNT\FIELD\SETTING as RULE;
+    use \Curator\Traits                       as TRAITS;
 
     //Include the Field language error messaging file.
     require_once(PATH\ROOT . 'resource/locale/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Field.php');
 
+    //Load Curator traits.
+    require_once(\Curator\Config\PATH\ROOT . 'resource/traits/Policy.php');
+
     class Field extends \Curator\Classes\Account\Form
     {
         //Class Variables
+        public $SQL              = NULL;
         public $error            = FALSE;
         public $Email            = array();
         public $Email_Confirm    = array();
@@ -56,6 +62,9 @@
 
             //Assign the current Form object to the Curator classes $Form varabie
             $this->Form = $Form;
+
+            //Open a database connection.
+            $this->SQL = new \Curator\Classes\SQL();
         }
 
         //Check all form fields to ensure the user data falls within the rules.
@@ -203,7 +212,7 @@
             if($this->Email['Value'] !== NULL)
             {
                 //Confirm e-mail and e-mail confirm fields match.
-                if($this->Email['Value'] !== $_POST['Email_Confirm'])
+                if($this->Email['Value'] !== filter_var($_POST['Email_Confirm'], FILTER_SANITIZE_EMAIL))
                 {
                     $this->Email_Confirm['Message'] = LANG\EMAIL_CONFIRM\MISMATCH;
                     $this->error                    = TRUE;
@@ -227,21 +236,29 @@
             //Confirm value exists.
             if(empty($_POST['Password']))
             {
-                $this->Password['Message'] = LANG\PASSWORD\MISSING;
-                $this->error               = TRUE;
+                $this->Password['Message']       = LANG\PASSWORD\MISSING;
+                $this->error                     = TRUE;
+                $this->Password_Confirm['Value'] = NULL;
 
                 return FALSE;
             }
 
-            $policy = \Curator\Traits\Security::getPasswordPolicy();
+            $policy = TRAITS\Policy::getPolicy_Password();
 
-            //Confirm value exists.
+            //Confirm password meets requirements
             if(filter_var($_POST['Password'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
             {
-                $this->Password['Message'] = LANG\PASSWORD\POLICY;
-                $this->error               = TRUE;
+                $this->Password['Message']       = LANG\PASSWORD\POLICY;
+                $this->error                     = TRUE;
+                $this->Password_Confirm['Value'] = NULL;
 
                 return FALSE;
+            }
+
+            //If word restriction is enabled, validate password against words.
+            if(RULE\PASSWORD\WORD)
+            {
+                //Get restricted word list.
             }
 
             //HASH PASSWORD
@@ -262,8 +279,8 @@
                 if($this->Password['Value'] !== $_POST['Password_Confirm'])
                 {
                     $this->Password_Confirm['Message'] = LANG\PASSWORD_CONFIRM\MISMATCH;
-                    $this->error                    = TRUE;
-
+                    $this->error                       = TRUE;
+                    $this->Password['Value']           = NULL;
                     return FALSE;
                 }
 

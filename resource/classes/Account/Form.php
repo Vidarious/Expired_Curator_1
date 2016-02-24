@@ -20,11 +20,15 @@
 
     use \Curator\Config\PATH           as PATH;
     use \Curator\Classes\Language\Form as LANG;
+    use \Curator\Traits                as TRAITS;
 
     //Include the Form language error messaging file.
     require_once(PATH\ROOT . 'resource/locale/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Form.php');
 
-    class Form extends \Curator\Classes\Account
+    //Load Whitelist trait.
+    require_once(\Curator\Config\PATH\ROOT . 'resource/traits/Whitelist.php');
+
+    class Form
     {
         //Class Variables
         public  $formMessagesWarning = array();
@@ -36,11 +40,13 @@
 
         //Class Objects
         public  $Field               = NULL;
+        private $Session             = NULL;
 
-        //Object initalization. Call parent constructor to gain access to class methods and variables/objects.
-        protected function __construct()
+        //Object initalization.
+        public function __construct()
         {
-            parent::__construct();
+            //Initialize session object.
+            $this->Session  = \Curator\Classes\Session::getSession();
         }
 
         //Generates the POST URI for the account creation form.
@@ -54,6 +60,18 @@
             }
 
             return($requestScheme . filter_var($_SERVER['SERVER_NAME'], FILTER_SANITIZE_URL) . filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL));
+        }
+
+        public function sanitizePOST($value)
+        {
+            if(!empty($_POST[$value]))
+            {
+                $_POST[$value] = filter_var($_POST[$value], FILTER_SANITIZE_MAGIC_QUOTES);
+
+                return;
+            }
+
+            $_POST[$value] = NULL;
         }
 
         //Set secure form token.
@@ -74,7 +92,7 @@
         {
             $this->formType         = $formType;
             $this->invisibleCAPTCHA = $invisibleCAPTCHA;
-            $this->whitelist        = $this->getFormWhitelist($formType, $invisibleCAPTCHA);
+            $this->whitelist        = TRAITS\Whitelist::getWhitelist_CreateAccount($formType, $invisibleCAPTCHA);
 
             if(self::verifyFormType() &&
                self::verifyInvisibleCAPTCHA() &&
