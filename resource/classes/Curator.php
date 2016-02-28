@@ -23,7 +23,6 @@
         //Class Objects
         public $Session  = NULL;
         public $Tracker  = NULL;
-
         public $Account  = NULL;
 
         //Object initalization. Singleton design.

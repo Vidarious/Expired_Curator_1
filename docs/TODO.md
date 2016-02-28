@@ -1,4 +1,8 @@
-- Review Visio and code. Ensure the remaining extentions make sense. Understand the form class. Don't think Curator needs a Session object at all.
+- Left off adding policy details to check Password - Need to add word list check
+- Question now is SQL class. Needed for Account/Policy to check password restricted words
+- - Review all code and specifically the public/private functions and variables and objects. I think more should be private?
+-   - Review all use statements
+-   - review all constructors
 - added new table for password restricted words.  Add option for it and other ones. Need regexp that matches restricted word for any letter ie password = PASSword
 -- Verify email and password rules
 -- Hash password when validated. (Not email sanitize)

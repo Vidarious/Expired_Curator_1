@@ -18,62 +18,82 @@
         die();
     }
 
-    class Create extends \Curator\Classes\Account
+    use \Curator\Config\PATH as PATH;
+    use \Curator\Classes     as CLASSES;
+
+    class Create
     {
-        //Object initalization. Call parent constructor to gain access to class methods and variables/objects
-        public function __construct($Form)
+        private $Form   = NULL;
+        private $Policy = NULL;
+
+        //Object initalization.
+        public function __construct()
         {
-            //Assign the $Form object passed to the \Curator\Account\ object (inherited).
-            $this->Form = $Form;
+            //Create form object for form functionality.
+            $this->Form = new CLASSES\Form('Create_Account');
 
-            var_dump($_POST);
+            //Check if a form was posted and validate it.
+            if($_SERVER['REQUEST_METHOD'] == 'POST')
+            {
+                var_dump($_POST);
 
-            self::processForm();
+                self::processForm();
+            }
         }
 
         //Process account creation form.
         private function processForm()
         {
-            //Check if a form was posted and validate it.
-            if($_SERVER['REQUEST_METHOD'] == 'POST')
+            //Validate the form passed The Curator's safety procedures.
+            if(!$this->Form->validate())
             {
-                //Validate the form passed The Curator's safety procedures.
-                if(!$this->Form->validate('Create_Account', 'username'))
-                {
-                    array_push($this->Form->formMessagesWarning, \Curator\Classes\Language\Form\MESSAGE\ERROR_GENERAL);
+                array_push($this->Form->formMessagesError, CLASSES\Language\Form\MESSAGE\ERROR_GENERAL);
 
-                    return FALSE;
-                }
-
-                //Check the user field data against Curator rules.
-                if($this->Form->Field->checkRules())
-                {
-                    array_push($this->Form->formMessagesWarning, \Curator\Classes\Language\Form\MESSAGE\ERROR_FIELD);
-
-                    return FALSE;
-                }
-
-                array_push($this->Form->formMessagesSuccess, 'Account Created.');
-
-                return TRUE;
-                    
-                    //Validate each field one at a time.
-                        //If its a required field it must have data
-                        //Ensure the data in the field matches the field.
-                        //Ensure the rules for each field are met.
-
-                    //Verify if account already exists.
-
-                    //Create account
-
-                    //Start authorization process
-
+                return FALSE;
             }
-            else
+
+            //Verify the form is not being flooded
+            if($this->Form->checkFormFlood(\Curator\Config\ACCOUNT\FLOOD_DELAY))
             {
-                //Generate page error indicating form submission failed (form wasn't validated).
-                echo "There was no form posted.";
+                array_push($this->Form->formMessagesError, CLASSES\Language\Form\MESSAGE\FLOOD);
+
+                return FALSE;
             }
+
+            //Initialize the Rules class for field validation.
+            $this->Policy = new Policy();
+
+            //Check the user field data against Curator rules.
+            if($this->Policy->checkRules($this->Form->whitelist))
+            {
+                array_push($this->Form->formMessagesError, CLASSES\Language\Form\MESSAGE\ERROR_FIELD);
+
+                return FALSE;
+            }
+
+            array_push($this->Form->formMessagesSuccess, 'Account Created.');
+
+            //Since the account was created set up the form flood protection.
+            $this->Form->setFormFlood();
+
+            return TRUE;
+                
+                //Validate each field one at a time.
+                    //If its a required field it must have data
+                    //Ensure the data in the field matches the field.
+                    //Ensure the rules for each field are met.
+
+                //Verify if account already exists.
+
+                //Create account
+
+                //Start authorization process
+        }
+
+        //Inject account creation form.
+        public function Form()
+        {
+            include(PATH\FORMS . 'Account_Create.php');
         }
     }
 ?>

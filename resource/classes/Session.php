@@ -36,7 +36,7 @@
         protected function __construct()
         {
             //Initialize cookie object.
-            $this->Cookie  = Cookie::getCookie();
+            $this->Cookie = Cookie::getCookie();
 
             //Setup the session configuration details.
             self::setupSession();
@@ -119,7 +119,7 @@
             return 'N/A';
         }
 
-        //Determine and validate the users IP.
+        //Determine and validate the users IP. This function checks (in the best order) to obtain the users IP.
         protected function setIP()
         {
             if(!empty($_SERVER['HTTP_CLIENT_IP']))

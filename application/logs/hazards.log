@@ -199,3 +199,219 @@ CLASS: Curator\Classes\Account\Form
 METHOD: Curator\Classes\Account\Form::verifyToken
 MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "29147463472b3647278d1c2e81fc5ac7" - IP: 10.240.0.94
 **********
+**********
+DATE: February 24, 2016 at 8:46 PM America/New_York
+ADDRESS: 10.240.0.165
+URI: /register.php
+CLASS: Curator\Classes\Account\Form
+METHOD: Curator\Classes\Account\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "cccd218fc752d29899570e7050a17c11" - IP: 10.240.0.165
+**********
+**********
+DATE: February 24, 2016 at 8:48 PM America/New_York
+ADDRESS: 10.240.0.200
+URI: /register.php
+CLASS: Curator\Classes\Account\Form
+METHOD: Curator\Classes\Account\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "cccd218fc752d29899570e7050a17c11" - IP: 10.240.0.200
+**********
+**********
+DATE: February 24, 2016 at 9:33 PM America/New_York
+ADDRESS: 10.240.0.187
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "9d51889555b832f8c34f75e54d1908e2" - POST[cToken]: "4def6bb6f6bbf11a5bbd0aa0a99e7181" - IP: 10.240.0.187
+**********
+**********
+DATE: February 24, 2016 at 9:37 PM America/New_York
+ADDRESS: 10.240.0.75
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "900315eb0b67963a0143c6345602e5e0" - POST[cToken]: "4def6bb6f6bbf11a5bbd0aa0a99e7181" - IP: 10.240.0.75
+**********
+**********
+DATE: February 24, 2016 at 9:38 PM America/New_York
+ADDRESS: 10.240.0.200
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "900315eb0b67963a0143c6345602e5e0" - POST[cToken]: "4def6bb6f6bbf11a5bbd0aa0a99e7181" - IP: 10.240.0.200
+**********
+**********
+DATE: February 25, 2016 at 8:16 PM America/New_York
+ADDRESS: 10.240.0.179
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.179
+**********
+**********
+DATE: February 25, 2016 at 8:19 PM America/New_York
+ADDRESS: 10.240.0.192
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.192
+**********
+**********
+DATE: February 25, 2016 at 9:18 PM America/New_York
+ADDRESS: 10.240.0.187
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.187
+**********
+**********
+DATE: February 25, 2016 at 9:19 PM America/New_York
+ADDRESS: 10.240.0.121
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.121
+**********
+**********
+DATE: February 25, 2016 at 9:19 PM America/New_York
+ADDRESS: 10.240.0.121
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.121
+**********
+**********
+DATE: February 25, 2016 at 9:20 PM America/New_York
+ADDRESS: 10.240.0.186
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.186
+**********
+**********
+DATE: February 25, 2016 at 9:22 PM America/New_York
+ADDRESS: 10.240.0.206
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.206
+**********
+**********
+DATE: February 25, 2016 at 9:23 PM America/New_York
+ADDRESS: 10.240.0.207
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.207
+**********
+**********
+DATE: February 25, 2016 at 9:23 PM America/New_York
+ADDRESS: 10.240.0.138
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.138
+**********
+**********
+DATE: February 25, 2016 at 9:24 PM America/New_York
+ADDRESS: 10.240.0.186
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.186
+**********
+**********
+DATE: February 25, 2016 at 9:25 PM America/New_York
+ADDRESS: 10.240.0.121
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.121
+**********
+**********
+DATE: February 25, 2016 at 9:28 PM America/New_York
+ADDRESS: 10.240.0.121
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.121
+**********
+**********
+DATE: February 25, 2016 at 9:34 PM America/New_York
+ADDRESS: 10.240.0.197
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.197
+**********
+**********
+DATE: February 25, 2016 at 9:35 PM America/New_York
+ADDRESS: 10.240.0.192
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.192
+**********
+**********
+DATE: February 25, 2016 at 9:36 PM America/New_York
+ADDRESS: 10.240.0.138
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.138
+**********
+**********
+DATE: February 27, 2016 at 10:33 PM America/New_York
+ADDRESS: 10.240.0.156
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.156
+**********
+**********
+DATE: February 27, 2016 at 10:34 PM America/New_York
+ADDRESS: 10.240.0.197
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.197
+**********
+**********
+DATE: February 27, 2016 at 10:34 PM America/New_York
+ADDRESS: 10.240.0.147
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.147
+**********
+**********
+DATE: February 27, 2016 at 10:36 PM America/New_York
+ADDRESS: 10.240.0.203
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.203
+**********
+**********
+DATE: February 27, 2016 at 10:36 PM America/New_York
+ADDRESS: 10.240.0.147
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.147
+**********
+**********
+DATE: February 27, 2016 at 10:42 PM America/New_York
+ADDRESS: 10.240.0.206
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.206
+**********
+**********
+DATE: February 27, 2016 at 11:32 PM America/New_York
+ADDRESS: 10.240.0.94
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "ebbf78465c75ab2d41f5ddd352f4b798" - IP: 10.240.0.94
+**********

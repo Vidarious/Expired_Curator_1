@@ -29,4 +29,6 @@
 
     define('Curator\Classes\Language\Form\HAZARD_VALIDATE_WHITELIST_FIELD', '$_POST whitelist verification failed. The following field was not found in the posted data: ');
     define('Curator\Classes\Language\Form\HAZARD_VALIDATE_WHITELIST_COUNT', '$_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST.');
+
+    define('Curator\Classes\Language\Form\MESSAGE\FLOOD', 'You must wait before you can submit this form again.');
 ?>

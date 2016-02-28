@@ -18,16 +18,15 @@
         die();
     }
 
-    class Account extends Curator
+    class Account
     {
         //Class Objects
         public $Create = NULL;
-        public $Form   = NULL;
 
         //Object initalization. Singleton design.
         protected function __construct()
         {
-            parent::__construct();
+            
         }
 
         //Returns the singleton instance of the account class. Singleton design.
@@ -52,12 +51,8 @@
         //Initializes the account creation class.
         public function initializeCreate()
         {
-            //Create form object for HTML page data and Create object.
-            $this->Form   = new Account\Form();
-
             //Create a 'Create' object to handle account creation processes.
-            //Pass the Form object so it may access its utilities.
-            $this->Create = new Account\Create($this->Form);
+            $this->Create = new Account\Create();
         }
     }
 ?>

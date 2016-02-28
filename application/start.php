@@ -12,6 +12,7 @@
     namespace Curator\Application;
 
     use \Curator\Config\PATH as PATH;
+    use \Curator\Classes     as CLASSES;
 
     //Load Curator configuartion data.
     require_once(dirname(__FILE__) . '/../resource/config/curator.php');
@@ -46,5 +47,5 @@
     spl_autoload_register('\Curator\Application\autoLoad');
 
     //Initialize The Curator.
-    $theCurator = \Curator\Classes\Curator::Initialize();
+    $theCurator = CLASSES\Curator::Initialize();
 ?>

@@ -8,49 +8,44 @@
                   </div>
                   <?php dump($this); ?>
                   <div class="panel-body">
-                       <form method="POST" action="<?=self::getActionURI();?>">
+                       <form method="POST" action="<?=$this->Form->getActionURI();?>">
                           <fieldset>
-                            <?php if(!empty($this->formMessagesSuccess)) : ?>
-                                <?php foreach($this->formMessagesSuccess as $message) : ?>
+                            <?php if(!empty($this->Form->formMessagesSuccess)) : ?>
+                                <?php foreach($this->Form->formMessagesSuccess as $message) : ?>
                             <div class="alert alert-success" role="alert"><?=$message?></div>
                                 <?php endforeach; ?>
                             <?php endif; ?>
-                            <?php if(!empty($this->formMessagesWarning)) : ?>
-                                <?php foreach($this->formMessagesWarning as $message) : ?>
-                            <div class="alert alert-warning" role="alert"><?=$message?></div>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                            <?php if(!empty($this->formMessagesError)) : ?>
-                                <?php foreach($this->formMessagesError as $message) : ?>
+                            <?php if(!empty($this->Form->formMessagesError)) : ?>
+                                <?php foreach($this->Form->formMessagesError as $message) : ?>
                             <div class="alert alert-danger" role="alert"><?=$message?></div>
                                 <?php endforeach; ?>
                             <?php endif; ?>
                              <div class="row">
                                 <div class="col-md-6">
-                                   <div class="form-group<?php if(!empty($this->Field->Email['Message'])) : ?> has-error has-feedback<?php endif; ?>">
+                                   <div class="form-group<?php if(!empty($this->Policy->Email['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Email" type="text" class="form-control" placeholder="Email" aria-describedby="user-email" value="<?php if(!empty($this->Field->Email['Value'])) { echo $this->Field->Email['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Field->Email['Message'])) { echo $this->Field->Email['Message']; } ?>">
-                                         <?php if(!empty($this->Field->Email['Message'])) : ?>
+                                         <input name="Email" type="text" class="form-control" placeholder="Email" aria-describedby="user-email" value="<?php if(!empty($this->Policy->Email['Value'])) { echo $this->Policy->Email['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Email['Message'])) { echo $this->Policy->Email['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Email['Message'])) : ?>
                                          <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                         <span class="sr-only"><?=$this->Field->Email['Message']?></span>
+                                         <span class="sr-only"><?=$this->Policy->Email['Message']?></span>
                                          <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
         
                                 <div class="col-md-6">
-                                   <div class="form-group<?php if(!empty($this->Field->Email_Confirm['Message'])) : ?> has-error has-feedback<?php endif; ?>">
+                                   <div class="form-group<?php if(!empty($this->Policy->Email_Confirm['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Email_Confirm" type="text" class="form-control" placeholder="Email (Confirm)" aria-describedby="user-email-confirm" value="<?php if(!empty($this->Field->Email_Confirm['Value'])) { echo $this->Field->Email_Confirm['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Field->Email_Confirm['Message'])) { echo $this->Field->Email_Confirm['Message']; } ?>">
-                                         <?php if(!empty($this->Field->Email_Confirm['Message'])) : ?>
+                                         <input name="Email_Confirm" type="text" class="form-control" placeholder="Email (Confirm)" aria-describedby="user-email-confirm" value="<?php if(!empty($this->Policy->Email_Confirm['Value'])) { echo $this->Policy->Email_Confirm['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Email_Confirm['Message'])) { echo $this->Policy->Email_Confirm['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Email_Confirm['Message'])) : ?>
                                          <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                         <span class="sr-only"><?=$this->Field->Email_Confirm['Message']?></span>
+                                         <span class="sr-only"><?=$this->Policy->Email_Confirm['Message']?></span>
                                          <?php endif; ?>
                                       </div>
                                    </div>
@@ -59,29 +54,29 @@
         
                              <div class="row">
                                 <div class="col-md-6">
-                                   <div class="form-group<?php if(!empty($this->Field->Password['Message'])) : ?> has-error has-feedback<?php endif; ?>">
+                                   <div class="form-group<?php if(!empty($this->Policy->Password['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Password"  type="password" class="form-control" placeholder="Password" aria-describedby="user-password" value="<?php if(!empty($this->Field->Password['Value'])) { echo $this->Field->Password['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Field->Password['Message'])) { echo $this->Field->Password['Message']; } ?>">
-                                         <?php if(!empty($this->Field->Password['Message'])) : ?>
+                                         <input name="Password"  type="password" class="form-control" placeholder="Password" aria-describedby="user-password" value="<?php if(!empty($this->Policy->Password['Value'])) { echo $this->Policy->Password['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Password['Message'])) { echo $this->Policy->Password['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Password['Message'])) : ?>
                                          <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                         <span class="sr-only"><?=$this->Field->Password['Message']?></span>
+                                         <span class="sr-only"><?=$this->Policy->Password['Message']?></span>
                                          <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                   <div class="form-group<?php if(!empty($this->Field->Password_Confirm['Message'])) : ?> has-error has-feedback<?php endif; ?>">
+                                   <div class="form-group<?php if(!empty($this->Policy->Password_Confirm['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Password_Confirm" type="password" class="form-control" placeholder="Password (Confirm)" aria-describedby="user-password-confirm" value="<?php if(!empty($this->Field->Password_Confirm['Value'])) { echo $this->Field->Password_Confirm['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Field->Password_Confirm['Message'])) { echo $this->Field->Password_Confirm['Message']; } ?>">
-                                         <?php if(!empty($this->Field->Password_Confirm['Message'])) : ?>
+                                         <input name="Password_Confirm" type="password" class="form-control" placeholder="Password (Confirm)" aria-describedby="user-password-confirm" value="<?php if(!empty($this->Policy->Password_Confirm['Value'])) { echo $this->Policy->Password_Confirm['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Password_Confirm['Message'])) { echo $this->Policy->Password_Confirm['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Password_Confirm['Message'])) : ?>
                                          <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                         <span class="sr-only"><?=$this->Field->Password_Confirm['Message']?></span>
+                                         <span class="sr-only"><?=$this->Policy->Password_Confirm['Message']?></span>
                                          <?php endif; ?>
                                       </div>
                                    </div>
@@ -300,11 +295,17 @@
                                 </div>
                              </div>
                             <?php endif; ?>
-        
+                            <?php if(\Curator\Config\FORM\RECAPTCHA) : ?>
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="g-recaptcha" data-sitekey="6LcqUxkTAAAAABsa1qL9zJKgw_1Yho5O06YF_OBm"></div>
+                                </div>
+                             </div>
+                             <?php endif; ?>
                              <div class="row">
                                 <div class="col-md-12">
                                    <input name="username" autocomplete="off" type="hidden" value="">
-                                   <input name="cToken" autocomplete="off" type="hidden" value="<?=self::assignToken();?>">
+                                   <input name="cToken" autocomplete="off" type="hidden" value="<?=$this->Form->assignToken();?>">
                                    <button name="Form_Type" value ="Create_Account" type="submit" class="btn btn-info btn-block">OK</button>
                                 </div>
                              </div>

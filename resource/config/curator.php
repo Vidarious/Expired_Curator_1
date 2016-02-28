@@ -119,8 +119,17 @@
     define('Curator\Config\COOKIE\DOMAIN', htmlspecialchars($_SERVER['SERVER_NAME']));
 
     //*****
+    //** Form Settings.
+    //*****
+
+    define('Curator\Config\FORM\RECAPTCHA', '1');
+    define('Curator\Config\FORM\RECAPTCHA\SECRET', '6LcqUxkTAAAAALvmj2I6BM0iNIHJavNWd_MIQyh6');
+
+    //*****
     //** Account Settings.
     //*****
+    //Minimun time that must pass before another new account can be created.
+    define('Curator\Config\ACCOUNT\FLOOD_DELAY', '60');
 
     //Account field setting: Username.
     define('Curator\Config\ACCOUNT\FIELD\USERNAME', '0');

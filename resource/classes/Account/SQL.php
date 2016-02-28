@@ -9,7 +9,7 @@
  * @copyright  2016 James Druhan
  * @version    1.0
  */
-    namespace Curator\Classes;
+    namespace Curator\Classes\Account;
 
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))

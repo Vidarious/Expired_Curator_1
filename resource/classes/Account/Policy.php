@@ -26,147 +26,138 @@
     //Include the Field language error messaging file.
     require_once(PATH\ROOT . 'resource/locale/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Field.php');
 
-    //Load Curator traits.
-    require_once(\Curator\Config\PATH\ROOT . 'resource/traits/Policy.php');
-
-    class Field extends \Curator\Classes\Account\Form
+    class Policy
     {
         //Class Variables
-        public $SQL              = NULL;
-        public $error            = FALSE;
-        public $Email            = array();
-        public $Email_Confirm    = array();
-        public $Password         = array();
-        public $Password_Confirm = array();
-        public $Username         = array();
-        public $Given_Name       = array();
-        public $Family_Name      = array();
-        public $Preferred_Name   = array();
-        public $Title            = array();
-        public $Gender           = array();
-        public $Date_Of_Birth    = array();
-        public $Phone            = array();
-        public $Address_Label    = array();
-        public $Address_Line_1   = array();
-        public $Address_Line_2   = array();
-        public $Address_Line_3   = array();
-        public $Address_City     = array();
-        public $Address_Province = array();
-        public $Address_Postal   = array();
-        public $Address_Country  = array();
+        public  $SQL              = NULL;
+        public  $error            = FALSE;
+        public  $Email            = array();
+        public  $Email_Confirm    = array();
+        public  $Password         = array();
+        public  $Password_Confirm = array();
+        public  $Username         = array();
+        public  $Given_Name       = array();
+        public  $Family_Name      = array();
+        public  $Preferred_Name   = array();
+        public  $Title            = array();
+        public  $Gender           = array();
+        public  $Date_Of_Birth    = array();
+        public  $Phone            = array();
+        public  $Address_Label    = array();
+        public  $Address_Line_1   = array();
+        public  $Address_Line_2   = array();
+        public  $Address_Line_3   = array();
+        public  $Address_City     = array();
+        public  $Address_Province = array();
+        public  $Address_Postal   = array();
+        public  $Address_Country  = array();
 
         //Object initalization. Call parent constructor to gain access to class methods and variables/objects
-        public function __construct($Form)
+        public function __construct()
         {
-            parent::__construct();
-
-            //Assign the current Form object to the Curator classes $Form varabie
-            $this->Form = $Form;
-
-            //Open a database connection.
-            $this->SQL = new \Curator\Classes\SQL();
+            $this->SQL = new SQL();
         }
 
         //Check all form fields to ensure the user data falls within the rules.
         //REQUIRES: $Form->whitelist.
-        public function checkRules()
+        public function checkRules($whitelist)
         {
-            if(in_array('Email', $this->Form->whitelist))
+            if(in_array('Email', $whitelist))
             {
                 self::checkEmail();
             }
 
-            if(in_array('Email_Confirm', $this->Form->whitelist))
+            if(in_array('Email_Confirm', $whitelist))
             {
                 self::checkEmailConfirm();
             }
 
-            if(in_array('Password', $this->Form->whitelist))
+            if(in_array('Password', $whitelist))
             {
                 self::checkPassword();
             }
 
-            if(in_array('Password_Confirm', $this->Form->whitelist))
+            if(in_array('Password_Confirm', $whitelist))
             {
                 self::checkPasswordConfirm();
             }
 
-            if(in_array('Username', $this->Form->whitelist))
+            if(in_array('Username', $whitelist))
             {
                 self::checkUsername();
             }
 
-            if(in_array('Given_Name', $this->Form->whitelist))
+            if(in_array('Given_Name', $whitelist))
             {
                 self::checkGivenName();
             }
 
-            if(in_array('Family_Name', $this->Form->whitelist))
+            if(in_array('Family_Name', $whitelist))
             {
                 self::checkFamilyName();
             }
 
-            if(in_array('Preferred_Name', $this->Form->whitelist))
+            if(in_array('Preferred_Name', $whitelist))
             {
                 self::checkPreferredName();
             }
 
-            if(in_array('Title', $this->Form->whitelist))
+            if(in_array('Title', $whitelist))
             {
                 self::checkTitle();
             }
 
-            if(in_array('Gender', $this->Form->whitelist))
+            if(in_array('Gender', $whitelist))
             {
                 self::checkGender();
             }
 
-            if(in_array('Date_Of_Birth', $this->Form->whitelist))
+            if(in_array('Date_Of_Birth', $whitelist))
             {
                 self::checkDateOfBirth();
             }
 
-            if(in_array('Phone', $this->Form->whitelist))
+            if(in_array('Phone', $whitelist))
             {
                 self::checkPhone();
             }
 
-            if(in_array('Address_Label', $this->Form->whitelist))
+            if(in_array('Address_Label', $whitelist))
             {
                 self::checkAddressLabel();
             }
 
-            if(in_array('Address_Line_1', $this->Form->whitelist))
+            if(in_array('Address_Line_1', $whitelist))
             {
                 self::checkAddressLine1();
             }
 
-            if(in_array('Address_Line_2', $this->Form->whitelist))
+            if(in_array('Address_Line_2', $whitelist))
             {
                 self::checkAddressLine2();
             }
 
-            if(in_array('Address_Line_3', $this->Form->whitelist))
+            if(in_array('Address_Line_3', $whitelist))
             {
                 self::checkAddressLine3();
             }
 
-            if(in_array('Address_City', $this->Form->whitelist))
+            if(in_array('Address_City', $whitelist))
             {
                 self::checkAddressCity();
             }
 
-            if(in_array('Address_Province', $this->Form->whitelist))
+            if(in_array('Address_Province', $whitelist))
             {
                 self::checkAddressProvince();
             }
 
-            if(in_array('Address_Postal', $this->Form->whitelist))
+            if(in_array('Address_Postal', $whitelist))
             {
                 self::checkAddressPostal();
             }
 
-            if(in_array('Address_Country', $this->Form->whitelist))
+            if(in_array('Address_Country', $whitelist))
             {
                 self::checkAddressCountry();
             }
@@ -243,7 +234,7 @@
                 return FALSE;
             }
 
-            $policy = TRAITS\Policy::getPolicy_Password();
+            $policy = self::getPolicy_Password();
 
             //Confirm password meets requirements
             if(filter_var($_POST['Password'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
@@ -278,6 +269,7 @@
                 //Confirm e-mail and e-mail confirm fields match.
                 if($this->Password['Value'] !== $_POST['Password_Confirm'])
                 {
+                    $this->Password['Message']         = LANG\PASSWORD_CONFIRM\MISMATCH;
                     $this->Password_Confirm['Message'] = LANG\PASSWORD_CONFIRM\MISMATCH;
                     $this->error                       = TRUE;
                     $this->Password['Value']           = NULL;
@@ -289,6 +281,41 @@
             }
 
             return TRUE;
+        }
+
+        //Generate the password rule policy.
+        public function getPolicy_Password()
+        {
+            //Set min and max password length rule.
+            $policy = '/^(?=.{' . RULE\PASSWORD\MIN_LENGTH . ',' . RULE\PASSWORD\MAX_LENGTH . '}$)';
+
+            //Set lower character requirement rule.
+            if(RULE\PASSWORD\LOWER_CHAR)
+            {
+                $policy .= '(?=.*[a-z])';
+            }
+
+            //Set upper character requirement rule.
+            if(RULE\PASSWORD\UPPER_CHAR)
+            {
+                $policy .= '(?=.*[A-Z])';
+            }
+
+            //Set number character requirement rule.
+            if(RULE\PASSWORD\NUMBER)
+            {
+                $policy .= '(?=.*\d)';
+            }
+
+            //Set special character requirement rule.
+            if(RULE\PASSWORD\SPECIAL_CHAR)
+            {
+                $policy .= '(?=.*(_|[^\w]))';
+            }
+
+            $policy .= '.+$/';
+
+            return $policy;
         }
 
         //Check username field against Curator fields.

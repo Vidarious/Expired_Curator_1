@@ -25,8 +25,14 @@
         //Generate and return an array of enabled account field names.
         public function getWhitelist_CreateAccount($formType, $invisibleCAPTCHA)
         {
+            //Email and password are absolute requirements (minimum).
             $fields = array('Email', 'Email_Confirm', 'Password', 'Password_Confirm', $invisibleCAPTCHA, 'Form_Type', 'cToken');
 
+            //If Google ReCAPTCHA is enabled.
+            if(\Curator\Config\FORM\RECAPTCHA)
+            {
+                array_push($fields, 'g-recaptcha-response');
+            }
             if(FIELD\USERNAME)
             {
                 array_push($fields, 'Username');

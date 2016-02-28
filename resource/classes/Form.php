@@ -1,6 +1,6 @@
 <?php
  /*
- * Class for page account form processing.
+ * Class for account form processing.
  *
  * PHP Version 7.0.2
  *
@@ -9,7 +9,7 @@
  * @copyright  2016 James Druhan
  * @version    1.0
  */
-    namespace Curator\Classes\Account;
+    namespace Curator\Classes;
 
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))
@@ -18,6 +18,7 @@
         die();
     }
 
+    use \Curator\Config\FORM           as FORM;
     use \Curator\Config\PATH           as PATH;
     use \Curator\Classes\Language\Form as LANG;
     use \Curator\Traits                as TRAITS;
@@ -26,12 +27,11 @@
     require_once(PATH\ROOT . 'resource/locale/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Form.php');
 
     //Load Whitelist trait.
-    require_once(\Curator\Config\PATH\ROOT . 'resource/traits/Whitelist.php');
+    require_once(PATH\ROOT . 'resource/traits/Whitelist.php');
 
     class Form
     {
         //Class Variables
-        public  $formMessagesWarning = array();
         public  $formMessagesError   = array();
         public  $formMessagesSuccess = array();
         private $formType            = NULL;
@@ -39,14 +39,26 @@
         public  $whitelist           = NULL;
 
         //Class Objects
-        public  $Field               = NULL;
         private $Session             = NULL;
 
         //Object initalization.
-        public function __construct()
+        public function __construct($formType)
         {
+            $this->formType = $formType;
+
+            self::setInvisibleCAPTCHA();
+
             //Initialize session object.
-            $this->Session  = \Curator\Classes\Session::getSession();
+            $this->Session  = Session::getSession();
+        }
+
+        //Sets the invisible CAPTCHA POST field based on form type.
+        private function setInvisibleCAPTCHA()
+        {
+            if($this->formType == 'Create_Account')
+            {
+                $this->invisibleCAPTCHA = 'username';
+            }
         }
 
         //Generates the POST URI for the account creation form.
@@ -62,6 +74,7 @@
             return($requestScheme . filter_var($_SERVER['SERVER_NAME'], FILTER_SANITIZE_URL) . filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL));
         }
 
+        //Sanitizes POST data.
         public function sanitizePOST($value)
         {
             if(!empty($_POST[$value]))
@@ -86,28 +99,37 @@
             return(md5(uniqid(microtime(), true)));
         }
 
-        //Check the validity of the posted form. Accepts two variables.
-        //$formType is the name or purpoase of the form. $invisibleCAPTCHA is the name of the fake field used to trick bots.
-        public function validate($formType, $invisibleCAPTCHA)
+        //Check the validity of the posted form.
+        public function validate()
         {
-            $this->formType         = $formType;
-            $this->invisibleCAPTCHA = $invisibleCAPTCHA;
-            $this->whitelist        = TRAITS\Whitelist::getWhitelist_CreateAccount($formType, $invisibleCAPTCHA);
-
-            if(self::verifyFormType() &&
-               self::verifyInvisibleCAPTCHA() &&
-               self::verifyToken() &&
-               self::verifyWhitelist())
+            if(FORM\RECAPTCHA && self::verifyReCAPTCHA() === FALSE)
             {
-                //Initialize the Rules class for field validation.
-                $this->Field = new Field($this);
-
-                //Form is verified.
-                return TRUE;
+                return FALSE;
             }
 
-            //Form is not verified.
-            return FALSE;
+            if(self::verifyFormType() === FALSE)
+            {
+                return FALSE;
+            }
+
+            if(self::verifyInvisibleCAPTCHA() === FALSE)
+            {
+                return FALSE;
+            }
+
+            if(self::verifyToken() === FALSE)
+            {
+                return FALSE;
+            }
+
+            $this->whitelist = TRAITS\Whitelist::getWhitelist_CreateAccount($this->formType, $this->invisibleCAPTCHA);
+
+            if(self::verifyWhitelist() === FALSE)
+            {
+                return FALSE;
+            }
+
+            return TRUE;
         }
 
         //Validate the form type in the POST data matches the passed value.
@@ -127,10 +149,29 @@
             return FALSE;
         }
 
+        //Validate Google ReCAPTCHA
+        private function verifyReCAPTCHA()
+        {
+            $reCaptcha = new ReCaptcha(FORM\RECAPTCHA\SECRET);
+
+            if (!empty($_POST["g-recaptcha-response"]))
+            {
+                $response = $reCaptcha->verifyResponse($this->Session->userIP, $_POST['g-recaptcha-response']);
+
+                if($response != NULL && $response->success)
+                {
+                    return TRUE;
+                }
+            }
+            array_push($this->formMessagesError, 'ReCAPTCH not verified.');
+
+            return FALSE;
+        }
+
         //Validate the form invisible CAPTCHA
         private function verifyInvisibleCAPTCHA()
         {
-            $this->sanitizePOST($this->invisibleCAPTCHA);
+            self::sanitizePOST($this->invisibleCAPTCHA);
 
             if(empty($_POST[$this->invisibleCAPTCHA]))
             {
@@ -147,7 +188,7 @@
         //Validate the form token.
         private function verifyToken()
         {
-            $this->sanitizePOST('cToken');
+            self::sanitizePOST('cToken');
 
             if($this->Session->getValue('Curator_formToken') == $_POST['cToken'])
             {
@@ -189,10 +230,22 @@
             return FALSE;
         }
 
-        //Inject account creation form.
-        public function Create()
+        //Confirm if the POSTED form has been submitted within the passed value.
+        public function checkFormFlood($delay)
         {
-            include(PATH\FORMS . 'Account_Create.php');
+            if($this->Session->getValue('Curator_formFlood') && (time() - $this->Session->getValue('Curator_formFlood') <= $delay))
+            {
+                return TRUE;
+            }
+
+            $this->Session->setValue('Curator_formFlood');
+            return FALSE;
+        }
+
+        //Set for flood variable.
+        public function setFormFlood()
+        {
+            $this->Session->setValue('Curator_formFlood', TIME());
         }
     }
 ?>
