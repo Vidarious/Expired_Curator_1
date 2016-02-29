@@ -1,16 +1,16 @@
-- Left off adding policy details to check Password - Need to add word list check
-- Question now is SQL class. Needed for Account/Policy to check password restricted words
-- - Review all code and specifically the public/private functions and variables and objects. I think more should be private?
--   - Review all use statements
--   - review all constructors
+- Broke down the password policy requirements and added messages for each. 
+-   - Double check that all of the defined variables are being used (may be 1-2 no longer used).Double
+-   - Try and make the password policy flow better. There is alot of duplicated code - Maybe another functioN?
+
 - added new table for password restricted words.  Add option for it and other ones. Need regexp that matches restricted word for any letter ie password = PASSword
 -- Verify email and password rules
 -- Hash password when validated. (Not email sanitize)
--- Add rule for displaying true reason why password policy failed. This will require error messages on password policy fail only when rule true.
 
+- Password policy: min and max is REQUIRED but the others can be enabled or disabled. This change needs to effect the Policy class as well as the form message if show policy is enabled.
+-   - Maybe the password policy checker should validate each policy at a time rather then one large REGEXP. Then you could only show the policy message for that error.
 - - Continue with creating rules
 - - on success create - redirect to new page
-- Should add error message on verify fail?
+- PW Policy: 0 = Feature is disabled.
 - Add enable / disable registration
 - Create the method that verifies which account fields are required for creation/update and validates data
 -   - Method gets list of required form fields - adds to array - compares to array of form fields submitted?

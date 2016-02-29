@@ -18,8 +18,9 @@
         die();
     }
 
-    use \Curator\Config\PATH as PATH;
-    use \Curator\Classes     as CLASSES;
+    use \Curator\Config                 as CONFIG;
+    use \Curator\Classes                as CLASSES;
+    use \Curator\Classes\Language\Form  as FORM;
 
     class Create
     {
@@ -47,26 +48,26 @@
             //Validate the form passed The Curator's safety procedures.
             if(!$this->Form->validate())
             {
-                array_push($this->Form->formMessagesError, CLASSES\Language\Form\MESSAGE\ERROR_GENERAL);
+                array_push($this->Form->formMessagesError, FORM\MESSAGE\ERROR_GENERAL);
 
                 return FALSE;
             }
 
             //Verify the form is not being flooded
-            if($this->Form->checkFormFlood(\Curator\Config\ACCOUNT\FLOOD_DELAY))
+            if($this->Form->checkFormFlood(CONFIG\ACCOUNT\FLOOD_DELAY))
             {
-                array_push($this->Form->formMessagesError, CLASSES\Language\Form\MESSAGE\FLOOD);
+                array_push($this->Form->formMessagesError, FORM\MESSAGE\FLOOD);
 
                 return FALSE;
             }
 
             //Initialize the Rules class for field validation.
-            $this->Policy = new Policy();
+            $this->Policy = new Policy($this->Form);
 
             //Check the user field data against Curator rules.
-            if($this->Policy->checkRules($this->Form->whitelist))
+            if($this->Policy->checkRules())
             {
-                array_push($this->Form->formMessagesError, CLASSES\Language\Form\MESSAGE\ERROR_FIELD);
+                array_push($this->Form->formMessagesError, FORM\MESSAGE\ERROR_FIELD);
 
                 return FALSE;
             }
@@ -93,7 +94,7 @@
         //Inject account creation form.
         public function Form()
         {
-            include(PATH\FORMS . 'Account_Create.php');
+            include(CONFIG\PATH\FORMS . 'Account_Create.php');
         }
     }
 ?>

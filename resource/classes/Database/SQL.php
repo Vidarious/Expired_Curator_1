@@ -9,7 +9,7 @@
  * @copyright  2016 James Druhan
  * @version    1.0
  */
-    namespace Curator\Classes\Account;
+    namespace Curator\Classes\Database;
 
     //Deny direct access to file.
     if(!defined('Curator\Config\APPLICATION'))
@@ -18,14 +18,11 @@
         die();
     }
 
-    class SQL
+    class SQL extends \Curator\Classes\Database
     {
-        //Class Objects.
-        public $Database = NULL;
-
         public function __construct()
         {
-            $this->Database = \Curator\Classes\Database::getConnection();
+            parent::__construct();
         }
     }
 ?>

@@ -131,7 +131,10 @@ class ReCaptcha
             $recaptchaResponse->success = true;
         } else {
             $recaptchaResponse->success = false;
-            $recaptchaResponse->errorCodes = $answers ['error-codes'];
+            if(!empty($answers ['error-codes']))
+            {
+                $recaptchaResponse->errorCodes = $answers ['error-codes'];
+            }
         }
 
         return $recaptchaResponse;

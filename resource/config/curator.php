@@ -122,12 +122,13 @@
     //** Form Settings.
     //*****
 
-    define('Curator\Config\FORM\RECAPTCHA', '1');
+    define('Curator\Config\FORM\RECAPTCHA', '0');
     define('Curator\Config\FORM\RECAPTCHA\SECRET', '6LcqUxkTAAAAALvmj2I6BM0iNIHJavNWd_MIQyh6');
 
     //*****
-    //** Account Settings.
+    //** Account Policy Settings.
     //*****
+
     //Minimun time that must pass before another new account can be created.
     define('Curator\Config\ACCOUNT\FLOOD_DELAY', '60');
 
@@ -179,4 +180,7 @@
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\SPECIAL_CHAR', '1');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\NUMBER', '1');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\WORD', '1');
+
+    //Display specific policy errors or not. Not = Generic message.
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\DISPLAY', '1');
 ?>

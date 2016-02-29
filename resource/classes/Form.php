@@ -122,8 +122,6 @@
                 return FALSE;
             }
 
-            $this->whitelist = TRAITS\Whitelist::getWhitelist_CreateAccount($this->formType, $this->invisibleCAPTCHA);
-
             if(self::verifyWhitelist() === FALSE)
             {
                 return FALSE;
@@ -163,7 +161,7 @@
                     return TRUE;
                 }
             }
-            array_push($this->formMessagesError, 'ReCAPTCH not verified.');
+            array_push($this->formMessagesError, LANG\MESSAGE\RECAPTCHA);
 
             return FALSE;
         }
@@ -178,7 +176,7 @@
                 return TRUE;
             }
 
-            //Form is not verified.
+            //Form is not verified. Save error to log.
             $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
             $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_INVISIBLE_CAPTCHA . ' invisibleCAPTCHA: "' . $_POST[$this->invisibleCAPTCHA] . '"');
 
@@ -195,7 +193,7 @@
                 return TRUE;
             }
 
-            //Form is not verified.
+            //Form is not verified. Save error to log.
             $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
             $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_TOKEN . ' sessionToken: "' . $this->Session->getValue('Curator_formToken') . '" - POST[cToken]: "' . $_POST['cToken'] . '"');
 
@@ -205,13 +203,15 @@
         //Verify the $_POST fields submitted.
         private function verifyWhitelist()
         {
+            $this->whitelist = TRAITS\Whitelist::getWhitelist_CreateAccount($this->formType, $this->invisibleCAPTCHA);
+
             if(sizeof($_POST) === sizeof($this->whitelist))
             {
                 foreach ($this->whitelist as $key)
                 {
                     if(!in_array($key, array_keys($_POST)))
                     {
-                        //One of the fields are missing. Fail.
+                        //One of the fields are missing. Fail. Save error to log.
                         $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
                         $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_WHITELIST_FIELD . $key);
 
@@ -223,7 +223,7 @@
                 return TRUE;
             }
 
-            //The $_POST and $whitelist sizes are different. Fail.
+            //The $_POST and $whitelist sizes are different. Fail. Save error to log.
             $logMessage = new \Curator\Application\Log(__CLASS__, __METHOD__);
             $logMessage ->saveHazard(LANG\HAZARD_VALIDATE_WHITELIST_COUNT);
 
@@ -242,7 +242,7 @@
             return FALSE;
         }
 
-        //Set for flood variable.
+        //Set session variable for flood form flood protection.
         public function setFormFlood()
         {
             $this->Session->setValue('Curator_formFlood', TIME());
