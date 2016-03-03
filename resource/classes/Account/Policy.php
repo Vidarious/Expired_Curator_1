@@ -22,9 +22,13 @@
     use \Curator\Classes\Language\Policy                      as LANG;
     use \Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW as SHOW;
     use \Curator\Config\ACCOUNT\FIELD\SETTING                 as RULE;
+    use \Curator\Traits                                       as TRAITS;
 
     //Include the Field language error messaging file.
     require_once(PATH\ROOT . 'resource/locale/' . \Curator\Config\LANG\CURATOR_APPLICATION . '/class/Policy.php');
+
+    //Include password trait file.
+    require_once(PATH\ROOT . 'resource/traits/Password.php');
 
     class Policy
     {
@@ -237,38 +241,17 @@
             }
 
             //Set min and max password length rule.
-            $policy = '/^(?=.{' . RULE\PASSWORD\MIN_LENGTH . ',' . RULE\PASSWORD\MAX_LENGTH . '}$).+$/';
-
-            if(filter_var($_POST['Password'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+            if(!self::passwordExpression('/^(?=.{' . RULE\PASSWORD\MIN_LENGTH . ',' . RULE\PASSWORD\MAX_LENGTH . '}$).+$/', SHOW\LENGTH))
             {
-                $this->Password['Message']       = LANG\PASSWORD\POLICY;
-                $this->error                     = TRUE;
-                $this->Password_Confirm['Value'] = NULL;
-
-                if(RULE\PASSWORD\DISPLAY)
-                {
-                    array_push($this->Form->formMessagesError, SHOW\GENERAL . '<li>' . SHOW\LENGTH . '</li>');
-                }
-
                 return FALSE;
             }
+
 
             //Set lower character requirement rule.
             if(RULE\PASSWORD\LOWER_CHAR)
             {
-                $policy = '/^(.*?[a-z]){' . RULE\PASSWORD\LOWER_CHAR . ',}.*$/';
-
-                if(filter_var($_POST['Password'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+                if(!self::passwordExpression('/^(.*?[a-z]){' . RULE\PASSWORD\LOWER_CHAR . ',}.*$/', SHOW\LOWER_CHAR))
                 {
-                    $this->Password['Message']       = LANG\PASSWORD\POLICY;
-                    $this->error                     = TRUE;
-                    $this->Password_Confirm['Value'] = NULL;
-
-                    if(RULE\PASSWORD\DISPLAY)
-                    {
-                        array_push($this->Form->formMessagesError, SHOW\GENERAL . '<li>' . SHOW\LOWER_CHAR . '</li>');
-                    }
-
                     return FALSE;
                 }
             }
@@ -276,19 +259,8 @@
             //Set upper character requirement rule.
             if(RULE\PASSWORD\UPPER_CHAR)
             {
-                $policy = '/^(.*?[A-Z]){' . RULE\PASSWORD\UPPER_CHAR . ',}.*$/';
-
-                if(filter_var($_POST['Password'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+                if(!self::passwordExpression('/^(.*?[A-Z]){' . RULE\PASSWORD\UPPER_CHAR . ',}.*$/', SHOW\UPPER_CHAR))
                 {
-                    $this->Password['Message']       = LANG\PASSWORD\POLICY;
-                    $this->error                     = TRUE;
-                    $this->Password_Confirm['Value'] = NULL;
-
-                    if(RULE\PASSWORD\DISPLAY)
-                    {
-                        array_push($this->Form->formMessagesError, SHOW\GENERAL . '<li>' . SHOW\UPPER_CHAR . '</li>');
-                    }
-
                     return FALSE;
                 }
             }
@@ -296,19 +268,8 @@
             //Set number character requirement rule.
             if(RULE\PASSWORD\NUMBER)
             {
-                $policy = '/^(.*?\d){' . RULE\PASSWORD\NUMBER . ',}.*$/';
-
-                if(filter_var($_POST['Password'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+                if(!self::passwordExpression('/^(.*?\d){' . RULE\PASSWORD\NUMBER . ',}.*$/', SHOW\NUMBER_CHAR))
                 {
-                    $this->Password['Message']       = LANG\PASSWORD\POLICY;
-                    $this->error                     = TRUE;
-                    $this->Password_Confirm['Value'] = NULL;
-
-                    if(RULE\PASSWORD\DISPLAY)
-                    {
-                        array_push($this->Form->formMessagesError, SHOW\GENERAL . '<li>' . SHOW\NUMBER_CHAR . '</li>');
-                    }
-
                     return FALSE;
                 }
             }
@@ -316,19 +277,8 @@
             //Set special character requirement rule.
             if(RULE\PASSWORD\SPECIAL_CHAR)
             {
-                $policy = '/^(.*?_|[^\w]){' . RULE\PASSWORD\SPECIAL_CHAR . ',}.*$/';
-
-                if(filter_var($_POST['Password'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+                if(!self::passwordExpression('/^(.*?[^\w]|.*?[_]){' . RULE\PASSWORD\SPECIAL_CHAR . ',}.*$/', SHOW\SPECIAL_CHAR))
                 {
-                    $this->Password['Message']       = LANG\PASSWORD\POLICY;
-                    $this->error                     = TRUE;
-                    $this->Password_Confirm['Value'] = NULL;
-
-                    if(RULE\PASSWORD\DISPLAY)
-                    {
-                        array_push($this->Form->formMessagesError, SHOW\GENERAL . '<li>' . SHOW\SPECIAL_CHAR . '</li>');
-                    }
-
                     return FALSE;
                 }
             }
@@ -339,8 +289,27 @@
                 //Get restricted word list.
             }
 
-            //HASH PASSWORD
-            $this->Password['Value'] = filter_var($_POST['Password'], FILTER_SANITIZE_EMAIL);
+            $this->Password['Value'] = TRAITS\Password::encrypt($_POST['Password_Confirm']);
+
+            return TRUE;
+        }
+
+        //Validate the password expression.
+        public function passwordExpression($policy, $error)
+        {
+            if(filter_var($_POST['Password'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+            {
+                $this->Password['Message']       = LANG\PASSWORD\POLICY;
+                $this->error                     = TRUE;
+                $this->Password_Confirm['Value'] = NULL;
+            
+                if(RULE\PASSWORD\DISPLAY)
+                {
+                    array_push($this->Form->formMessagesError, SHOW\GENERAL . '<li>' . $error . '</li>');
+                }
+
+                return FALSE;
+            }
 
             return TRUE;
         }
@@ -351,23 +320,23 @@
             $this->Password_Confirm['Value']   = NULL;
             $this->Password_Confirm['Message'] = NULL;
 
-            if($this->Password['Value'] !== NULL)
+            if($this->Password['Message'] === NULL)
             {
-                //Confirm e-mail and e-mail confirm fields match.
-                if($this->Password['Value'] !== $_POST['Password_Confirm'])
+                //Confirm password and password confirm fields match.
+                if($_POST['Password_Confirm'] === $_POST['Password'])
                 {
-                    $this->Password['Message']         = LANG\PASSWORD_CONFIRM\MISMATCH;
-                    $this->Password_Confirm['Message'] = LANG\PASSWORD_CONFIRM\MISMATCH;
-                    $this->error                       = TRUE;
-                    $this->Password['Value']           = NULL;
-                    return FALSE;
+                    //Secure the password
+                    $this->Password['Value'] = $this->Password_Confirm['Value'] = TRAITS\Password::encrypt($_POST['Password_Confirm']);
+
+                    return TRUE;
                 }
 
-                //HASH PASSWORD
-                $this->Password_Confirm['Value'] = filter_var($_POST['Password_Confirm'], FILTER_SANITIZE_EMAIL);
+                $this->Password_Confirm['Message'] = $this->Password['Message'] = LANG\PASSWORD_CONFIRM\MISMATCH;
+                $this->error                       = TRUE;
+                $this->Password['Value']           = NULL;
             }
 
-            return TRUE;
+            return FALSE;
         }
 
         //Check username field against Curator fields.

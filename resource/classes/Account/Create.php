@@ -24,8 +24,12 @@
 
     class Create
     {
+        //Class Objects
         private $Form   = NULL;
         private $Policy = NULL;
+
+        //Class Variables
+        public $success = NULL;
 
         //Object initalization.
         public function __construct()
@@ -74,8 +78,10 @@
 
             array_push($this->Form->formMessagesSuccess, 'Account Created.');
 
+            $this->success = TRUE;
+
             //Since the account was created set up the form flood protection.
-            $this->Form->setFormFlood();
+            //$this->Form->setFormFlood();
 
             return TRUE;
                 

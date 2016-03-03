@@ -1,7 +1,3 @@
-- Broke down the password policy requirements and added messages for each. 
--   - Double check that all of the defined variables are being used (may be 1-2 no longer used).Double
--   - Try and make the password policy flow better. There is alot of duplicated code - Maybe another functioN?
-
 - added new table for password restricted words.  Add option for it and other ones. Need regexp that matches restricted word for any letter ie password = PASSword
 -- Verify email and password rules
 -- Hash password when validated. (Not email sanitize)

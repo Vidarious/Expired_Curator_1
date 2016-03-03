@@ -20,6 +20,9 @@
                             <div class="alert alert-danger" role="alert"><?=$message?></div>
                                 <?php endforeach; ?>
                             <?php endif; ?>
+
+                            <?php if(!$this->success) : ?>
+
                              <div class="row">
                                 <div class="col-md-6">
                                    <div class="form-group<?php if(!empty($this->Policy->Email['Message'])) : ?> has-error has-feedback<?php endif; ?>">
@@ -309,6 +312,9 @@
                                    <button name="Form_Type" value ="Create_Account" type="submit" class="btn btn-info btn-block">OK</button>
                                 </div>
                              </div>
+
+                            <?php endif; ?>
+
                           </fieldset>
                        </form>
                   </div>

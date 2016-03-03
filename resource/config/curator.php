@@ -183,4 +183,10 @@
 
     //Display specific policy errors or not. Not = Generic message.
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\DISPLAY', '1');
+
+    //Password encryption settings.
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\ENCRYPTION', 'PASSWORD_BCRYPT');
+
+    //BCrypt encryption cost range: 4 - 31.
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\ENCRYPTION\BCRYPT\COST', '10');
 ?>
