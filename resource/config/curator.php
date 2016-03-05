@@ -133,7 +133,7 @@
     define('Curator\Config\ACCOUNT\FLOOD_DELAY', '60');
 
     //Account field setting: Username.
-    define('Curator\Config\ACCOUNT\FIELD\USERNAME', '0');
+    define('Curator\Config\ACCOUNT\FIELD\USERNAME', '1');
     define('Curator\Config\ACCOUNT\FIELD\USERNAME\REQUIRED', '1');
 
     //Account field setting: Given Name.
@@ -174,7 +174,7 @@
 
     //Account password settings.
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\MIN_LENGTH', '5');
-    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\MAX_LENGTH', '10');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\MAX_LENGTH', '20');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\UPPER_CHAR', '1');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\LOWER_CHAR', '1');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\SPECIAL_CHAR', '1');
@@ -189,4 +189,8 @@
 
     //BCrypt encryption cost range: 4 - 31.
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\ENCRYPTION\BCRYPT\COST', '10');
+
+    //Account username settings
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\USERNAME\MIN_LENGTH', '1');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\USERNAME\MAX_LENGTH', '1');
 ?>

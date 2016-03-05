@@ -145,7 +145,12 @@
         //Executes a SQL query (SELECT) and returns a single column item with $row representing which result row.
         public function getResultColumn($row = NULL)
         {
-            return($this->preparedStatement->fetchColumn($row));
+            if($row)
+            {
+                return($this->preparedStatement->fetchColumn($row));
+            }
+
+            return($this->preparedStatement->fetchAll(\PDO::FETCH_COLUMN));
         }
 
         //Returns the row count for the executed query result.

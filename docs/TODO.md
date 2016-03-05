@@ -1,9 +1,6 @@
-- added new table for password restricted words.  Add option for it and other ones. Need regexp that matches restricted word for any letter ie password = PASSword
--- Verify email and password rules
--- Hash password when validated. (Not email sanitize)
-
+- Need to add min and max length checks for Username
+- 
 - Password policy: min and max is REQUIRED but the others can be enabled or disabled. This change needs to effect the Policy class as well as the form message if show policy is enabled.
--   - Maybe the password policy checker should validate each policy at a time rather then one large REGEXP. Then you could only show the policy message for that error.
 - - Continue with creating rules
 - - on success create - redirect to new page
 - PW Policy: 0 = Feature is disabled.

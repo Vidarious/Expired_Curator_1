@@ -519,3 +519,107 @@ CLASS: Curator\Classes\Form
 METHOD: Curator\Classes\Form::verifyToken
 MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "2203395410809d1db7b5df6ef03460d8" - POST[cToken]: "1c2f3b0e9391fc304fe0f7f6ca8ed930" - IP: 10.240.0.94
 **********
+**********
+DATE: March 05, 2016 at 2:50 PM America/New_York
+ADDRESS: 10.240.0.121
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "2350db37e0837b7e6c47d00b5028bf9d" - IP: 10.240.0.121
+**********
+**********
+DATE: March 05, 2016 at 3:01 PM America/New_York
+ADDRESS: 10.240.0.147
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "8113c7b037546d8348c3a93c0c3e8973" - POST[cToken]: "fb4f62935d6a5cbecf577a2e29f1332d" - IP: 10.240.0.147
+**********
+**********
+DATE: March 05, 2016 at 3:01 PM America/New_York
+ADDRESS: 10.240.0.145
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "cbb44f257ce79a6fc67087b922227410" - POST[cToken]: "8113c7b037546d8348c3a93c0c3e8973" - IP: 10.240.0.145
+**********
+**********
+DATE: March 05, 2016 at 3:22 PM America/New_York
+ADDRESS: 10.240.0.203
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "338d44d90960c1f090c8ab6f830ba2e1" - POST[cToken]: "708d4a057a09e760135c7b2252598309" - IP: 10.240.0.203
+**********
+**********
+DATE: March 05, 2016 at 3:23 PM America/New_York
+ADDRESS: 10.240.0.138
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "d263a49160f5acc03c7171876c21ebe1" - POST[cToken]: "3bd21fedcf8fac81cc591f4597b1eb59" - IP: 10.240.0.138
+**********
+**********
+DATE: March 05, 2016 at 3:24 PM America/New_York
+ADDRESS: 10.240.0.113
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "31a68060dc0f4911ef80fe77b74503fa" - POST[cToken]: "207617cff551c3d70d03b8fcc4563a31" - IP: 10.240.0.113
+**********
+**********
+DATE: March 05, 2016 at 3:26 PM America/New_York
+ADDRESS: 10.240.0.156
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "22d970e0827a37450c21482d7dab177c" - POST[cToken]: "b06d3f8178448cbe451f992e71c10afe" - IP: 10.240.0.156
+**********
+**********
+DATE: March 05, 2016 at 3:54 PM America/New_York
+ADDRESS: 10.240.0.197
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "b4434aa079b036c847b71b933eeaadc9" - IP: 10.240.0.197
+**********
+**********
+DATE: March 05, 2016 at 4:15 PM America/New_York
+ADDRESS: 10.240.0.47
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "200796744ee38c336c7da3e478ba11da" - IP: 10.240.0.47
+**********
+**********
+DATE: March 05, 2016 at 4:17 PM America/New_York
+ADDRESS: 10.240.0.167
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "5f16d5644b48448e8d250b9b6ecda35b" - POST[cToken]: "2f453789f946c0da8a18b8bbbda8f858" - IP: 10.240.0.167
+**********
+**********
+DATE: March 05, 2016 at 4:18 PM America/New_York
+ADDRESS: 10.240.0.207
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "312c9415644cfe713062865cb92481ce" - POST[cToken]: "e25aab9f233c9cac2f32d248b846b657" - IP: 10.240.0.207
+**********
+**********
+DATE: March 05, 2016 at 4:23 PM America/New_York
+ADDRESS: 10.240.0.138
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "3ee28c9db18d41dc2d5e40233da02a3f" - POST[cToken]: "83352791830860ade6a67d5f3588d72c" - IP: 10.240.0.138
+**********
+**********
+DATE: March 05, 2016 at 4:33 PM America/New_York
+ADDRESS: 10.240.0.167
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "0ecc696f826c051a7e580ef654c0bcca" - POST[cToken]: "db0c4415b45f1e3ff1153597e4dc40ef" - IP: 10.240.0.167
+**********

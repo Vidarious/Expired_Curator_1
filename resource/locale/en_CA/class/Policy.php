@@ -37,4 +37,8 @@
     define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\SPECIAL_CHAR', 'Must contain at least ' . PASSWORD\SPECIAL_CHAR . ' special character(s)');
     define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\NUMBER_CHAR', 'Must contain at least ' . PASSWORD\NUMBER . ' number(s)');
 
+    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\RESTRICTED_WORD', 'Your password contains a group of restricted characters: ');
+
+    define('Curator\Classes\Language\Policy\USERNAME\MISSING', 'Username is required.');
+    define('Curator\Classes\Language\Policy\USERNAME\INVALID', 'Username does not meet requirements. Only alphanumeric characters are allowed.');
 ?>

@@ -24,5 +24,17 @@
         {
             parent::__construct();
         }
+
+        //Checks the passed string against the restricted word list. If match is found, return the restricted word(s).
+        public function checkRestrictedWord($string)
+        {
+            $query = "SELECT word FROM `Restricted_Password` WHERE INSTR(LOWER(:string), LOWER(word))";
+
+            self::prepareStatement($query);
+            self::bindValue('string', $string);
+            self::executeQuery();
+
+            return self::getResultSingle();
+        }
     }
 ?>

@@ -60,6 +60,12 @@
         //Object initalization. Call parent constructor to gain access to class methods and variables/objects
         public function __construct($Form)
         {
+            //TEST VARIABLES
+            $_POST['Email'] = 'jdruhan.home@gmail.com';
+            $_POST['Email_Confirm'] = 'jdruhan.home@gmail.com';
+            $_POST['Password'] = 'aA1!tes3pass3wordt';
+            $_POST['Password_Confirm'] = 'aA1!tes3pass3wordt';
+
             $this->Form = $Form;
             $this->SQL  = new \Curator\Classes\Database\SQL();
         }
@@ -286,7 +292,19 @@
             //If word restriction is enabled, validate password against words.
             if(RULE\PASSWORD\WORD)
             {
-                //Get restricted word list.
+                if($restricted = $this->SQL->checkRestrictedWord($_POST['Password']))
+                {
+                    $this->Password['Message']       = LANG\PASSWORD\POLICY;
+                    $this->error                     = TRUE;
+                    $this->Password_Confirm['Value'] = NULL;
+
+                    if(RULE\PASSWORD\DISPLAY)
+                    {
+                        array_push($this->Form->formMessagesError, SHOW\GENERAL . '<li>' . SHOW\RESTRICTED_WORD . '<b>' . $restricted['word'] . '</b></li>');
+                    }
+
+                    return FALSE;
+                }
             }
 
             $this->Password['Value'] = TRAITS\Password::encrypt($_POST['Password_Confirm']);
@@ -342,7 +360,30 @@
         //Check username field against Curator fields.
         public function checkUsername()
         {
-            
+            $this->Username['Value']   = NULL;
+            $this->Username['Message'] = NULL;
+
+            //Confirm value exists.
+            if(empty($_POST['Username']))
+            {
+                $this->Username['Message'] = LANG\USERNAME\MISSING;
+                $this->error               = TRUE;
+
+                return FALSE;
+            }
+
+            $policy = '/^[a-zA-Z0-9]*$/';
+
+            //Confirm username matches policy (letters and numbers only).
+            if(filter_var($_POST['Username'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+            {
+                $this->Username['Message']       = LANG\USERNAME\INVALID;
+                $this->error                     = TRUE;
+
+                return FALSE;
+            }
+
+            return TRUE;
         }
 
         //Check given name field against Curator fields.

@@ -89,12 +89,16 @@
                             <div class="row">
                                 <?php if(FIELD\USERNAME) : ?>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group <?php if(!empty($this->Policy->Username['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             </span>
-                                         <input name="Username" type="text" class="form-control" placeholder="Username" aria-describedby="user-username" value="Vidarious">
+                                         <input name="Username" type="text" class="form-control" placeholder="Username" aria-describedby="user-username" value="<?php if(!empty($this->Policy->Username['Value'])) { echo $this->Policy->Username['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Username['Message'])) { echo $this->Policy->Username['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Username['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Policy->Username['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
