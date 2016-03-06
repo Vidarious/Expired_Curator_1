@@ -153,11 +153,11 @@
     define('Curator\Config\ACCOUNT\FIELD\TITLE\REQUIRED', '1');
 
     //Account field setting: Gender.
-    define('Curator\Config\ACCOUNT\FIELD\GENDER', '0');
+    define('Curator\Config\ACCOUNT\FIELD\GENDER', '1');
     define('Curator\Config\ACCOUNT\FIELD\GENDER\REQUIRED', '1');
 
     //Account field setting: Date of Birth.
-    define('Curator\Config\ACCOUNT\FIELD\DATE_OF_BIRTH', '0');
+    define('Curator\Config\ACCOUNT\FIELD\DATE_OF_BIRTH', '1');
     define('Curator\Config\ACCOUNT\FIELD\DATE_OF_BIRTH\REQUIRED', '1');
 
     //Account field setting: Phone.

@@ -58,4 +58,11 @@
     define('Curator\Classes\Language\Policy\TITLE\MISSING', 'Title is required.');
     define('Curator\Classes\Language\Policy\TITLE\POLICY\INVALID', 'Title does not meet requirements. Only alphabet characters are allowed.');
     define('Curator\Classes\Language\Policy\TITLE\POLICY\LENGTH', 'Title is too long.');
+
+    define('Curator\Classes\Language\Policy\GENDER\MISSING', 'Gender is required.');
+    define('Curator\Classes\Language\Policy\GENDER\POLICY\INVALID', 'Gender does not meet requirements. Only alphabet characters are allowed.');
+    define('Curator\Classes\Language\Policy\GENDER\POLICY\LENGTH', 'Gender is too long.');
+
+    define('Curator\Classes\Language\Policy\DATE_OF_BIRTH\MISSING', 'Date of birth is required.');
+    define('Curator\Classes\Language\Policy\DATE_OF_BIRTH\POLICY\INVALID', 'Date of birth does not meet requirements. Please use the format: MM/DD/YYYY');
 ?>

@@ -186,11 +186,12 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Gender" type="text" class="form-control" placeholder="Gender<?php if(FIELD\GENDER\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-gender" value="<?php if(!empty($this->Policy->Gender['Value'])) { echo $this->Policy->Gender['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Gender['Message'])) { echo $this->Policy->Gender['Message']; } ?>">
-                                         <?php if(!empty($this->Policy->Gender['Message'])) : ?>
-                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                                         <span class="sr-only"><?=$this->Policy->Gender['Message']?></span>
-                                         <?php endif; ?>
+                                            <select name="Gender" class="form-control" aria-describedby="user-gender" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Gender['Message'])) { echo $this->Policy->Gender['Message']; } ?>">
+                                                <option value=''>Select Gender<?php if(FIELD\GENDER\REQUIRED) : ?>*<?php endif; ?></option>
+                                                <option value='M' <?php if(!empty($this->Policy->Gender['Value']) && $this->Policy->Gender['Value'] == 'M') : ?>selected<?php endif; ?>>Male</option>
+                                                <option value='F' <?php if(!empty($this->Policy->Gender['Value']) && $this->Policy->Gender['Value'] == 'F') : ?>selected<?php endif; ?>>Female</option>
+                                                <option value='O' <?php if(!empty($this->Policy->Gender['Value']) && $this->Policy->Gender['Value'] == 'O') : ?>selected<?php endif; ?>>Other</option>
+                                            </select>
                                       </div>
                                    </div>
                                 </div>
@@ -205,7 +206,7 @@
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Date_Of_Birth" type="text" class="form-control" placeholder="Date of Birth<?php if(FIELD\DATE_OF_BIRTH\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-date-of-birth" value="<?php if(!empty($this->Policy->Date_Of_Birth['Value'])) { echo $this->Policy->Date_Of_Birth['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Date_Of_Birth['Message'])) { echo $this->Policy->Date_Of_Birth['Message']; } ?>">
+                                         <input name="Date_Of_Birth" type="text" class="form-control" placeholder="MM/DD/YYYY<?php if(FIELD\DATE_OF_BIRTH\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-date-of-birth" value="<?php if(!empty($this->Policy->Date_Of_Birth['Value'])) { echo $this->Policy->Date_Of_Birth['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Date_Of_Birth['Message'])) { echo $this->Policy->Date_Of_Birth['Message']; } ?>">
                                          <?php if(!empty($this->Policy->Date_Of_Birth['Message'])) : ?>
                                          <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                          <span class="sr-only"><?=$this->Policy->Date_Of_Birth['Message']?></span>

@@ -570,7 +570,40 @@
         {
             $this->Gender['Value']   = NULL;
             $this->Gender['Message'] = NULL;
-            
+
+            if(FIELD\GENDER\REQUIRED)
+            {
+                //Confirm value exists.
+                if(empty($_POST['Gender']))
+                {
+                    self::addMessage($this->Gender, LANG\GENDER\MISSING);
+
+                    return FALSE;
+                }
+            }
+
+            if(!empty($_POST['Gender']))
+            {
+                //Check length
+                if(strlen($_POST['Gender']) > 1) //1 is DB field length.
+                {
+                    self::addMessage($this->Gender, LANG\GENDER\POLICY\LENGTH);
+
+                    return FALSE;
+                }
+
+                //Restrict to numbers.
+                $policy = '/^[a-zA-Z]*$/';
+
+                //Confirm name does not contain numbers.
+                if(filter_var($_POST['Gender'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+                {
+                    self::addMessage($this->Gender, LANG\GENDER\POLICY\INVALID);
+
+                    return FALSE;
+                }
+            }
+
             $this->Gender['Value'] = filter_var($_POST['Gender'], FILTER_SANITIZE_STRING);
         }
 
@@ -579,7 +612,32 @@
         {
             $this->Date_Of_Birth['Value']   = NULL;
             $this->Date_Of_Birth['Message'] = NULL;
-            
+
+            if(FIELD\DATE_OF_BIRTH\REQUIRED)
+            {
+                //Confirm value exists.
+                if(empty($_POST['Date_Of_Birth']))
+                {
+                    self::addMessage($this->Date_Of_Birth, LANG\DATE_OF_BIRTH\MISSING);
+
+                    return FALSE;
+                }
+            }
+
+            if(!empty($_POST['Date_Of_Birth']))
+            {
+                //Restrict to date format MM/DD/YYYY.
+                $policy = '/^(\d{2}\/\d{2}\/\d{4})$/';
+
+                //Confirm name does not contain numbers.
+                if(filter_var($_POST['Date_Of_Birth'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+                {
+                    self::addMessage($this->Date_Of_Birth, LANG\DATE_OF_BIRTH\POLICY\INVALID);
+
+                    return FALSE;
+                }
+            }
+
             $this->Date_Of_Birth['Value'] = filter_var($_POST['Date_Of_Birth'], FILTER_SANITIZE_STRING);
         }
 
