@@ -94,7 +94,7 @@
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             </span>
-                                         <input name="Username" type="text" class="form-control" placeholder="Username" aria-describedby="user-username" value="<?php if(!empty($this->Policy->Username['Value'])) { echo $this->Policy->Username['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Username['Message'])) { echo $this->Policy->Username['Message']; } ?>">
+                                         <input name="Username" type="text" class="form-control" placeholder="Username<?php if(FIELD\USERNAME\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-username" value="<?php if(!empty($this->Policy->Username['Value'])) { echo $this->Policy->Username['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Username['Message'])) { echo $this->Policy->Username['Message']; } ?>">
                                          <?php if(!empty($this->Policy->Username['Message'])) : ?>
                                          <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
                                          <span class="sr-only"><?=$this->Policy->Username['Message']?></span>
@@ -107,11 +107,15 @@
                                 <?php if(FIELD\GIVEN_NAME) : ?>
                                 <div class="col-md-6">
                                    <div class="form-group">
-                                      <div class="input-group">
+                                      <div class="input-group <?php if(!empty($this->Policy->Given_Name['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Given_Name" type="text" class="form-control" placeholder="Given Name" aria-describedby="user-given-name" value="John">
+                                         <input name="Given_Name" type="text" class="form-control" placeholder="Given Name<?php if(FIELD\GIVEN_NAME\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-given-name" value="<?php if(!empty($this->Policy->Given_Name['Value'])) { echo $this->Policy->Given_Name['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Given_Name['Message'])) { echo $this->Policy->Given_Name['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Given_Name['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Policy->Given_Name['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
@@ -121,12 +125,16 @@
                             <div class="row">
                                 <?php if(FIELD\FAMILY_NAME) : ?>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    <div class="form-group <?php if(!empty($this->Policy->Family_Name['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             </span>
-                                            <input name="Family_Name" type="text" class="form-control" placeholder="Family Name" aria-describedby="user-family-name" value="Smith">
+                                            <input name="Family_Name" type="text" class="form-control" placeholder="Family Name<?php if(FIELD\FAMILY_NAME\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-family-name" value="<?php if(!empty($this->Policy->Family_Name['Value'])) { echo $this->Policy->Family_Name['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Family_Name['Message'])) { echo $this->Policy->Family_Name['Message']; } ?>">
+                                             <?php if(!empty($this->Policy->Family_Name['Message'])) : ?>
+                                             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                             <span class="sr-only"><?=$this->Policy->Family_Name['Message']?></span>
+                                             <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -134,12 +142,16 @@
 
                                 <?php if(FIELD\PREFERRED_NAME) : ?>
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group <?php if(!empty($this->Policy->Preferred_Name['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Preferred_Name" type="text" class="form-control" placeholder="Preferred Name" aria-describedby="user-preferred-name" value="Kitten">
+                                         <input name="Preferred_Name" type="text" class="form-control" placeholder="Preferred Name<?php if(FIELD\PREFERRED_NAME\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-preferred-name" value="<?php if(!empty($this->Policy->Preferred_Name['Value'])) { echo $this->Policy->Preferred_Name['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Preferred_Name['Message'])) { echo $this->Policy->Preferred_Name['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Preferred_Name['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Policy->Preferred_Name['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
@@ -149,12 +161,19 @@
                              <div class="row">
                                 <?php if(FIELD\TITLE) : ?>
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group <?php if(!empty($this->Policy->Title['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Title" type="text" class="form-control" placeholder="Title" aria-describedby="user-title" value="Mr.">
+                                            <select name="Title" class="form-control" aria-describedby="user-title" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Title['Message'])) { echo $this->Policy->Title['Message']; } ?>">
+                                                <option value=''>Select Title<?php if(FIELD\TITLE\REQUIRED) : ?>*<?php endif; ?></option>
+                                                <option <?php if(!empty($this->Policy->Title['Value']) && $this->Policy->Title['Value'] == 'Miss.') : ?>selected<?php endif; ?>>Miss.</option>
+                                                <option <?php if(!empty($this->Policy->Title['Value']) && $this->Policy->Title['Value'] == 'Mr.') : ?>selected<?php endif; ?>>Mr.</option>
+                                                <option <?php if(!empty($this->Policy->Title['Value']) && $this->Policy->Title['Value'] == 'Mrs.') : ?>selected<?php endif; ?>>Mrs.</option>
+                                                <option <?php if(!empty($this->Policy->Title['Value']) && $this->Policy->Title['Value'] == 'Ms.') : ?>selected<?php endif; ?>>Ms.</option>
+                                                <option <?php if(!empty($this->Policy->Title['Value']) && $this->Policy->Title['Value'] == 'Dr.') : ?>selected<?php endif; ?>>Dr.</option>
+                                            </select>
                                       </div>
                                    </div>
                                 </div>
@@ -162,12 +181,16 @@
                                 <?php endif; ?>
                                 <?php if(FIELD\GENDER) : ?>
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group <?php if(!empty($this->Policy->Gender['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Gender" type="text" class="form-control" placeholder="Gender" aria-describedby="user-gender" value="Male">
+                                         <input name="Gender" type="text" class="form-control" placeholder="Gender<?php if(FIELD\GENDER\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-gender" value="<?php if(!empty($this->Policy->Gender['Value'])) { echo $this->Policy->Gender['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Gender['Message'])) { echo $this->Policy->Gender['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Gender['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Policy->Gender['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
@@ -177,24 +200,32 @@
                              <div class="row">
                                 <?php if(FIELD\DATE_OF_BIRTH) : ?>
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group <?php if(!empty($this->Policy->Date_Of_Birth['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Date_Of_Birth" type="text" class="form-control" placeholder="Date of Birth" aria-describedby="user-date-of-birth" value="Jan 1, 1980">
+                                         <input name="Date_Of_Birth" type="text" class="form-control" placeholder="Date of Birth<?php if(FIELD\DATE_OF_BIRTH\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-date-of-birth" value="<?php if(!empty($this->Policy->Date_Of_Birth['Value'])) { echo $this->Policy->Date_Of_Birth['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Date_Of_Birth['Message'])) { echo $this->Policy->Date_Of_Birth['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Date_Of_Birth['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Policy->Date_Of_Birth['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>
                                 <?php endif; ?>
                                 <?php if(FIELD\PHONE) : ?>
                                 <div class="col-md-6">
-                                   <div class="form-group">
+                                   <div class="form-group <?php if(!empty($this->Policy->Phone['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Phone" type="text" class="form-control" placeholder="Phone Number" aria-describedby="user-phone-number" value="999-999-999">
+                                         <input name="Phone" type="text" class="form-control" placeholder="Phone Number<?php if(FIELD\PHONE\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-phone-number" value="<?php if(!empty($this->Policy->Phone['Value'])) { echo $this->Policy->Phone['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Phone['Message'])) { echo $this->Policy->Phone['Message']; } ?>">
+                                         <?php if(!empty($this->Policy->Phone['Message'])) : ?>
+                                         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                                         <span class="sr-only"><?=$this->Policy->Phone['Message']?></span>
+                                         <?php endif; ?>
                                       </div>
                                    </div>
                                 </div>

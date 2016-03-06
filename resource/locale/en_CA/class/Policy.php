@@ -18,7 +18,7 @@
         die();
     }
 
-    use Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD AS PASSWORD;
+    use Curator\Config\ACCOUNT\FIELD\SETTING AS SETTING;
 
     define('Curator\Classes\Language\Policy\EMAIL\MISSING', 'E-mail is required.');
     define('Curator\Classes\Language\Policy\EMAIL\INVALID', 'Invalid e-mail address.');
@@ -31,14 +31,31 @@
     define('Curator\Classes\Language\Policy\PASSWORD_CONFIRM\MISMATCH', 'Passwords do not match.');
 
     define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\GENERAL', 'Password Policy:');
-    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\LENGTH', 'Must contain between ' . PASSWORD\MIN_LENGTH . ' and ' . PASSWORD\MAX_LENGTH . ' characters in length');
-    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\UPPER_CHAR', 'Must contain at least ' . PASSWORD\UPPER_CHAR . ' upper-case character(s)');
-    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\LOWER_CHAR', 'Must contain at least ' . PASSWORD\LOWER_CHAR . ' lower-case character(s)');
-    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\SPECIAL_CHAR', 'Must contain at least ' . PASSWORD\SPECIAL_CHAR . ' special character(s)');
-    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\NUMBER_CHAR', 'Must contain at least ' . PASSWORD\NUMBER . ' number(s)');
+    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\LENGTH', 'Must contain between ' . SETTING\PASSWORD\MIN_LENGTH . ' and ' . SETTING\PASSWORD\MAX_LENGTH . ' characters in length');
+    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\UPPER_CHAR', 'Must contain at least ' . SETTING\PASSWORD\UPPER_CHAR . ' upper-case character(s)');
+    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\LOWER_CHAR', 'Must contain at least ' . SETTING\PASSWORD\LOWER_CHAR . ' lower-case character(s)');
+    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\SPECIAL_CHAR', 'Must contain at least ' . SETTING\PASSWORD\SPECIAL_CHAR . ' special character(s)');
+    define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\NUMBER_CHAR', 'Must contain at least ' . SETTING\PASSWORD\NUMBER . ' number(s)');
 
     define('Curator\Classes\Language\Policy\PASSWORD\POLICY\SHOW\RESTRICTED_WORD', 'Your password contains a group of restricted characters: ');
 
     define('Curator\Classes\Language\Policy\USERNAME\MISSING', 'Username is required.');
-    define('Curator\Classes\Language\Policy\USERNAME\INVALID', 'Username does not meet requirements. Only alphanumeric characters are allowed.');
+    define('Curator\Classes\Language\Policy\USERNAME\POLICY\LENGTH', 'Must contain between ' . SETTING\USERNAME\MIN_LENGTH . ' and ' . SETTING\USERNAME\MAX_LENGTH . ' alphanumeric characters in length');
+    define('Curator\Classes\Language\Policy\USERNAME\POLICY\INVALID', 'Username does not meet requirements. Only alphanumeric characters are allowed.');
+
+    define('Curator\Classes\Language\Policy\GIVEN_NAME\MISSING', 'Given name is required.');
+    define('Curator\Classes\Language\Policy\GIVEN_NAME\POLICY\INVALID', 'Given name does not meet requirements. Only alphabet characters are allowed.');
+    define('Curator\Classes\Language\Policy\GIVEN_NAME\POLICY\LENGTH', 'Given name is too long.');
+
+    define('Curator\Classes\Language\Policy\FAMILY_NAME\MISSING', 'Family name is required.');
+    define('Curator\Classes\Language\Policy\FAMILY_NAME\POLICY\INVALID', 'Family name does not meet requirements. Only alphabet characters are allowed.');
+    define('Curator\Classes\Language\Policy\FAMILY_NAME\POLICY\LENGTH', 'Family name is too long.');
+
+    define('Curator\Classes\Language\Policy\PREFERRED_NAME\MISSING', 'Preffered name is required.');
+    define('Curator\Classes\Language\Policy\PREFERRED_NAME\POLICY\INVALID', 'Preffered name does not meet requirements. Only alphabet characters are allowed.');
+    define('Curator\Classes\Language\Policy\PREFERRED_NAME\POLICY\LENGTH', 'Preffered name is too long.');
+
+    define('Curator\Classes\Language\Policy\TITLE\MISSING', 'Title is required.');
+    define('Curator\Classes\Language\Policy\TITLE\POLICY\INVALID', 'Title does not meet requirements. Only alphabet characters are allowed.');
+    define('Curator\Classes\Language\Policy\TITLE\POLICY\LENGTH', 'Title is too long.');
 ?>

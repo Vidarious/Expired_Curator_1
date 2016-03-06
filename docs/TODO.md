@@ -1,5 +1,6 @@
 - Need to add min and max length checks for Username
 - 
+GENERAL: When adding admin section to modify settings ensure min/max char options (for pass and username) have protection so that user cannot exceed the DB max length.
 - Password policy: min and max is REQUIRED but the others can be enabled or disabled. This change needs to effect the Policy class as well as the form message if show policy is enabled.
 - - Continue with creating rules
 - - on success create - redirect to new page

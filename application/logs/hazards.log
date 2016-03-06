@@ -623,3 +623,91 @@ CLASS: Curator\Classes\Form
 METHOD: Curator\Classes\Form::verifyToken
 MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "0ecc696f826c051a7e580ef654c0bcca" - POST[cToken]: "db0c4415b45f1e3ff1153597e4dc40ef" - IP: 10.240.0.167
 **********
+**********
+DATE: March 05, 2016 at 9:15 PM America/New_York
+ADDRESS: 10.240.0.147
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "9da2f8e338d0533336dcb1a5a2234371" - IP: 10.240.0.147
+**********
+**********
+DATE: March 05, 2016 at 9:44 PM America/New_York
+ADDRESS: 10.240.0.208
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "8e1b201c0059b8e96e482d47658210f8" - POST[cToken]: "b15d4593462d2d775d30c7f0f26eb6dd" - IP: 10.240.0.208
+**********
+**********
+DATE: March 05, 2016 at 10:19 PM America/New_York
+ADDRESS: 10.240.0.94
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "5dfc8a90a5ea89140f515dbbdfb07449" - IP: 10.240.0.94
+**********
+**********
+DATE: March 05, 2016 at 10:39 PM America/New_York
+ADDRESS: 10.240.0.200
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "" - POST[cToken]: "a4ce7a1e3b3a3617b6e9e1f294c1a7c9" - IP: 10.240.0.200
+**********
+**********
+DATE: March 05, 2016 at 11:18 PM America/New_York
+ADDRESS: 10.240.0.206
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "69318f5ee55bf4f7ae59ac3853701580" - POST[cToken]: "e2fbf3b78adbdeab88fe7691bae5c548" - IP: 10.240.0.206
+**********
+**********
+DATE: March 05, 2016 at 11:21 PM America/New_York
+ADDRESS: 10.240.0.138
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "8346ac87de575ccdf3522ea6c4d146fe" - POST[cToken]: "a5237fa280dee0d016b9de7d694e2652" - IP: 10.240.0.138
+**********
+**********
+DATE: March 05, 2016 at 11:28 PM America/New_York
+ADDRESS: 10.240.0.121
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "66bae2c9d90b5c1a20dca7612f308392" - POST[cToken]: "58ba725f1918139540602f7e87332608" - IP: 10.240.0.121
+**********
+**********
+DATE: March 05, 2016 at 11:31 PM America/New_York
+ADDRESS: 10.240.0.167
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.167
+**********
+**********
+DATE: March 05, 2016 at 11:34 PM America/New_York
+ADDRESS: 10.240.0.192
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.192
+**********
+**********
+DATE: March 05, 2016 at 11:44 PM America/New_York
+ADDRESS: 10.240.0.186
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyWhitelist
+MESSAGE: $_POST whitelist verification failed. The number of fields in the account whitelist does not match the amount of fields in $_POST. - IP: 10.240.0.186
+**********
+**********
+DATE: March 05, 2016 at 11:47 PM America/New_York
+ADDRESS: 10.240.0.75
+URI: /register.php
+CLASS: Curator\Classes\Form
+METHOD: Curator\Classes\Form::verifyToken
+MESSAGE: A submitted form failed validation due to bad tokens. sessionToken: "09aafdb188491396b5f010bfed9a5553" - POST[cToken]: "94ad07c177bbc7a16a75d14a1636fd56" - IP: 10.240.0.75
+**********

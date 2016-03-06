@@ -137,19 +137,19 @@
     define('Curator\Config\ACCOUNT\FIELD\USERNAME\REQUIRED', '1');
 
     //Account field setting: Given Name.
-    define('Curator\Config\ACCOUNT\FIELD\GIVEN_NAME', '0');
+    define('Curator\Config\ACCOUNT\FIELD\GIVEN_NAME', '1');
     define('Curator\Config\ACCOUNT\FIELD\GIVEN_NAME\REQUIRED', '1');
 
     //Account field setting: Family Name.
-    define('Curator\Config\ACCOUNT\FIELD\FAMILY_NAME', '0');
+    define('Curator\Config\ACCOUNT\FIELD\FAMILY_NAME', '1');
     define('Curator\Config\ACCOUNT\FIELD\FAMILY_NAME\REQUIRED', '1');
 
     //Account field setting: Preferred Name.
-    define('Curator\Config\ACCOUNT\FIELD\PREFERRED_NAME', '0');
+    define('Curator\Config\ACCOUNT\FIELD\PREFERRED_NAME', '1');
     define('Curator\Config\ACCOUNT\FIELD\PREFERRED_NAME\REQUIRED', '1');
 
     //Account field setting: Title.
-    define('Curator\Config\ACCOUNT\FIELD\TITLE', '0');
+    define('Curator\Config\ACCOUNT\FIELD\TITLE', '1');
     define('Curator\Config\ACCOUNT\FIELD\TITLE\REQUIRED', '1');
 
     //Account field setting: Gender.
@@ -174,7 +174,7 @@
 
     //Account password settings.
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\MIN_LENGTH', '5');
-    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\MAX_LENGTH', '20');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\MAX_LENGTH', '50');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\UPPER_CHAR', '1');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\LOWER_CHAR', '1');
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\SPECIAL_CHAR', '1');
@@ -191,6 +191,6 @@
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\ENCRYPTION\BCRYPT\COST', '10');
 
     //Account username settings
-    define('Curator\Config\ACCOUNT\FIELD\SETTING\USERNAME\MIN_LENGTH', '1');
-    define('Curator\Config\ACCOUNT\FIELD\SETTING\USERNAME\MAX_LENGTH', '1');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\USERNAME\MIN_LENGTH', '3');
+    define('Curator\Config\ACCOUNT\FIELD\SETTING\USERNAME\MAX_LENGTH', '25');
 ?>
