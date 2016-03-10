@@ -38,7 +38,7 @@
                                       </div>
                                    </div>
                                 </div>
-        
+
                                 <div class="col-md-6">
                                    <div class="form-group<?php if(!empty($this->Policy->Email_Confirm['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                       <div class="input-group">
@@ -54,7 +54,7 @@
                                    </div>
                                 </div>
                              </div>
-        
+
                              <div class="row">
                                 <div class="col-md-6">
                                    <div class="form-group<?php if(!empty($this->Policy->Password['Message'])) : ?> has-error has-feedback<?php endif; ?>">
@@ -232,7 +232,7 @@
                                 </div>
                                 <?php endif; ?>
                              </div>
-        
+
                              <?php if(FIELD\ADDRESS) : ?>
                              <div class="row">
                                 <div class="col-md-12">
@@ -246,20 +246,20 @@
                                    </div>
                                 </div>
                              </div>
-        
+
                              <div class="row">
                                 <div class="col-md-12">
                                    <div class="form-group">
-                                      <div class="input-group">
+                                      <div class="input-group <?php if(!empty($this->Policy->Address_Line_1['Message'])) : ?> has-error has-feedback<?php endif; ?>">
                                          <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                          </span>
-                                         <input name="Address_Line_1" type="text" class="form-control" placeholder="Line 1" aria-describedby="user-address-line1" value="123 Hotel Dr.">
+                                         <input name="Address_Line_1" type="text" class="form-control" placeholder="Line 1<?php if(FIELD\ADDRESS\LINE_1\REQUIRED) : ?>*<?php endif; ?>" aria-describedby="user-address-line1" value="<?php if(!empty($this->Policy->Address_Line_1['Value'])) { echo $this->Policy->Address_Line_1['Value']; } ?>" data-toggle="tooltip" title="<?php if(!empty($this->Policy->Address_Line_1['Message'])) { echo $this->Policy->Address_Line_1['Message']; } ?>">
                                       </div>
                                    </div>
                                 </div>
                              </div>
-        
+
                              <div class="row">
                                 <div class="col-md-12">
                                    <div class="form-group">
@@ -272,7 +272,7 @@
                                    </div>
                                 </div>
                              </div>
-        
+
                              <div class="row">
                                 <div class="col-md-12">
                                    <div class="form-group">
@@ -285,7 +285,7 @@
                                    </div>
                                 </div>
                              </div>
-        
+
                              <div class="row">
                                 <div class="col-md-6">
                                    <div class="form-group">
@@ -297,7 +297,7 @@
                                       </div>
                                    </div>
                                 </div>
-        
+
                                 <div class="col-md-6">
                                    <div class="form-group">
                                       <div class="input-group">
@@ -309,7 +309,7 @@
                                    </div>
                                 </div>
                              </div>
-        
+
                              <div class="row">
                                 <div class="col-md-6">
                                    <div class="form-group">
@@ -321,7 +321,7 @@
                                       </div>
                                    </div>
                                 </div>
-        
+
                                 <div class="col-md-6">
                                    <div class="form-group">
                                       <div class="input-group">
@@ -363,6 +363,6 @@
                 $('[data-toggle="tooltip"]').tooltip({
                     container: "body",
                     placement: "top"
-                });   
+                });
             });
         </script>

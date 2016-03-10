@@ -65,4 +65,16 @@
 
     define('Curator\Classes\Language\Policy\DATE_OF_BIRTH\MISSING', 'Date of birth is required.');
     define('Curator\Classes\Language\Policy\DATE_OF_BIRTH\POLICY\INVALID', 'Date of birth does not meet requirements. Please use the format: MM/DD/YYYY');
+    define('Curator\Classes\Language\Policy\DATE_OF_BIRTH\POLICY\BAD_DATE', 'Date of birth is an invalid date.');
+
+    define('Curator\Classes\Language\Policy\PHONE\MISSING', 'Phone number is required.');
+    define('Curator\Classes\Language\Policy\PHONE\POLICY\INVALID', 'Phone number does not meet requirements. Only numbers & characters are allowed.');
+    define('Curator\Classes\Language\Policy\PHONE\POLICY\LENGTH', 'Phone number is too long.');
+
+    define('Curator\Classes\Language\Policy\ADDRESS_LABEL\POLICY\INVALID', 'Address Label does not meet requirements. Only letters and numbers characters are allowed.');
+    define('Curator\Classes\Language\Policy\ADDRESS_LABEL\POLICY\LENGTH', 'Address Label number is too long.');
+
+    define('Curator\Classes\Language\Policy\ADDRESS\LINE_1\MISSING', 'Address Line 1 is required.');
+    define('Curator\Classes\Language\Policy\ADDRESS\LINE_1\POLICY\INVALID', 'Address Line 1 does not meet requirements. Only numbers & characters are allowed.');
+    define('Curator\Classes\Language\Policy\ADDRESS\LINE_1\POLICY\LENGTH', 'Address Line 1 is too long.');
 ?>

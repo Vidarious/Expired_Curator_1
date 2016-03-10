@@ -161,16 +161,16 @@
     define('Curator\Config\ACCOUNT\FIELD\DATE_OF_BIRTH\REQUIRED', '1');
 
     //Account field setting: Phone.
-    define('Curator\Config\ACCOUNT\FIELD\PHONE', '0');
+    define('Curator\Config\ACCOUNT\FIELD\PHONE', '1');
     define('Curator\Config\ACCOUNT\FIELD\PHONE\REQUIRED', '1');
 
     //Account field setting: Address.
-    define('Curator\Config\ACCOUNT\FIELD\ADDRESS', '0');
-    define('Curator\Config\ACCOUNT\FIELD\LINE_1\REQUIRED', '1');
-    define('Curator\Config\ACCOUNT\FIELD\CITY\REQUIRED', '1');
-    define('Curator\Config\ACCOUNT\FIELD\PROVINCE\REQUIRED', '1');
-    define('Curator\Config\ACCOUNT\FIELD\POSTAL\REQUIRED', '1');
-    define('Curator\Config\ACCOUNT\FIELD\COUNTRY\REQUIRED', '1');
+    define('Curator\Config\ACCOUNT\FIELD\ADDRESS', '1');
+    define('Curator\Config\ACCOUNT\FIELD\ADDRESS\LINE_1\REQUIRED', '1');
+    define('Curator\Config\ACCOUNT\FIELD\ADDRESS\CITY\REQUIRED', '1');
+    define('Curator\Config\ACCOUNT\FIELD\ADDRESS\PROVINCE\REQUIRED', '1');
+    define('Curator\Config\ACCOUNT\FIELD\ADDRESS\POSTAL\REQUIRED', '1');
+    define('Curator\Config\ACCOUNT\FIELD\ADDRESS\COUNTRY\REQUIRED', '1');
 
     //Account password settings.
     define('Curator\Config\ACCOUNT\FIELD\SETTING\PASSWORD\MIN_LENGTH', '5');

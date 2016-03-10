@@ -592,7 +592,7 @@
                     return FALSE;
                 }
 
-                //Restrict to numbers.
+                //Restrict to letters.
                 $policy = '/^[a-zA-Z]*$/';
 
                 //Confirm name does not contain numbers.
@@ -636,6 +636,14 @@
 
                     return FALSE;
                 }
+
+                //Validate date
+                if(strtotime($_POST['Date_Of_Birth']) === FALSE)
+                {
+                  self::addMessage($this->Date_Of_Birth, LANG\DATE_OF_BIRTH\POLICY\BAD_DATE);
+
+                  return FALSE;
+                }
             }
 
             $this->Date_Of_Birth['Value'] = filter_var($_POST['Date_Of_Birth'], FILTER_SANITIZE_STRING);
@@ -646,7 +654,40 @@
         {
             $this->Phone['Value']   = NULL;
             $this->Phone['Message'] = NULL;
-            
+
+            if(FIELD\PHONE\REQUIRED)
+            {
+                //Confirm value exists.
+                if(empty($_POST['Phone']))
+                {
+                    self::addMessage($this->Phone, LANG\PHONE\MISSING);
+
+                    return FALSE;
+                }
+            }
+
+            if(!empty($_POST['Phone']))
+            {
+              //Restrict to phone number to numbers.
+              $policy = '/^[0-9]*$/';
+
+              //Confirm phone only has numbers
+              if(filter_var($_POST['Phone'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+              {
+                  self::addMessage($this->Phone, LANG\PHONE\POLICY\INVALID);
+
+                  return FALSE;
+              }
+
+                //Check length
+                if(strlen($_POST['Phone']) > 50) //50 is DB field length.
+                {
+                    self::addMessage($this->Phone, LANG\PHONE\POLICY\LENGTH);
+
+                    return FALSE;
+                }
+            }
+
             $this->Phone['Value'] = filter_var($_POST['Phone'], FILTER_SANITIZE_STRING);
         }
 
@@ -655,7 +696,29 @@
         {
             $this->Address_Label['Value']   = NULL;
             $this->Address_Label['Message'] = NULL;
-            
+
+            if(!empty($_POST['Address_Label']))
+            {
+              //Restrict to letters and numbers.
+              $policy = '/^[a-zA-Z0-9]*$/';
+
+              //Confirm address lebel to letters and numbers.
+              if(filter_var($_POST['Address_Label'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+              {
+                  self::addMessage($this->Address_Label, LANG\ADDRESS_LABEL\POLICY\INVALID);
+
+                  return FALSE;
+              }
+
+                //Check length
+                if(strlen($_POST['Address_Label']) > 50) //50 is DB field length.
+                {
+                    self::addMessage($this->Address_Label, LANG\ADDRESS_LABEL\POLICY\LENGTH);
+
+                    return FALSE;
+                }
+            }
+
             $this->Address_Label['Value'] = filter_var($_POST['Address_Label'], FILTER_SANITIZE_STRING);
         }
 
@@ -664,16 +727,57 @@
         {
             $this->Address_Line_1['Value']   = NULL;
             $this->Address_Line_1['Message'] = NULL;
-            
+
+            //Letters, numbers, periods, hyphens only.
+            //Check length
+            //Required check
+
+            if(FIELD\ADDRESS\LINE_1\REQUIRED)
+            {
+                //Confirm value exists.
+                if(empty($_POST['Address_Line_1']))
+                {
+                    self::addMessage($this->Address_Line_1, LANG\ADDRESS\LINE_1\MISSING);
+
+                    return FALSE;
+                }
+            }
+
+            if(!empty($_POST['Address_Line_1']))
+            {
+              //Restrict to phone number to numbers.
+              $policy = '/^[a-zA-Z0-9]*$/';
+
+              //Confirm phone only has numbers
+              if(filter_var($_POST['Address_Line_1'], FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => $policy))) === FALSE)
+              {
+                  self::addMessage($this->Address_Line_1, LANG\ADDRESS\LINE_1\POLICY\INVALID);
+
+                  return FALSE;
+              }
+
+              //Check length
+              if(strlen($_POST['Address_Line_1']) > 20) //100 is DB field length.
+              {
+                  self::addMessage($this->Address_Line_1, LANG\ADDRESS\LINE_1\POLICY\LENGTH);
+
+                  return FALSE;
+                }
+            }
+
             $this->Address_Line_1['Value'] = filter_var($_POST['Address_Line_1'], FILTER_SANITIZE_STRING);
         }
 
         //Check address line 2 field against Curator fields.
         public function checkAddressLine2()
         {
+
+            //Letters, numbers, periods, hyphens only.
+            //Check length
+
             $this->Address_Line_2['Value']   = NULL;
             $this->Address_Line_2['Message'] = NULL;
-            
+
             $this->Address_Line_2['Value'] = filter_var($_POST['Address_Line_2'], FILTER_SANITIZE_STRING);
         }
 
@@ -682,7 +786,7 @@
         {
             $this->Address_Line_3['Value']   = NULL;
             $this->Address_Line_3['Message'] = NULL;
-            
+
             $this->Address_Line_3['Value'] = filter_var($_POST['Address_Line_3'], FILTER_SANITIZE_STRING);
         }
 
@@ -691,7 +795,10 @@
         {
             $this->Address_City['Value']   = NULL;
             $this->Address_City['Message'] = NULL;
-            
+
+            //Letters, numbers, periods, hyphens only.
+            //Check length
+
             $this->Address_City['Value'] = filter_var($_POST['Address_City'], FILTER_SANITIZE_STRING);
         }
 
@@ -700,7 +807,11 @@
         {
             $this->Address_Province['Value']   = NULL;
             $this->Address_Province['Message'] = NULL;
-            
+
+            //Letters, numbers, periods, hyphens only.
+            //Check length
+            //Check required
+
             $this->Address_Province['Value'] = filter_var($_POST['Address_Province'], FILTER_SANITIZE_STRING);
         }
 
@@ -709,7 +820,11 @@
         {
             $this->Address_Postal['Value']   = NULL;
             $this->Address_Postal['Message'] = NULL;
-            
+
+            //Letters, numbers, periods, hyphens only.
+            //Check length
+            //Check required
+
             $this->Address_Postal['Value'] = filter_var($_POST['Address_Postal'], FILTER_SANITIZE_STRING);
         }
 
@@ -718,7 +833,11 @@
         {
             $this->Address_Country['Value']   = NULL;
             $this->Address_Country['Message'] = NULL;
-            
+
+            //Letters, numbers, periods, hyphens only.
+            //Check length
+            //Check required
+
             $this->Address_Country['Value'] = filter_var($_POST['Address_Country'], FILTER_SANITIZE_STRING);
         }
     }
